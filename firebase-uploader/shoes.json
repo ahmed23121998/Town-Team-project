@@ -1,182 +1,186 @@
 {
-    "collection": {
-      "shoes": [
+  "collection": {
+    "shoes": {
+      "Sneakers": [
         {
-          "price": {
-            "amount": 1799.00,
-            "currencyCode": "EGP"
-          },
-          "product": {
-            "title": "SHO25GSFB25417TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
-          },
-          "id": "44011863834848",
+          "title": "SHO25GSFB25417TM1",
           "image": {
             "src": "//townteam.com/cdn/shop/files/2_afc23515-cecf-4b5c-9b56-69b90440ba03.png?v=1740922833"
           },
-          "color": "White"
-        },
-        {
           "price": {
-            "amount": 2249.00,
+            "amount": 1799.0,
             "currencyCode": "EGP"
           },
-          "product": {
-            "title": "SHO25GCML25600TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
+          "discount": {
+            "percentage": "20%",
+            "label": "Sale"
           },
-          "id": "44011863834850",
+          "fit": "Standard",
+          "color": "White",
+          "id": "44011863834848"
+        },
+        {
+          "title": "SHO25GCML25600TM1",
           "image": {
             "src": "//townteam.com/cdn/shop/files/2_31dd4bb3-e25f-4e1f-84ad-d77e5eec7765.png?v=1740922820"
           },
-          "color": "White"
-        },
-        {
           "price": {
-            "amount": 1999.00,
+            "amount": 2249.0,
             "currencyCode": "EGP"
           },
-          "product": {
-            "title": "SHO25GCML25607TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
+          "discount": {
+            "percentage": "15%",
+            "label": "Sale"
           },
-          "id": "44011863834851",
+          "fit": "Standard",
+          "color": "White",
+          "id": "44011863834850"
+        },
+        {
+          "title": "SHO25GCML25607TM1",
           "image": {
             "src": "//townteam.com/cdn/shop/files/2_9e6e4511-90b1-4deb-bf72-a4d7f2d455c1.png?v=1740922828"
           },
-          "color": "WHT/GRN"
-        },
-        {
           "price": {
-            "amount": 2249.00,
+            "amount": 1999.0,
             "currencyCode": "EGP"
           },
-          "product": {
-            "title": "SHO25GCML25602TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
+          "discount": {
+            "percentage": "25%",
+            "label": "Sale"
           },
-          "id": "44011863834852",
+          "fit": "Standard",
+          "color": "White/Green",
+          "id": "44011863834851"
+        }
+      ],
+      "Casual": [
+        {
+          "title": "SHO25GCML25602TM1",
           "image": {
             "src": "//townteam.com/cdn/shop/files/1_b5db7b26-f18c-49ee-b40a-6e594881a868.png?v=1742041402"
           },
-          "color": "Navy"
-        },
-        {
           "price": {
-            "amount": 2249.00,
+            "amount": 2249.0,
             "currencyCode": "EGP"
           },
-          "product": {
-            "title": "SHO25GCML25610TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
+          "discount": {
+            "percentage": "10%",
+            "label": "Sale"
           },
-          "id": "44011863834853",
+          "fit": "Standard",
+          "color": "Navy",
+          "id": "44011863834852"
+        },
+        {
+          "title": "SHO25GCML25610TM1",
           "image": {
             "src": "//townteam.com/cdn/shop/files/3_409ce5e9-3b92-40f5-a138-9d657d4a5e3c.png?v=1740922830"
           },
-          "color": "Beige"
-        },
-        {
           "price": {
-            "amount": 1999.00,
+            "amount": 2249.0,
             "currencyCode": "EGP"
           },
-          "product": {
-            "title": "SHO25GCML25603TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
+          "discount": {
+            "percentage": "15%",
+            "label": "Sale"
           },
-          "id": "44011863834854",
-          "image": {
-            "src": "//townteam.com/cdn/shop/files/1_b60dae2b-fc05-4b61-8050-55074dfdf577.png?v=1740922826"
-          },
-          "color": "White"
-        },
+          "fit": "Standard",
+          "color": "Beige",
+          "id": "44011863834853"
+        }
+      ],
+      "Leather": [
         {
-          "price": {
-            "amount": 2249.00,
-            "currencyCode": "EGP"
-          },
-          "product": {
-            "title": "SHO25GCML25612TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
-          },
-          "id": "44011863834855",
-          "image": {
-            "src": "//townteam.com/cdn/shop/files/4_e5ce257d-1e59-43e4-9cc1-7c095aaf9eb1.png?v=1744115836"
-          },
-          "color": "Olive"
-        },
-        {
-          "price": {
-            "amount": 1749.00,
-            "currencyCode": "EGP"
-          },
-          "product": {
-            "title": "SHO25GCWL25624TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
-          },
-          "id": "44011863834856",
+          "title": "SHO25GCWL25624TM1",
           "image": {
             "src": "//townteam.com/cdn/shop/files/1_5bf43774-9799-47f4-a604-f9fced59d05d.png?v=1742454642"
           },
-          "color": "Black"
-        },
-        {
           "price": {
-            "amount": 1999.00,
+            "amount": 1749.0,
             "currencyCode": "EGP"
           },
-          "product": {
-            "title": "SHO25GSTL25620TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
+          "discount": {
+            "percentage": "30%",
+            "label": "Sale"
           },
-          "id": "44011863834857",
+          "fit": "Standard",
+          "color": "Black",
+          "id": "44011863834856"
+        },
+        {
+          "title": "SHO25GSTL25620TM1",
           "image": {
             "src": "//townteam.com/cdn/shop/files/1_34222a93-a6e6-4c36-91c6-14950b0aaca9.png?v=1742454512"
           },
-          "color": "Camel"
-        },
-        {
           "price": {
-            "amount": 719.00,
+            "amount": 1999.0,
             "currencyCode": "EGP"
           },
-          "product": {
-            "title": "SHO23GCAN25361TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
+          "discount": {
+            "percentage": "25%",
+            "label": "Sale"
           },
-          "id": "44011863834858",
+          "fit": "Standard",
+          "color": "Camel",
+          "id": "44011863834857"
+        }
+      ],
+      "Canvas": [
+        {
+          "title": "SHO23GCAN25361TM1",
           "image": {
             "src": "//townteam.com/cdn/shop/files/1_fdbc9db2-da40-4574-a96c-c700c4fdf168.jpg?v=1744117606"
           },
-          "color": "Black"
-        },
-        {
           "price": {
-            "amount": 1999.00,
+            "amount": 719.0,
             "currencyCode": "EGP"
           },
-          "product": {
-            "title": "SHO25GCML25614TM1",
-            "id": "8045876773088",
-            "type": "Shoes - SHO"
+          "discount": {
+            "percentage": "40%",
+            "label": "Sale"
           },
-          "id": "44011863834859",
+          "fit": "Standard",
+          "color": "Black",
+          "id": "44011863834858"
+        }
+      ],
+      "Sport": [
+        {
+          "title": "SHO25GCML25612TM1",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/4_e5ce257d-1e59-43e4-9cc1-7c095aaf9eb1.png?v=1744115836"
+          },
+          "price": {
+            "amount": 2249.0,
+            "currencyCode": "EGP"
+          },
+          "discount": {
+            "percentage": "10%",
+            "label": "New"
+          },
+          "fit": "Performance",
+          "color": "Olive",
+          "id": "44011863834855"
+        },
+        {
+          "title": "SHO25GCML25614TM1",
           "image": {
             "src": "//townteam.com/cdn/shop/files/1_1077a2ea-ce2c-4168-8583-32105800b956.png?v=1743858524"
           },
-          "color": "BLK/BEG"
+          "price": {
+            "amount": 1999.0,
+            "currencyCode": "EGP"
+          },
+          "discount": {
+            "percentage": "15%",
+            "label": "New"
+          },
+          "fit": "Performance",
+          "color": "Black/Beige",
+          "id": "44011863834859"
         }
       ]
     }
   }
+}
