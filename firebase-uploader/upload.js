@@ -1,89 +1,177 @@
+// upload.js
+
 import admin from "firebase-admin";
+
 import fs from "fs";
+
 import path from "path";
+
 import { fileURLToPath } from "url";
 
-// Helpers for ES Modules
+
+
 const __filename = fileURLToPath(import.meta.url);
+
 const __dirname = path.dirname(__filename);
 
-// Read Firebase credentials
+
+
+// 1. init Firebase
+
 const serviceAccount = JSON.parse(
+
   fs.readFileSync(path.join(__dirname, "serviceAccountKey.json"), "utf8")
+
 );
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
 
 const db = admin.firestore();
 
-const files = [
-  { file: "kids.json", collection: "kids" },
-  { file: "men.json", collection: "men" },
-  { file: "newarrival.json", collection: "newarrival" },
-  { file: "summer.json", collection: "summer" },
-  { file: "winter.json", collection: "winter" },
-  { file: "shoes.json", collection: "shoes" },
-  { file: "accessories.json", collection: "accessories" },
-  { file: "trousers.json", collection: "trousers" },
-];
 
-files.forEach(({ file, collection }) => {
-  const filePath = path.join(__dirname, file);
-  console.log(`📂 Processing file: ${file} → collection: ${collection}`);
 
-  try {
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    const data = JSON.parse(fileContent);
-    const items = data.collection?.[collection] || data[collection];
+// 2. خليه يقرأ كل الفولدرز في __dirname
+
+const entries = fs.readdirSync(__dirname, { withFileTypes: true });
+
+const folders = entries
+
+  .filter((e) => e.isDirectory())
+
+  .map((e) => e.name);
+
+
+
+folders.forEach((folder) => {
+
+  const collectionName = folder; // كلها كولكشن بنفس اسم الفولدر
+
+  const folderPath = path.join(__dirname, folder);
+
+
+
+  // 3. يقرأ كل ملفات الـ JSON في الفولدر
+
+  const jsonFiles = fs
+
+    .readdirSync(folderPath)
+
+    .filter(
+
+      (f) =>
+
+        f.endsWith(".json") &&
+
+        f.toLowerCase() !== "serviceaccountkey.json"
+
+    );
+
+
+
+  jsonFiles.forEach((file) => {
+
+    const subName = path.basename(file, ".json"); // اسم الملف من غير .json
+
+    const filePath = path.join(folderPath, file);
+
+    console.log(`📂 [${collectionName}] ↳ processing ${file} as sub="${subName}"`);
+
+
+
+    let raw;
+
+    try {
+
+      raw = JSON.parse(fs.readFileSync(filePath, "utf8"));
+
+    } catch (err) {
+
+      console.error(`❌ JSON parse error in ${filePath}: ${err.message}`);
+
+      return;
+
+    }
+
+
+
+    // 4. البيانات ممكن تكون تحت raw.collection[subName] أو raw[subName]
+
+    const root = raw.collection || raw;
+
+    const items = root[subName];
 
     if (!items) {
-      console.warn(
-        `⚠ No data found for collection '${collection}' in file '${file}'`
-      );
+
+      console.warn(`⚠ No data for key "${subName}" in ${filePath}`);
+
       return;
+
     }
 
-    // الحالة 1: لو items عبارة عن Array (قديمة)
+
+
+    // 5. لو items مصفوفة
+
     if (Array.isArray(items)) {
-      items.forEach(async (item) => {
-        if (!item?.title) return;
 
-        await db.collection(collection).doc(item.id).set(item);
-        console.log(`✅ Uploaded to [${collection}]: ${item.title}`);
+      items.forEach(async (item) => {
+
+        if (!item.id) return;
+
+        await db
+
+          .collection(collectionName)
+
+          .doc(subName)            // كل الفولدر كـ doc
+
+          .collection("items")    // جوه docّ الفرعي item
+
+          .doc(item.id)
+
+          .set(item);
+
+        console.log(`✅ uploaded ${item.id} under ${collectionName}/${subName}/items`);
+
       });
+
     }
 
-    // الحالة 2: لو items عبارة عن Object فيه sub-categories
-    else if (typeof items === "object") {
-      Object.entries(items).forEach(async ([subCategory, products]) => {
-        if (!Array.isArray(products)) {
-          console.warn(
-            `⚠ Skipping invalid sub-category [${subCategory}] in [${collection}]`
-          );
-          return;
-        }
+    // 6. لو items كائن فيه sub‑sub categories
 
-        for (const item of products) {
-          if (!item?.title) continue;
+    else if (typeof items === "object") {
+
+      Object.entries(items).forEach(async ([groupName, arr]) => {
+
+        if (!Array.isArray(arr)) return;
+
+        for (const item of arr) {
+
+          if (!item.id) continue;
 
           await db
-            .collection(collection)
-            .doc(subCategory)
-            .collection("items")
+
+            .collection(collectionName)
+
+            .doc(subName)           // الفولدر الأساسي كـ doc
+
+            .collection(groupName)  // subName ثم groupName
+
             .doc(item.id)
+
             .set(item);
 
-          console.log(
-            `✅ Uploaded to [${collection}/${subCategory}]: ${item.title}`
-          );
+          console.log(`✅ uploaded ${item.id} under ${collectionName}/${subName}/${groupName}`);
+
         }
+
       });
+
     } else {
-      console.warn(`⚠ Data format not recognized in file '${file}'`);
+
+      console.warn(`⚠ Unexpected data type for "${subName}" in ${filePath}`);
+
     }
-  } catch (err) {
-    console.error(`❌ Error reading or parsing file '${file}':`, err.message);
-  }
+
+  });
+
 });
