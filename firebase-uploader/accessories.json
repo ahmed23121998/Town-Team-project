@@ -1,694 +1,381 @@
 {
   "collection": {
-    "accessories": [
-      {
-        "price": {
-          "amount": 599.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "SET22SSETST001TM1",
-          "id": "8045876773088",
-          "type": "PERFUME"
-        },
-        "id": "44011863834848",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_5542e8a1-6a63-4463-9e81-d2bff23532b3.png?v=1707404175"
-        },
-        "color": "Various"
-      },
-      {
-        "price": {
-          "amount": 129.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BOD22SBSPB0001TM1",
-          "id": "8045876773088",
-          "type": "BOD - BODY SPLASH"
-        },
-        "id": "44011863834849",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_4b8ce3ed-c5f0-4e48-8b08-2d3e2c9ee7a6.png?v=1707378542"
-        },
-        "color": "Beige"
-      },
-      {
-        "price": {
-          "amount": 599.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "PERTWN99008-100ML",
-          "id": "8045876773088",
-          "type": "PERFUMES"
-        },
-        "id": "44011863834850",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_0f3ce1a5-f0c0-48cb-8895-06a4ccada01d.png?v=1707404092"
-        },
-        "color": "Black"
-      },
-      {
-        "price": {
-          "amount": 399.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "PER22SPER99010TM1",
-          "id": "8045876773088",
-          "type": "PERFUMES"
-        },
-        "id": "44011863834851",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_12133fae-1bef-4dd8-807a-aa1ef05d3a02.png?v=1707378669"
-        },
-        "color": "Various"
-      },
-      {
-        "price": {
-          "amount": 299.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "PER24GPEM99035TM1",
-          "id": "8045876773088",
-          "type": "PERFUMES"
-        },
-        "id": "44011863834852",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/2_009ca2d7-b82f-40b1-bd40-0ca3de02bedb.png?v=1717069332"
-        },
-        "color": "Black"
-      },
-      {
-        "price": {
-          "amount": 59.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "DEO22SDEOD0002TM1",
-          "id": "8045876773088",
-          "type": "DEODRANT"
-        },
-        "id": "44011863834853",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_204181c0-d80d-441d-bd8c-93668d9158e9.png?v=1707378631"
-        },
-        "color": "Various"
-      },
-      {
-        "price": {
-          "amount": 59.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "DEO22SDEOD0003TM1",
-          "id": "8045876773088",
-          "type": "DEODRANT"
-        },
-        "id": "44011863834854",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_9ccf59ce-9210-4930-8f3c-b931a27825c0.png?v=1708270029"
-        },
-        "color": "180"
-      },
-      {
-        "price": {
-          "amount": 59.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "DEO22SDEOD0001TM1",
-          "id": "8045876773088",
-          "type": "DEODRANT"
-        },
-        "id": "44011863834855",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_9fd8fff8-b506-420d-a97f-e5f261dfac31.png?v=1707378609"
-        },
-        "color": "Various"
-      },
-      {
-        "price": {
-          "amount": 399.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "WLT24GWLB57243TM1",
-          "id": "8045876773088",
-          "type": "Wallets - WLT"
-        },
-        "id": "44011863834856",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/3_f76ae849-1070-46e8-9cfb-49750c5dc2dd.png?v=1743074929"
-        },
-        "color": "Havan"
-      },
-      {
-        "price": {
-          "amount": 399.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "WLT24GWLB57241TM1",
-          "id": "8045876773088",
-          "type": "Wallets - WLT"
-        },
-        "id": "44011863834857",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_081e4a43-fe9c-4930-83f8-2daa1913ab81.png?v=1741443609"
-        },
-        "color": "Hazelnut"
-      },
-      {
-        "price": {
-          "amount": 499.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "WLT24GWLB57248TM1",
-          "id": "8045876773088",
-          "type": "Wallets - WLT"
-        },
-        "id": "44011863834858",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_efc467f6-6752-4a29-8a86-8625be9ecd89.png?v=1743074858"
-        },
-        "color": "TOBACCO"
-      },
-      {
-        "price": {
-          "amount": 129.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BOD24GWXS99034TM1",
-          "id": "8045876773088",
-          "type": "BOD - BODY SPLASH"
-        },
-        "id": "44011863834859",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_cffca1e7-2307-4e72-88e3-994f936a76a5.png?v=1721218943"
-        },
-        "color": "BLK/SLV"
-      },
-      {
-        "price": {
-          "amount": 129.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BOD22SBSPB0003TM1",
-          "id": "8045876773088",
-          "type": "BOD - BODY SPLASH"
-        },
-        "id": "44011863834860",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_7011cbf7-557f-444f-a640-2eaec6eb90a8.png?v=1707404063"
-        },
-        "color": "Black"
-      },
-      {
-        "price": {
-          "amount": 59.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "DEO24SDEO99033TM1",
-          "id": "8045876773088",
-          "type": "Body Care - DEO"
-        },
-        "id": "44011863834861",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_e0db31a0-b54a-426d-8b1b-a3855e691255.png?v=1721218881"
-        },
-        "color": "BLK/TAN"
-      },
-      {
-        "price": {
-          "amount": 299.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "PER24GPEM99038TM1",
-          "id": "8045876773088",
-          "type": "Perfumes "
-        },
-        "id": "44011863834862",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_06882928-7a82-41a6-af1c-c7f0c8f9cbf5.png?v=1717069113"
-        },
-        "color": "BLK/RED"
-      },
-      {
-        "price": {
-          "amount": 449.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL24GBBU52243TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834863",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/brown.png?v=1721218915"
-        },
-        "color": "Black"
-      },
-      {
-        "price": {
-          "amount": 499.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL25GBBU52252TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834864",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_bec35b5c-4ad4-4763-9240-458768173499.png?v=1737381629"
-        },
-        "color": "Black"
-      },
-      {
-        "price": {
-          "amount": 449.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL24GBBU52245TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834865",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_7d9e8c52-889a-4918-be3c-6b27fe475b8a.png?v=1728997307"
-        },
-        "color": "Brown"
-      },
-      {
-        "price": {
-          "amount": 449.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL24GBBU52244TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834866",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_50ee8de1-7457-478a-84ee-11649421468e.png?v=1728997319"
-        },
-        "color": "Brown"
-      },
-      {
-        "price": {
-          "amount": 449.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL24GBBU52242TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834867",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_49fcaf6d-2de4-4193-bcd4-608822e61485.png?v=1728997336"
-        },
-        "color": "Havan"
-      },
-      {
-        "price": {
-          "amount": 499.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL25GBBB52247TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834868",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_848f4327-c4c5-4b5d-ade8-9b881ca5111f.png?v=1737381746"
-        },
-        "color": "Brown"
-      },
-      {
-        "price": {
-          "amount": 499.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL24GBBB52241TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834869",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_54b5c447-b447-4aaa-84dc-1fe454f46eb8.png?v=1728997344"
-        },
-        "color": "BRN/BLK"
-      },
-      {
-        "price": {
-          "amount": 499.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL25GBBB52246TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834870",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_70a206a2-1fd9-498e-bed4-5776f871cdc7.png?v=1737381653"
-        },
-        "color": "Brown"
-      },
-      {
-        "price": {
-          "amount": 399.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL24GBBB52230TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834871",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_2998e09e-ee92-4313-8dfc-477c112a73a1.png?v=1717317167"
-        },
-        "color": "Brown"
-      },
-      {
-        "price": {
-          "amount": 399.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BEL24GBBB52230TM1",
-          "id": "8045876773088",
-          "type": "Belts - BEL "
-        },
-        "id": "44011863834871",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_2998e09e-ee92-4313-8dfc-477c112a73a1.png?v=1717317167"
-        },
-        "color": "Brown"
-      },
-      {
-        "price": {
-          "amount": 149.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BOX25GBCA99479TM1",
-          "id": "8045876773088",
-          "type": "Boxers - BOX "
-        },
-        "id": "44011863834872",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_c56f862d-4de6-43f4-85d1-208a99db7247.png?v=1740656443"
-        },
-        "color": "BLK/WHT"
-      },
-      {
-        "price": {
-          "amount": 149.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BOX25GBCB99482TM1",
-          "id": "8045876773088",
-          "type": "Boxers - BOX "
-        },
-        "id": "44011863834873",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_21d9395a-c2d4-444d-8b46-d30cd467bf1c.png?v=1740656616"
-        },
-        "color": "Olive"
-      },
-      {
-        "price": {
-          "amount": 149.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BOX25GBCA99478TM1",
-          "id": "8045876773088",
-          "type": "Boxers - BOX "
-        },
-        "id": "44011863834874",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_0c3473dc-67ed-428a-9785-4ac27afbe6fa.png?v=1740656297"
-        },
-        "color": "COLOR MX"
-      },
-      {
-        "price": {
-          "amount": 199.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BOX23GCOTKT460TM1",
-          "id": "8045876773088",
-          "type": "Boxers - BOX "
-        },
-        "id": "44011863834875",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_c73961c8-86fe-418c-9742-48f1bc7c9563.png?v=1738235401"
-        },
-        "color": "Black/Whit"
-      },
-      {
-        "price": {
-          "amount": 149.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "BOX25GBCB99470TM1",
-          "id": "8045876773088",
-          "type": "Boxers - BOX "
-        },
-        "id": "44011863834876",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_257cc283-1d17-4111-bb59-60e9f0202eca.png?v=1740656523"
-        },
-        "color": "Black"
-      },
-      {
-        "price": {
-          "amount": 149.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "SOK24GNPC52436TM1",
-          "id": "8045876773088",
-          "type": "Socks - SOK "
-        },
-        "id": "44011863834877",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_0c42358b-28d2-4c7d-aee6-f4ef44a166fb.png?v=1705758861"
-        },
-        "color": "White"
-      },
-      {
-        "price": {
-          "amount": 279.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "ACS23GIPA27377TM1",
-          "id": "8045876773088",
-          "type": "Sets - ACS "
-        },
-        "id": "44011863834878",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_69a2f7d6-56af-4758-a1d3-2b650fd6d289.png?v=1700921573"
-        },
-        "color": "Charcoal"
-      },
-      {
-        "price": {
-          "amount": 189.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "ICC23GIWP27378TM1",
-          "id": "8045876773088",
-          "type": "Ice Caps - ICC "
-        },
-        "id": "44011863834879",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/2_8df40e12-1d92-4015-a795-1a627f3f40c1.png?v=1740319470"
-        },
-        "color": "Grey"
-      },
-      {
-        "price": {
-          "amount": 149.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "GLV23GFWQ27375TM1",
-          "id": "8045876773088",
-          "type": "Gloves - GLV "
-        },
-        "id": "44011863834880",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_e2143fe6-3df2-41ec-a32b-c0d6f75abb0f.png?v=1740319449"
-        },
-        "color": "Charcoal"
-      },
-      {
-        "price": {
-          "amount": 179.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "SOK24GHPC52432TM1",
-          "id": "8045876773088",
-          "type": "Socks - SOK "
-        },
-        "id": "44011863834881",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_f149364a-fca9-48b4-9a7b-74d5cc1f8691.png?v=1703425516"
-        },
-        "color": "White"
-      },
-      {
-        "price": {
-          "amount": 199.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "GLV23GGWQ27376TM1",
-          "id": "8045876773088",
-          "type": "Gloves - GLV "
-        },
-        "id": "44011863834882",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_397a991d-d427-492d-b9d2-f775bb8f79fe.png?v=1740319451"
-        },
-        "color": "Charcoal"
-      },
-      {
-        "price": {
-          "amount": 89.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "SOK24GHSA52450TM1",
-          "id": "8045876773088",
-          "type": "Socks - SOK "
-        },
-        "id": "44011863834883",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_68d86ee9-3d1b-4f94-9afa-3820cf52b515.png?v=1728997196"
-        },
-        "color": "OFF/ORG"
-      },
-      {
-        "price": {
-          "amount": 89.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "SOK24GHTA52449TM1",
-          "id": "8045876773088",
-          "type": "Socks - SOK "
-        },
-        "id": "44011863834884",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/1_dce9f89a-8cfb-475a-9e44-0cd577085f35.png?v=1728997172"
-        },
-        "color": "White"
-      },
-      {
-        "price": {
-          "amount": 259.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "SOK24GHPC52452TM1",
-          "id": "8045876773088",
-          "type": "Socks - SOK "
-        },
-        "id": "44011863834885",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/2_1efb9ba8-d646-4eee-a8da-bd7da23fb2eb.png?v=1728997235"
-        },
-        "color": "Black"
-      },
-      {
-        "price": {
-          "amount": 599.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "HBG24GXXX57231TM1",
-          "id": "8045876773088",
-          "type": "Bags - HBG "
-        },
-        "id": "44011863834886",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/2_02b51be0-3fae-4221-a054-cf8a60e1951c.png?v=1733752263"
-        },
-        "color": "TOBACCO"
-      },
-      {
-        "price": {
-          "amount": 749.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "HBG24GXXX57232TM1",
-          "id": "8045876773088",
-          "type": "Bags - HBG "
-        },
-        "id": "44011863834887",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/4_f243cb71-29c7-43e2-9e00-6bf9511995df.png?v=1721218812"
-        },
-        "color": "Black"
-      },
-      {
-        "price": {
-          "amount": 449.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "HBG24GXXX57234TM1",
-          "id": "8045876773088",
-          "type": "Bags - HBG "
-        },
-        "id": "44011863834888",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/3_1a83d680-f522-4994-b9a1-f1f3bd717d93.png?v=1717317000"
-        },
-        "color": "Black"
-      },
-      {
-        "price": {
-          "amount": 349.0,
-          "currencyCode": "EGP"
-        },
-        "product": {
-          "title": "HBG24GXXX57233TM1",
-          "id": "8045876773088",
-          "type": "Bags - HBG "
-        },
-        "id": "44011863834891",
-        "image": {
-          "src": "//townteam.com/cdn/shop/files/4_0f79761c-9aff-4cf1-ae16-355dd7262c12.png?v=1713964948"
-        },
-        "color": "Brown"
-      }
-    ]
+    "accessories": {
+      "Perfumes": [
+        {
+          "price": { "amount": 599.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "SET22SSETST001TM1",
+            "id": "8045876773088",
+            "type": "PERFUME"
+          },
+          "id": "44011863834848",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_5542e8a1-6a63-4463-9e81-d2bff23532b3.png?v=1707404175"
+          },
+          "title": "SET22SSETST001TM1"
+        },
+        {
+          "price": { "amount": 599.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "PERTWN99008-100ML",
+            "id": "8045876773088",
+            "type": "PERFUMES"
+          },
+          "id": "44011863834850",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_0f3ce1a5-f0c0-48cb-8895-06a4ccada01d.png?v=1707404092"
+          },
+          "title": "PERTWN99008-100ML"
+        },
+        {
+          "price": { "amount": 399.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "PER22SPER99010TM1",
+            "id": "8045876773088",
+            "type": "PERFUMES"
+          },
+          "id": "44011863834851",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_12133fae-1bef-4dd8-807a-aa1ef05d3a02.png?v=1707378669"
+          },
+          "title": "PER22SPER99010TM1"
+        },
+        {
+          "price": { "amount": 299.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "PER24GPEM99035TM1",
+            "id": "8045876773088",
+            "type": "PERFUMES"
+          },
+          "id": "44011863834852",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/2_009ca2d7-b82f-40b1-bd40-0ca3de02bedb.png?v=1717069332"
+          },
+          "title": "PER24GPEM99035TM1"
+        },
+        {
+          "price": { "amount": 299.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "PER24GPEM99038TM1",
+            "id": "8045876773088",
+            "type": "Perfumes"
+          },
+          "id": "44011863834862",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_06882928-7a82-41a6-af1c-c7f0c8f9cbf5.png?v=1717069113"
+          },
+          "title": "PER24GPEM99038TM1"
+        }
+      ],
+      "Body Splash": [
+        {
+          "price": { "amount": 129.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "BOD22SBSPB0001TM1",
+            "id": "8045876773088",
+            "type": "BOD - BODY SPLASH"
+          },
+          "id": "44011863834849",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_4b8ce3ed-c5f0-4e48-8b08-2d3e2c9ee7a6.png?v=1707378542"
+          },
+          "title": "BOD22SBSPB0001TM1"
+        },
+        {
+          "price": { "amount": 129.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "BOD24GWXS99034TM1",
+            "id": "8045876773088",
+            "type": "BOD - BODY SPLASH"
+          },
+          "id": "44011863834859",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_cffca1e7-2307-4e72-88e3-994f936a76a5.png?v=1721218943"
+          },
+          "title": "BOD24GWXS99034TM1"
+        },
+        {
+          "price": { "amount": 129.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "BOD22SBSPB0003TM1",
+            "id": "8045876773088",
+            "type": "BOD - BODY SPLASH"
+          },
+          "id": "44011863834860",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_7011cbf7-557f-444f-a640-2eaec6eb90a8.png?v=1707404063"
+          },
+          "title": "BOD22SBSPB0003TM1"
+        }
+      ],
+      "Deodorant": [
+        {
+          "price": { "amount": 59.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "DEO22SDEOD0002TM1",
+            "id": "8045876773088",
+            "type": "DEODRANT"
+          },
+          "id": "44011863834853",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_204181c0-d80d-441d-bd8c-93668d9158e9.png?v=1707378631"
+          },
+          "title": "DEO22SDEOD0002TM1"
+        },
+        {
+          "price": { "amount": 59.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "DEO22SDEOD0003TM1",
+            "id": "8045876773088",
+            "type": "DEODRANT"
+          },
+          "id": "44011863834854",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_9ccf59ce-9210-4930-8f3c-b931a27825c0.png?v=1708270029"
+          },
+          "title": "DEO22SDEOD0003TM1"
+        },
+        {
+          "price": { "amount": 59.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "DEO22SDEOD0001TM1",
+            "id": "8045876773088",
+            "type": "DEODRANT"
+          },
+          "id": "44011863834855",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_9fd8fff8-b506-420d-a97f-e5f261dfac31.png?v=1707378609"
+          },
+          "title": "DEO22SDEOD0001TM1"
+        }
+      ],
+      "Wallets": [
+        {
+          "price": { "amount": 399.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "WLT24GWLB57243TM1",
+            "id": "8045876773088",
+            "type": "Wallets - WLT"
+          },
+          "id": "44011863834856",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/3_f76ae849-1070-46e8-9cfb-49750c5dc2dd.png?v=1743074929"
+          },
+          "title": "WLT24GWLB57243TM1"
+        },
+        {
+          "price": { "amount": 399.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "WLT24GWLB57241TM1",
+            "id": "8045876773088",
+            "type": "Wallets - WLT"
+          },
+          "id": "44011863834857",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_081e4a43-fe9c-4930-83f8-2daa1913ab81.png?v=1741443609"
+          },
+          "title": "WLT24GWLB57241TM1"
+        },
+        {
+          "price": { "amount": 499.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "WLT24GWLB57248TM1",
+            "id": "8045876773088",
+            "type": "Wallets - WLT"
+          },
+          "id": "44011863834858",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_efc467f6-6752-4a29-8a86-8625be9ecd89.png?v=1743074858"
+          },
+          "title": "WLT24GWLB57248TM1"
+        }
+      ],
+      "Body Care": [
+        {
+          "price": { "amount": 59.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "DEO24SDEO99033TM1",
+            "id": "8045876773088",
+            "type": "Body Care - DEO"
+          },
+          "id": "44011863834861",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_e0db31a0-b54a-426d-8b1b-a3855e691255.png?v=1721218881"
+          },
+          "title": "DEO24SDEO99033TM1"
+        }
+      ],
+      "Belts": [
+        {
+          "price": { "amount": 449.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "BEL24GBBU52243TM1",
+            "id": "8045876773088",
+            "type": "Belts - BEL"
+          },
+          "id": "44011863834863",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/brown.png?v=1721218915"
+          },
+          "title": "BEL24GBBU52243TM1"
+        },
+        {
+          "price": { "amount": 499.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "BEL25GBBU52252TM1",
+            "id": "8045876773088",
+            "type": "Belts - BEL"
+          },
+          "id": "44011863834864",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_bec35b5c-4ad4-4763-9240-458768173499.png?v=1737381629"
+          },
+          "title": "BEL25GBBU52252TM1"
+        },
+        {
+          "price": { "amount": 449.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "BEL24GBBU52245TM1",
+            "id": "8045876773088",
+            "type": "Belts - BEL"
+          },
+          "id": "44011863834865",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_7d9e8c52-889a-4918-be3c-6b27fe475b8a.png?v=1728997307"
+          },
+          "title": "BEL24GBBU52245TM1"
+        }
+      ],
+      "Boxers": [
+        {
+          "price": { "amount": 149.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "BOX25GBCA99479TM1",
+            "id": "8045876773088",
+            "type": "Boxers - BOX"
+          },
+          "id": "44011863834872",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_c56f862d-4de6-43f4-85d1-208a99db7247.png?v=1740656443"
+          },
+          "title": "BOX25GBCA99479TM1"
+        },
+        {
+          "price": { "amount": 149.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "BOX25GBCB99482TM1",
+            "id": "8045876773088",
+            "type": "Boxers - BOX"
+          },
+          "id": "44011863834873",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_21d9395a-c2d4-444d-8b46-d30cd467bf1c.png?v=1740656616"
+          },
+          "title": "BOX25GBCB99482TM1"
+        }
+      ],
+      "Socks": [
+        {
+          "price": { "amount": 149.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "SOK24GNPC52436TM1",
+            "id": "8045876773088",
+            "type": "Socks - SOK"
+          },
+          "id": "44011863834877",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_0c42358b-28d2-4c7d-aee6-f4ef44a166fb.png?v=1705758861"
+          },
+          "title": "SOK24GNPC52436TM1"
+        },
+        {
+          "price": { "amount": 179.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "SOK24GHPC52432TM1",
+            "id": "8045876773088",
+            "type": "Socks - SOK"
+          },
+          "id": "44011863834881",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_f149364a-fca9-48b4-9a7b-74d5cc1f8691.png?v=1703425516"
+          },
+          "title": "SOK24GHPC52432TM1"
+        }
+      ],
+      "Sets": [
+        {
+          "price": { "amount": 279.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "ACS23GIPA27377TM1",
+            "id": "8045876773088",
+            "type": "Sets - ACS"
+          },
+          "id": "44011863834878",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_69a2f7d6-56af-4758-a1d3-2b650fd6d289.png?v=1700921573"
+          },
+          "title": "ACS23GIPA27377TM1"
+        }
+      ],
+      "Ice Caps": [
+        {
+          "price": { "amount": 189.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "ICC23GIWP27378TM1",
+            "id": "8045876773088",
+            "type": "Ice Caps - ICC"
+          },
+          "id": "44011863834879",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/2_8df40e12-1d92-4015-a795-1a627f3f40c1.png?v=1740319470"
+          },
+          "title": "ICC23GIWP27378TM1"
+        }
+      ],
+      "Gloves": [
+        {
+          "price": { "amount": 149.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "GLV23GFWQ27375TM1",
+            "id": "8045876773088",
+            "type": "Gloves - GLV"
+          },
+          "id": "44011863834880",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_e2143fe6-3df2-41ec-a32b-c0d6f75abb0f.png?v=1740319449"
+          },
+          "title": "GLV23GFWQ27375TM1"
+        }
+      ],
+      "Bags": [
+        {
+          "price": { "amount": 599.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "HBG24GXXX57231TM1",
+            "id": "8045876773088",
+            "type": "Bags - HBG"
+          },
+          "id": "44011863834886",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/2_02b51be0-3fae-4221-a054-cf8a60e1951c.png?v=1733752263"
+          },
+          "title": "HBG24GXXX57231TM1"
+        },
+        {
+          "price": { "amount": 749.0, "currencyCode": "EGP" },
+          "product": {
+            "title": "HBG24GXXX57232TM1",
+            "id": "8045876773088",
+            "type": "Bags - HBG"
+          },
+          "id": "44011863834887",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/4_f243cb71-29c7-43e2-9e00-6bf9511995df.png?v=1721218812"
+          },
+          "title": "HBG24GXXX57232TM1"
+        }
+      ]
+    }
   }
 }
