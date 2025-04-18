@@ -1,12 +1,20 @@
 import { useState } from 'react'
-import './App.css'
+import Login from './Components/Login'
+import { AuthProvider } from './Context/auth'
+import { BrowserRouter } from 'react-router-dom'
+import Footer from './Components/Footer';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isAuth, setIsAuth] = useState(false); 
 
   return (
-    <>
-    </>
+    <AuthProvider value={{ isAuth, setIsAuth }}>
+    <BrowserRouter>
+    <Login/>
+    <Footer/>
+    </BrowserRouter>
+  </AuthProvider>
+  
   )
 }
 
