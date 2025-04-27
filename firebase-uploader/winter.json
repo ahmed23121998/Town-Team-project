@@ -1,0 +1,326 @@
+{
+  "collection": {
+    "winter": [
+      {
+        "price": {
+          "amount": 1099,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "JAC23WFWP28353TM1",
+          "id": "7991043981536",
+          "type": "MEN JACKET"
+        },
+        "id": "43847928086752",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/TST25SSPT15004TM1-Beige.jpg?v=1743590070"
+        },
+        "title": "Orange / S"
+      },
+      {
+        "price": {
+          "amount": 1099,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "JAC23WFWP28375TM1",
+          "id": "8008524202208",
+          "type": "MEN JACKET"
+        },
+        "id": "43907709960416",
+        "image": {
+          "src": "//townteam.com/cdn/shop/products/JAC23WFWP28375TM1_NAVY-RED-2.jpg?v=1702389728"
+        },
+        "title": "Red*Blue / S"
+      },
+      {
+        "price": {
+          "amount": 549,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS23WFL411709HM1",
+          "id": "8177758077152",
+          "type": "Men Sweatshirts"
+        },
+        "id": "44391221690592",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/SWS23WFL411709HM1_RoyalBlue.jpg?v=1735141729"
+        },
+        "title": "Royal Blue / S"
+      },
+      {
+        "price": {
+          "amount": 449,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "FSH22AFCH19762TM1",
+          "id": "8104006320352",
+          "type": "Men Autumn Shirts"
+        },
+        "id": "44192282607840",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/FSH22AFCH19762TM1-Grey.jpg?v=1735141169"
+        },
+        "title": "Grey / S"
+      },
+      {
+        "price": {
+          "amount": 1049,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "JAC24WWCL28394TM1",
+          "id": "8104007925984",
+          "type": "Men Jackets"
+        },
+        "id": "46550704914656",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/JAC24WWCL28394TM1-BLK-YLW.jpg?v=1735141322"
+        },
+        "title": "BLK/YLW / S"
+      },
+      {
+        "price": {
+          "amount": 1139,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "JAC24WCCP28431TM1",
+          "id": "8177771479264",
+          "type": "Men Jackets"
+        },
+        "id": "44391251804384",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/JAC24WCCP28431TM1_CHRL_BLK.jpg?v=1735141238"
+        },
+        "title": "Charcoal*Black / S"
+      },
+      {
+        "price": {
+          "amount": 539,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS24WHPK26143TM1",
+          "id": "8223360811232",
+          "type": "Men Sweatshirts"
+        },
+        "id": "44630002696416",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/SWS24WHPK26143TM1_Mauve.jpg?v=1735141938"
+        },
+        "title": "Mauve / 4XL"
+      },
+      {
+        "price": {
+          "amount": 659,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS24WZNK26157TM1",
+          "id": "8223360319712",
+          "type": "Men Sweatshirts"
+        },
+        "id": "44629996437728",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/SWS24WZNK26157TM1_L-BEIGE.jpg?v=1735142014"
+        },
+        "title": "L-BEIGE / XL"
+      },
+      {
+        "price": {
+          "amount": 509,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS24WZPK26741TM1",
+          "id": "8104778170592",
+          "type": "Men Sweatshirts"
+        },
+        "id": "44194501034208",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/SWS24WZPK26741TM1-Charcoal.jpg?v=1735142023"
+        },
+        "title": "Charcoal / 3XL"
+      },
+      {
+        "price": {
+          "amount": 659,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS24WHWK26062TM1",
+          "id": "8177803428064",
+          "type": "Men Sweatshirts"
+        },
+        "id": "44391321764064",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/SWS24WHWK26062TM1_Charcoal.jpg?v=1735141944"
+        },
+        "title": "Charcoal / 2XL"
+      },
+      {
+        "price": {
+          "amount": 599,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS24WRAL26140TM1",
+          "id": "8223358255328",
+          "type": "Men Sweatshirts"
+        },
+        "id": "44629969633504",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/SWS24WRAL26140TM1_D-GREY.jpg?v=1735141957"
+        },
+        "title": "D-GREY / XL"
+      },
+      {
+        "price": {
+          "amount": 749,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS24WCCS26017TM1",
+          "id": "8223358714080",
+          "type": "Men Sweatshirts"
+        },
+        "id": "44629975892192",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/SWS24WCCS26017TM1_BRN_WHT.jpg?v=1735141844"
+        },
+        "title": "BRN/WHT / 2XL"
+      },
+      {
+        "price": {
+          "amount": 539,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS24WHNK26100TM1",
+          "id": "8223359828192",
+          "type": "Men Sweatshirts"
+        },
+        "id": "44629989458144",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/SWS24WHNK26100TM1_Yellow.jpg?v=1735141906"
+        },
+        "title": "Yellow / 2XL"
+      },
+      {
+        "price": {
+          "amount": 659,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS24WZNK26156TM1",
+          "id": "8223360483552",
+          "type": "Men Sweatshirts"
+        },
+        "id": "44629999026400",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/SWS24WZNK26156TM1_Mauve.jpg?v=1735142012"
+        },
+        "title": "Mauve / XL"
+      },
+      {
+        "price": {
+          "amount": 659,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "PUL24WPSZ27625TM1",
+          "id": "8277094039776",
+          "type": "Men Pullovers"
+        },
+        "id": "46599886340320",
+        "image": {
+          "src": "//townteam.com/cdn/shop/files/PUL24WPSZ27625TM1-NVY-BGE.jpg?v=1735141651"
+        },
+        "title": "NVY/BGE / S"
+      },
+      {
+        "price": {
+          "amount": 399,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "PUL23WCOT27446TM1",
+          "id": "7871017484512",
+          "type": "MEN PULLOVER"
+        },
+        "id": "43830856909024",
+        "image": {
+          "src": "//townteam.com/cdn/shop/products/PUL23WCOT27446TM1-DK.RED_1of4.jpg?v=1673450765"
+        },
+        "title": "Red / S"
+      },
+      {
+        "price": {
+          "amount": 399,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "PUL23WCOT27410TM1",
+          "id": "7871015485664",
+          "type": "MEN PULLOVER"
+        },
+        "id": "43830869754080",
+        "image": {
+          "src": "//townteam.com/cdn/shop/products/DSC_6390_def157e8-24dd-4459-8eac-6dd8fe3b5fb6.jpg?v=1716989169"
+        },
+        "title": "Blue / S"
+      },
+      {
+        "price": {
+          "amount": 399,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS23WMIL26791TM1",
+          "id": "7941783748832",
+          "type": "MEN SWEAT SHIRT"
+        },
+        "id": "43830765453536",
+        "image": {
+          "src": "//townteam.com/cdn/shop/products/SWS23WMIL26791TM1-MUSTARD_1of4.jpg?v=1697546851"
+        },
+        "title": "Yellow / S"
+      },
+      {
+        "price": {
+          "amount": 399,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS23WMIL26722TM1",
+          "id": "7962524418272",
+          "type": "MEN SWEAT SHIRT"
+        },
+        "id": "43830760046816",
+        "image": {
+          "src": "//townteam.com/cdn/shop/products/SWS23WMIL26722TM1-ORANGE.jpg?v=1671798076"
+        },
+        "title": "Orange / XL"
+      },
+      {
+        "price": {
+          "amount": 399,
+          "currencyCode": "EGP"
+        },
+        "product": {
+          "title": "SWS23WMIL26701TM1",
+          "id": "7871017713888",
+          "type": "MEN SWEAT SHIRT"
+        },
+        "id": "43460834525408",
+        "image": {
+          "src": "//townteam.com/cdn/shop/products/DSC_6692.jpg?v=1687264097"
+        },
+        "title": "CYRRY / S"
+      }
+    ]
+  }
+}
