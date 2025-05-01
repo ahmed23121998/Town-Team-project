@@ -6,6 +6,7 @@ import PauseIcon from '@mui/icons-material/Pause';
 
 export default function Header() {
     const [isPlaying, setIsPlaying] = useState(true);
+    const [isIconVisible, setIsIconVisible] = useState(true);
 
     const handleVideoClick = (event) => {
         const videoElement = event.target;
@@ -15,6 +16,19 @@ export default function Header() {
             videoElement.play();
         }
         setIsPlaying(!isPlaying);
+        setIsIconVisible(false);
+    };
+
+    const handleIconClick = (e) => {
+        e.stopPropagation();
+        const videoElement = e.currentTarget.previousSibling;
+        if (isPlaying) {
+            videoElement.pause();
+        } else {
+            videoElement.play();
+        }
+        setIsPlaying(!isPlaying);
+        setIsIconVisible(false); 
     };
 
     return (
@@ -34,31 +48,24 @@ export default function Header() {
                         display:'block'
                     }}
                 />
-                <IconButton
-                onClick={(e) => {
-                    e.stopPropagation(); 
-                    const videoElement = e.currentTarget.previousSibling;
-                    if (isPlaying) {
-                        videoElement.pause();
-                    } else {
-                        videoElement.play();
-                    }
-                    setIsPlaying(!isPlaying);
-                }}
-                sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    color: 'white',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    '&:hover': {
-                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    },
-                }}
-            >
-                {isPlaying ? <PauseIcon sx={{ fontSize: 48 }} /> : <PlayArrowIcon sx={{ fontSize: 48 }} />}
-            </IconButton>
+                 {isIconVisible && (  
+                    <IconButton
+                        onClick={handleIconClick}
+                        sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            color: 'white',
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            '&:hover': {
+                                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                            },
+                        }}
+                    >
+                        {isPlaying ? <PauseIcon sx={{ fontSize: 48 }} /> : <PlayArrowIcon sx={{ fontSize: 48 }} />}
+                    </IconButton>
+                )}
             </Box>
         </>
     )

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Container, Box, Button, Divider, Menu, MenuItem, MenuList, Paper, Stack, Badge, Typography, Link, IconButton, Drawer, List, ListItem, ListItemText, InputBase, Modal } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { AppBar, Toolbar, Container, Box, Button, Divider, Menu, MenuItem, MenuList, Paper, Stack, Badge, Typography, Link, IconButton, Drawer, List, ListItem, ListItemText, InputBase, Modal, colors } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import SearchIcon from '@mui/icons-material/Search';
@@ -48,7 +49,7 @@ const SubMenuItem = ({ item }) => {
     const handleMouseLeave = () => {
         timeoutRef.current = setTimeout(() => {
             setOpen(false);
-        }, 0);
+        }, 50);
     };
 
     return (
@@ -165,6 +166,9 @@ const NavItem = ({ item }) => {
 
 // ============ NavBar Component ============
 export default function NavBar() {
+    // =============== Router ===============
+    const navigate = useNavigate();
+
     // =============== Drawer state ===============
     const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -195,6 +199,10 @@ export default function NavBar() {
 
     // =============== Search state ===============
     const [openSearch, setOpenSearch] = React.useState(false);
+
+    const [searchValue, setSearchValue] = useState('');
+    const [isFocused, setIsFocused] = useState(false);
+    const showSuggestions = isFocused || searchValue.length > 0;
 
     // =============== Nav Items ===============
     const navItems = [
@@ -251,8 +259,10 @@ export default function NavBar() {
         <AppBar sx={{ height: 90, backgroundColor: 'black' }} elevation={0}>
             <Container maxWidth="xl">
                 <Toolbar sx={{ justifyContent: 'space-between', px: 2 }}>
-                    <Button variant="text" sx={{ height: 90 }}>
-                        <img src={logo} alt="TownTeam Logo" style={{ height: 90 }} />
+                    <Button variant="text" sx={{ height: 90 }}
+                        onClick={() => navigate(0)} >
+                        <img src={logo} alt="TownTeam Logo" style={{ height: 90 }}
+                        />
                     </Button>
                     {/* Nav Items */}
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4 }}>
@@ -343,6 +353,7 @@ export default function NavBar() {
                             </IconButton>
                             <Modal open={openSearch} onClose={() => setOpenSearch(false)}>
                                 <Box
+                                    onClick={() => setOpenSearch(false)} // اغلاق عند الضغط في أي مكان بالخارج
                                     sx={{
                                         position: 'fixed',
                                         top: 0,
@@ -357,6 +368,7 @@ export default function NavBar() {
                                     }}
                                 >
                                     <Box
+                                        onClick={(e) => e.stopPropagation()} // منع الإغلاق عند الضغط داخل مربع البحث
                                         sx={{
                                             bgcolor: 'white',
                                             width: '100%',
@@ -377,22 +389,72 @@ export default function NavBar() {
                                             <CloseIcon />
                                         </IconButton>
 
-                                        {/* Search Input */}
-                                        <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                                            <InputBase
-                                                fullWidth
-                                                placeholder="Search products..."
-                                                color="black"
-                                                sx={{ fontSize: 20, borderBottom: '1px solid gray', pb: 1 }}
-                                            />
-                                            <IconButton>
-                                                <SearchIcon />
-                                            </IconButton>
+                                        {/* Search Section */}
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                                            {/* Search Input */}
+                                            <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                                                <InputBase
+                                                    fullWidth
+                                                    placeholder="Search products..."
+                                                    value={searchValue}
+                                                    onChange={(e) => setSearchValue(e.target.value)}
+                                                    onFocus={() => setIsFocused(true)}
+                                                    onBlur={() => setIsFocused(false)}
+                                                    sx={{
+                                                        fontSize: 20,
+                                                        borderBottom: '1px solid gray',
+                                                        pb: 1,
+                                                    }}
+                                                />
+                                                <IconButton>
+                                                    <SearchIcon />
+                                                </IconButton>
+                                            </Box>
+                                            {/* Suggestions Section */}
+                                            {showSuggestions && (
+                                                <Box sx={{ mt: 2, width: '100%' }}>
+                                                    <Typography variant="h6">Trending Now</Typography>
+                                                    <Divider sx={{ my: 1,mt:2 }} />
+
+                                                    <Stack direction="row" spacing={2} >
+                                                        <Button sx={{ backgroundColor: '#f7f7f7' }}>
+                                                            <Stack direction="row" spacing={1}>
+                                                                <SearchIcon sx={{ color: 'gray' }} />
+                                                                <Typography sx={{ color: 'gray' }}>men jackets</Typography>
+                                                            </Stack>
+                                                        </Button>
+                                                        <Button sx={{ backgroundColor: '#f7f7f7' }}>
+                                                            <Stack direction="row" spacing={1}>
+                                                                <SearchIcon sx={{ color: 'gray' }} />
+                                                                <Typography sx={{ color: 'gray' }}>pullover</Typography>
+                                                            </Stack>
+                                                        </Button>
+                                                        <Button sx={{ backgroundColor: '#f7f7f7' }}>
+                                                            <Stack direction="row" spacing={1}>
+                                                                <SearchIcon sx={{ color: 'gray' }} />
+                                                                <Typography sx={{ color: 'gray' }}>sweatshirts</Typography>
+                                                            </Stack>
+                                                        </Button>
+                                                        <Button sx={{ backgroundColor: '#f7f7f7' }}>
+                                                            <Stack direction="row" spacing={1}>
+                                                                <SearchIcon sx={{ color: 'gray' }} />
+                                                                <Typography sx={{ color: 'gray' }}>shirt</Typography>
+                                                            </Stack>
+                                                        </Button>
+                                                        <Button sx={{ backgroundColor: '#f7f7f7' }}>
+                                                            <Stack direction="row" spacing={1}>
+                                                                <SearchIcon sx={{ color: 'gray' }} />
+                                                                <Typography sx={{ color: 'gray' }}>polo shirt</Typography>
+                                                            </Stack>
+                                                        </Button>
+                                                    </Stack>
+                                                    <Divider sx={{ my: 1 ,mt:2}} />
+                                                </Box>
+                                            )}
                                         </Box>
                                     </Box>
                                 </Box>
                             </Modal>
-
                             <IconButton aria-label="user" >
                                 <PermIdentityIcon sx={{ color: 'white', fontSize: 30 }} />
                             </IconButton>
