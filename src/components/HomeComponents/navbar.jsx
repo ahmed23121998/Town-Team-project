@@ -22,7 +22,7 @@ const SubMenu = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     zIndex: theme.zIndex.appBar + 1,
-    minWidth: 200,
+    minWidth: 230,
 }));
 
 const NestedSubMenu = styled(Paper)(({ theme }) => ({
@@ -32,7 +32,7 @@ const NestedSubMenu = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     zIndex: theme.zIndex.appBar + 2,
-    minWidth: 200,
+    minWidth: 230,
 }));
 
 // ============ Sub Menu Item Component ============
@@ -79,13 +79,13 @@ const SubMenuItem = ({ item }) => {
                                 <MenuItem
                                     sx={{
                                         '&:hover': {
-                                            textDecoration: 'underline', // يظهر خط تحت العنصر عند hover
+                                            textDecoration: 'underline', 
                                         },
                                     }}
                                 >
                                     {label}
                                 </MenuItem>
-                                {i < item.submenu.length - 1 && <Divider />} {/* Divider بين العناصر */}
+                                {i < item.submenu.length - 1 && <Divider />} 
                             </React.Fragment>
                         ))}
                     </MenuList>
@@ -230,15 +230,15 @@ export default function NavBar() {
             ]
         },
         {
-            label: 'WINTER CLEARANCE', tag: 'Sale', submenu: [
-                { label: 'WINTER CLEARANCE', submenu: ['MEN AUTUMN SHIRTS', 'MEN JACKETS', 'MEN PULLOVERS', 'MEN SWEATSHIRTS'] }
+            label: 'WINTER', tag: 'Sale', submenu: [
+                { label: 'WINTER', submenu: ['MEN AUTUMN SHIRTS', 'MEN JACKETS', 'MEN PULLOVERS', 'MEN SWEATSHIRTS'] }
             ]
         },
         {
-            label: 'NEW ARRIVALS',
+            label: 'NEW ARRIVAL',
             submenu: [
                 {
-                    label: 'NEW ARRIVALS', submenu: [
+                    label: 'NEW ARRIVAL', submenu: [
                         'MEN JACKETS', 'MEN OVER SHIRTS', 'MEN PULLOVERS', 'MEN SWEATSHIRTS'
                     ]
                 }
@@ -265,7 +265,7 @@ export default function NavBar() {
                         />
                     </Button>
                     {/* Nav Items */}
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4 }}>
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
                         {navItems.map((item) =>
                             item.submenu ? (
                                 <NavItem key={item.label} item={item} />
@@ -353,7 +353,7 @@ export default function NavBar() {
                             </IconButton>
                             <Modal open={openSearch} onClose={() => setOpenSearch(false)}>
                                 <Box
-                                    onClick={() => setOpenSearch(false)} // اغلاق عند الضغط في أي مكان بالخارج
+                                    onClick={() => setOpenSearch(false)}
                                     sx={{
                                         position: 'fixed',
                                         top: 0,
@@ -368,7 +368,7 @@ export default function NavBar() {
                                     }}
                                 >
                                     <Box
-                                        onClick={(e) => e.stopPropagation()} // منع الإغلاق عند الضغط داخل مربع البحث
+                                        onClick={(e) => e.stopPropagation()} 
                                         sx={{
                                             bgcolor: 'white',
                                             width: '100%',
@@ -391,7 +391,6 @@ export default function NavBar() {
 
                                         {/* Search Section */}
                                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-                                            {/* Search Input */}
                                             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                                                 <InputBase
                                                     fullWidth
@@ -414,7 +413,7 @@ export default function NavBar() {
                                             {showSuggestions && (
                                                 <Box sx={{ mt: 2, width: '100%' }}>
                                                     <Typography variant="h6">Trending Now</Typography>
-                                                    <Divider sx={{ my: 1,mt:2 }} />
+                                                    <Divider sx={{ my: 1, mt: 2 }} />
 
                                                     <Stack direction="row" spacing={2} >
                                                         <Button sx={{ backgroundColor: '#f7f7f7' }}>
@@ -448,14 +447,16 @@ export default function NavBar() {
                                                             </Stack>
                                                         </Button>
                                                     </Stack>
-                                                    <Divider sx={{ my: 1 ,mt:2}} />
+                                                    <Divider sx={{ my: 1, mt: 2 }} />
                                                 </Box>
                                             )}
                                         </Box>
                                     </Box>
                                 </Box>
                             </Modal>
-                            <IconButton aria-label="user" >
+                            <IconButton aria-label="user"
+                                onClick={() => navigate('/login')}
+                            >
                                 <PermIdentityIcon sx={{ color: 'white', fontSize: 30 }} />
                             </IconButton>
                             <IconButton aria-label="favorite" >
@@ -476,28 +477,30 @@ export default function NavBar() {
             {/* Drawer */}
             <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
                 <Box
-                    sx={{ width: 450 }}
+                    sx={{ width: 350 }}
                     role="presentation"
                     onClick={toggleDrawer(false)}
                     onKeyDown={toggleDrawer(false)}
                 >
-                    <List>
-                        <ListItem>
-                            <ListItemText primary="Language" />
-                        </ListItem>
-                        <ListItem>
-                            <Stack direction="row" spacing={1}>
-                                <img src="https://flagcdn.com/gb.svg" alt="GB" width={20} />
-                                <Typography>English</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: 2, bgcolor: '#f8f8f8' }}>
+                        <Typography sx={{ fontWeight: 'bold' }}>Language</Typography>
+                        <IconButton onClick={toggleDrawer(false)}>
+                            <CloseIcon />
+                        </IconButton>
+                    </Box>
+
+                    {/* Language Options */}
+                    <Box sx={{ px: 2, py: 3 }}>
+                        <Stack direction="row" spacing={6} alignItems="center" justifyContent="flex-start">
+                            <Stack direction="row" spacing={1} alignItems="center" sx={{ cursor: 'pointer' }}>
+                                <img src="https://flagcdn.com/gb.svg" alt="GB" width={24} />
+                                <Typography sx={{ fontWeight: 'bold', textDecoration: 'underline' }}>EN</Typography>
                             </Stack>
-                        </ListItem>
-                        <ListItem>
-                            <Stack direction="row" spacing={1}>
-                                <img src="https://flagcdn.com/eg.svg" alt="EG" width={20} />
-                                <Typography>Arabic</Typography>
+                            <Stack sx={{ cursor: 'pointer' }} >
+                                <Typography>AR</Typography>
                             </Stack>
-                        </ListItem>
-                    </List>
+                        </Stack>
+                    </Box>
                 </Box>
             </Drawer>
         </AppBar>
