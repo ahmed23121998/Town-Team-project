@@ -38,7 +38,7 @@ const defaultColorFilters = {
   darkteal: false,
 };
 
-function FilterComponent() {
+function FilterComponent({ toggleFilters }) {
   const { Filteration, setFilteration } = useContext(MyContext);
   const [expanded, setExpanded] = useState({
     availability: true,
@@ -140,7 +140,6 @@ function FilterComponent() {
     black: "#000000",
     green: "#008000",
     blue: "#0000FF",
-    // الألوان الأصلية
   };
 
   function ClearFilter() {
@@ -154,6 +153,7 @@ function FilterComponent() {
 
   return (
     <>
+      <button onClick={toggleFilters}>x</button>
       <div
         style={{
           width: "300px",

@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import "./App.css";
 import ProductList from "./components/ProductList/ProductList";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import MainCart from "./components/Cart/MainCart";
 
 function App() {
   const [Filteration, setFilteration] = useState();
@@ -23,6 +24,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ProductList />} />
+          <Route path="/MainCart" element={<MainCart />} />
           <Route path="/productDetails" element={<ProductDetails />} />
         </Routes>
       </BrowserRouter>

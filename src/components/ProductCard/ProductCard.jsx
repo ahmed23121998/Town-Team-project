@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useContext } from "react"; //useMemo,
+import React, { useEffect, useState } from "react";
+import { addToCart } from "../cartUtils";
 import {
   Box,
   Card,
@@ -11,24 +12,26 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./ProductCard.css";
 import { useNavigate } from "react-router-dom";
-import { MyContext } from "../../Context/FilterContaext";
 
 const ProductCard = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [inWishlist, setInWishlist] = useState(false);
   const [isWishlistHovered, setIsWishlistHovered] = useState(false);
-  const [selectedSize] = useState(null); //, setSelectedSize
+  const [selectedSize] = useState(null);
 
   const [hoveredSize, setHoveredSize] = useState(null);
 
   const [randomPrice, setRandomPrice] = useState(null);
 
   const navigate = useNavigate();
-  const { cartProducts, setcartProducts } = useContext(MyContext);
 
-  const addProductToCart = (product) => {
-    setcartProducts([...cartProducts, product]);
-    console.log("cartProducts", cartProducts);
+  const addProductToCart = async (product) => {
+    const userId = `u1234567890`;
+    try {
+      await addToCart(userId, product, 1);
+    } catch (error) {
+      console.error("Cart update failed:", error);
+    }
   };
   useEffect(() => {
     const basePrice = parseFloat(
@@ -54,7 +57,6 @@ const ProductCard = ({ product }) => {
     setHoveredSize(size);
   };
 
-  //  Handle mouse leaving a size circle
   const handleSizeMouseLeave = () => {
     setHoveredSize(null);
   };
@@ -63,10 +65,8 @@ const ProductCard = ({ product }) => {
 
   return (
     <Card className="product-card">
-      {/* Sale Tag */}
       <Box className="sale-tag">Sale 70%</Box>
 
-      {/* Wishlist Button */}
       <Box
         className={`wishlist-container ${isWishlistHovered ? "hovered" : ""} ${
           inWishlist ? "active" : ""
@@ -87,7 +87,6 @@ const ProductCard = ({ product }) => {
         )}
       </Box>
 
-      {/* product Image with Hover Elements */}
       <Box
         className="image-container"
         onMouseEnter={handleImageMouseEnter}
@@ -144,7 +143,6 @@ const ProductCard = ({ product }) => {
 
         {isHovered && (
           <Button
-            // variant="contained"
             fullWidth
             className="quick-add-button"
             onClick={() => addProductToCart(product)}
@@ -155,7 +153,6 @@ const ProductCard = ({ product }) => {
       </Box>
 
       <CardContent className="product-info">
-        {/* product Title */}
         <Box
           sx={{
             display: "flex",
@@ -215,7 +212,6 @@ const ProductCard = ({ product }) => {
           </Typography>
         </Box>
         <Stack
-          // onClick={() => onProductClick(product)}
           direction="row"
           spacing={1}
           className="product-thumbnails"

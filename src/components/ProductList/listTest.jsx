@@ -1,20 +1,12 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
 import { db } from "../../Firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Typography,
-  IconButton,
-  Drawer,
-} from "@mui/material";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ProductCard from "../ProductCard/ProductCard";
 import FiltereTheProducts from "../Filtration/FiltereTheProducts";
 import Subcart from "../Cart/Subcart";
 import { MyContext } from "../../Context/FilterContaext";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import "./ProductList.css";
 
 const theme = createTheme({
@@ -29,19 +21,14 @@ const ProductList = ({ category }) => {
   const [rawProducts, setRawProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [cart, setCart] = useState(false);
 
   const normalizeFilterValue = (value) => {
     return String(value).toLowerCase().trim().replace(/['"]/g, "");
   };
 
   const toggleCart = () => {
-    setCartOpen(!cartOpen);
-  };
-
-  const toggleFilters = () => {
-    setFiltersOpen(!filtersOpen);
+    setCart(!cart);
   };
 
   const filterProducts = (data, filters) => {
@@ -103,6 +90,7 @@ const ProductList = ({ category }) => {
     () => JSON.stringify(Filteration),
     [Filteration]
   );
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -153,7 +141,6 @@ const ProductList = ({ category }) => {
 
     fetchData();
   }, [category]);
-
   const userId = "u1234567890";
 
   const filteredProducts = useMemo(() => {
@@ -161,83 +148,63 @@ const ProductList = ({ category }) => {
   }, [rawProducts, filterString]);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <>
       <Box
-        sx={{
-          margin: { xs: "10px 0", md: "20px 0" },
-          padding: "5px",
-          backgroundColor: "black",
-          color: "white",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: { xs: "10px", md: "20px" },
-          width: "100%",
-          flexWrap: "wrap",
-        }}
+        sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <IconButton
-            onClick={toggleFilters}
-            sx={{ display: { xs: "block", md: "none" }, color: "white" }}
-          >
-            <FilterListIcon />
-          </IconButton>
+        <Box
+          sx={{
+            margin: { xs: "10px 0", md: "20px 0" },
+            padding: "5px",
+            backgroundColor: "black",
+            color: "white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: { xs: "10px", md: "20px" },
+            width: "100%",
+            flexWrap: "wrap",
+          }}
+        >
           <Typography variant="h4" gutterBottom>
             Products
           </Typography>
-        </Box>
-        <Typography variant="subtitle1" gutterBottom>
-          {filteredProducts.length} products found
-        </Typography>
-        <button
-          onClick={toggleCart}
-          style={{
-            padding: "8px 16px",
-            backgroundColor: "#ffeb3b",
-            color: "black",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-          Cart
-        </button>
-      </Box>
-
-      <Box sx={{ display: "flex", position: "relative", flexGrow: 1 }}>
-        <Drawer
-          anchor="left"
-          open={filtersOpen}
-          onClose={toggleFilters}
-          sx={{ display: { xs: "block", md: "none" } }}
-        >
-          <Box sx={{ width: 310, padding: "20px" }}>
-            <FiltereTheProducts toggleFilters={toggleFilters} />
-          </Box>
-        </Drawer>
-
-        <Box
-          sx={{
-            width: { xs: "0", md: "250px" },
-            padding: { md: "20px" },
-            display: { xs: "none", md: "block" },
-            marginRight: "50px",
-          }}
-        >
-          <FiltereTheProducts />
-        </Box>
-
-        <ThemeProvider theme={theme}>
-          <Container
-            maxWidth="xl"
-            sx={{
-              py: 4,
-              flexGrow: 1,
-              transition: "margin-right 0.3s ease",
-              marginRight: { md: cartOpen ? "420px" : 0 },
+          <Typography variant="subtitle1" gutterBottom>
+            {filteredProducts.length} products found
+          </Typography>
+          <button
+            onClick={toggleCart}
+            style={{
+              padding: "8px 16px",
+              backgroundColor: "#ffeb3b",
+              color: "black",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
             }}
           >
+            Cart
+          </button>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            maxWidth: "100%",
+            position: "relative",
+          }}
+        >
+          <Box
+            sx={{
+              width: { xs: "100%", md: "250px" },
+              minWidth: { md: "200px" },
+              padding: { xs: "10px", md: "20px" },
+            }}
+          >
+            <FiltereTheProducts />
+          </Box>
+
+          <ThemeProvider theme={theme}>
             {loading ? (
               <Box
                 sx={{
@@ -266,59 +233,109 @@ const ProductList = ({ category }) => {
                   {error}
                 </Typography>
               </Box>
-            ) : filteredProducts.length === 0 ? (
-              <Box textAlign="center" py={8}>
-                <Typography variant="h5">
-                  No products match the current filters
-                </Typography>
-              </Box>
             ) : (
-              <Box
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: {
-                    xs: "1fr",
-                    sm: "repeat(2, 1fr)",
-                    md: "repeat(3, 1fr)",
-                    lg: "repeat(4, 1fr)",
-                  },
-                  gap: { xs: "2px", sm: "5px", md: "10px", lg: "15px" },
-                }}
-                className="products-grid"
+              <Container
+                maxWidth="xl"
+                sx={{ py: 4, flexGrow: 1, width: { xs: "100%", md: "auto" } }}
               >
-                {filteredProducts.map((product) => (
-                  <Box key={product.id} className="product-item">
-                    <ProductCard product={product} />
+                {filteredProducts.length === 0 ? (
+                  <Box textAlign="center" py={8}>
+                    <Box
+                      sx={{
+                        marginBottom: "20px",
+                        padding: "5px",
+                        backgroundColor: "black",
+                        color: "white",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "20px",
+                        borderRadius: "8px",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <button
+                        style={{
+                          padding: "8px 16px",
+                          backgroundColor: "#ffeb3b",
+                          color: "black",
+                          border: "none",
+                          borderRadius: "4px",
+                        }}
+                      >
+                        CART
+                      </button>
+                      <Typography variant="h4" gutterBottom>
+                        Products
+                      </Typography>
+                      <Typography variant="subtitle1" gutterBottom>
+                        {filteredProducts.length} products found
+                      </Typography>
+                    </Box>
+                    <Typography variant="h5">
+                      No products match the current filters
+                    </Typography>
                   </Box>
-                ))}
-              </Box>
+                ) : (
+                  <Box
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns: {
+                        xs: "1fr",
+                        sm: "repeat(2, 1fr)",
+                        md: "repeat(3, 1fr)",
+                        lg: "repeat(4, 1fr)",
+                      },
+                      gap: { xs: 2, md: 3 },
+                    }}
+                    className="products-grid"
+                  >
+                    {filteredProducts.map((product) => (
+                      <Box key={product.id} className="product-item">
+                        <ProductCard product={product} />
+                      </Box>
+                    ))}
+                  </Box>
+                )}
+              </Container>
             )}
-          </Container>
-        </ThemeProvider>
+          </ThemeProvider>
+        </Box>
+      </Box>
 
-        <Drawer
-          anchor="right"
-          open={cartOpen}
-          onClose={toggleCart}
+      <Box sx={{ position: "absolute", height: "100vh", width: "100%" }}>
+        <Box
+          onClick={() => toggleCart()}
           sx={{
-            width: { xs: "100%", md: 420 },
-            "& .MuiDrawer-paper": {
-              width: { xs: "100%", md: 420 },
-              boxSizing: "border-box",
-              backgroundColor: "white",
-            },
+            backgroundColor: "black",
+            color: "orange",
+            width: "75%",
+            // minHeight: "760px",
+            minHeight: "100vh",
+            opacity: "0.5",
+            cursor: "pointer",
+            // zIndex: "100",
+          }}
+        ></Box>
+        <Box
+          sx={{
+            position: { xs: "fixed", md: "absolute" },
+            top: 0,
+            right: 0,
+            height: "100vh",
+            width: { xs: cart ? "100%" : 0, md: cart ? "420px" : 0 },
+            zIndex: 1000,
+            backgroundColor: "white",
+            transition: "width 0.3s ease",
+            overflowY: "auto",
+            boxShadow: cart ? "-2px 0 5px rgba(0,0,0,0.2)" : "none",
           }}
         >
-          <Box sx={{ width: { xs: "100%", md: 420 }, padding: "20px" }}>
-            <Subcart
-              userId={userId}
-              onClose={toggleCart}
-              toggleCart={toggleCart}
-            />
-          </Box>
-        </Drawer>
+          {/* <button onClick={() => toggleCart()}>clos</button> */}
+          <Subcart userId={userId} />
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 
