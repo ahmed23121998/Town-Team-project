@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import { getCartItems, removeFromCart, updateCartQuantity } from "../cartUtils";
 import "./SubCart.css";
+import { Close } from "@mui/icons-material";
+
+import { IconButton } from "@mui/material";
 
 const SubCart = ({ toggleCart }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -60,6 +63,7 @@ const SubCart = ({ toggleCart }) => {
       console.error(err);
     }
   };
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2);
 
   return (
     <div
@@ -83,7 +87,9 @@ const SubCart = ({ toggleCart }) => {
         <h4 style={{ opacity: "0.5", fontWeight: "bolder" }}>
           {cartItems.length} items
         </h4>
-        <button onClick={toggleCart}>X</button>
+        <IconButton onClick={() => toggleCart()}>
+          <Close />
+        </IconButton>
       </div>
 
       {loading && (
@@ -225,26 +231,9 @@ const SubCart = ({ toggleCart }) => {
                   </span>
                 </div>
 
-                <button
-                  onClick={() => handleRemove(item.id)}
-                  style={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    color: "#ff7675",
-                    padding: "0.3rem 0.8rem",
-                    borderRadius: "4px",
-                    cursor: "pointer",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    transition: "all 0.2s",
-                    ":hover": {
-                      backgroundColor: "#fff1f2",
-                    },
-                  }}
-                >
-                  🗑️ Remove
-                </button>
+                <IconButton onClick={() => handleRemove(item.id)}>
+                  <Close />
+                </IconButton>
               </div>
             </div>
           ))}
@@ -274,10 +263,7 @@ const SubCart = ({ toggleCart }) => {
           >
             Total:
           </h4>
-          <h2>
-            {cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2)}{" "}
-            EGP{" "}
-          </h2>
+          <h2>{total}EGP</h2>
         </div>
 
         <button
@@ -290,7 +276,14 @@ const SubCart = ({ toggleCart }) => {
             cursor: "pointer",
             transition: "all 0.2s",
           }}
-          onClick={() => navigate("/###")}
+          onClick={() =>
+            navigate("/CheckoutForm", {
+              state: {
+                cartItems: cartItems,
+                total: total,
+              },
+            })
+          }
         >
           Checkout
         </button>
@@ -305,7 +298,14 @@ const SubCart = ({ toggleCart }) => {
             transition: "all 0.2s",
             marginTop: "15px",
           }}
-          onClick={() => navigate("/MainCart")}
+          onClick={() =>
+            navigate("/MainCart", {
+              state: {
+                cartItems: cartItems,
+                total: total,
+              },
+            })
+          }
         >
           View Cart
         </button>

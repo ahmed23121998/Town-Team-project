@@ -9,26 +9,29 @@ import {
   Paper,
   Divider,
   Grid,
+  CircularProgress,
 } from "@mui/material";
 import { Add, Remove, Close, ShoppingBag, Info } from "@mui/icons-material";
 import {
   collection,
-  // getDocs,
   doc,
   updateDoc,
   deleteDoc,
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../Firebase/firebase";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const MainCart = ({ onClose }) => {
+const MainCart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [couponCode, setCouponCode] = useState("");
-  const [timeRemaining, setTimeRemaining] = useState(3600); // 60 minutes in seconds
+  const [timeRemaining, setTimeRemaining] = useState(60 * 60); // 60 minutes in seconds
   const [userId] = useState(`u1234567890`);
-  // Currency format function
+  const navigate = useNavigate();
+
   const formatCurrency = (amount) => {
     return `LE ${amount.toLocaleString("en-US", {
       minimumFractionDigits: 2,
@@ -36,16 +39,17 @@ const MainCart = ({ onClose }) => {
     })}`;
   };
 
-  // Calculate cart totals
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + (item.price?.amount || 0) * item.quantity,
+    (sum, item) => sum + (item.price || 0) * item.quantity,
     0
   );
-  const total = subtotal; // Can be modified later to include shipping, discounts, etc.
+  const total = subtotal;
 
-  // Fetch cart data
   useEffect(() => {
-    if (!userId) return;
+    if (!userId) {
+      setLoading(false);
+      return;
+    }
 
     const cartRef = collection(db, "users", userId, "cart");
 
@@ -79,27 +83,23 @@ const MainCart = ({ onClose }) => {
     }
   }, [userId]);
 
-  // Handle countdown timer
   useEffect(() => {
-    if (timeRemaining <= 0) return;
-
     const timer = setInterval(() => {
-      setTimeRemaining((prev) => prev - 1);
+      setTimeRemaining((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeRemaining]);
+  }, []);
 
-  // Format time remaining
   const formatTimeRemaining = () => {
     const minutes = Math.floor(timeRemaining / 60);
     const seconds = timeRemaining % 60;
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
-  // Handle quantity updates
   const updateQuantity = async (itemId, newQuantity) => {
-    if (newQuantity < 1) return;
+    if (newQuantity < 1) newQuantity = 1;
+    if (newQuantity > 99) newQuantity = 99;
 
     try {
       const itemRef = doc(db, "users", userId, "cart", itemId);
@@ -110,7 +110,6 @@ const MainCart = ({ onClose }) => {
     }
   };
 
-  // Handle item removal
   const removeItem = async (itemId) => {
     try {
       const itemRef = doc(db, "users", userId, "cart", itemId);
@@ -121,22 +120,31 @@ const MainCart = ({ onClose }) => {
     }
   };
 
-  // Handle coupon code
   const handleCouponChange = (e) => {
     setCouponCode(e.target.value);
   };
 
-  // Proceed to checkout
   const handleCheckout = () => {
-    // Implement checkout logic
-    console.log("Proceeding to checkout with items:", cartItems);
-    // Redirect to checkout page or open checkout modal
+    navigate("/checkout", {
+      state: {
+        cartItems,
+        total,
+      },
+    });
+    onClose?.();
   };
 
   if (loading) {
     return (
-      <Box sx={{ p: 4, textAlign: "center" }}>
-        <Typography>Loading your cart...</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <CircularProgress />
       </Box>
     );
   }
@@ -145,13 +153,25 @@ const MainCart = ({ onClose }) => {
     return (
       <Box sx={{ p: 4, textAlign: "center" }}>
         <Typography color="error">{error}</Typography>
+        <Button
+          variant="outlined"
+          sx={{ mt: 2 }}
+          onClick={() => {
+            setError(null);
+            setLoading(true);
+          }}
+        >
+          Retry
+        </Button>
       </Box>
     );
+  }
+  function onClose() {
+    navigate("/");
   }
 
   return (
     <Container maxWidth={false} disableGutters sx={{ height: "100%" }}>
-      {/* Cart Header */}
       <Box
         sx={{
           p: 2,
@@ -165,12 +185,11 @@ const MainCart = ({ onClose }) => {
         <Typography variant="h6" sx={{ fontWeight: "bold" }}>
           YOUR CART
         </Typography>
-        <IconButton onClick={onClose}>
+        <IconButton onClick={() => onClose()}>
           <Close />
         </IconButton>
       </Box>
 
-      {/* Free Shipping Progress */}
       <Box sx={{ p: 2, backgroundColor: "#f5f5f5" }}>
         {subtotal >= 1399 ? (
           <Typography sx={{ color: "#009688" }}>
@@ -201,7 +220,6 @@ const MainCart = ({ onClose }) => {
         </Box>
       </Box>
 
-      {/* Urgency Message */}
       {cartItems.length > 0 && (
         <Paper
           elevation={0}
@@ -224,7 +242,6 @@ const MainCart = ({ onClose }) => {
         </Paper>
       )}
 
-      {/* Cart Content */}
       <Box sx={{ flex: 1, overflow: "auto", p: 2 }}>
         {cartItems.length === 0 ? (
           <Box
@@ -271,12 +288,15 @@ const MainCart = ({ onClose }) => {
                   >
                     <Box sx={{ width: 80, height: 80, mr: 2 }}>
                       <img
-                        src={item.image || "/api/placeholder/80/80"}
+                        src={item.image || "/placeholder-image.jpg"}
                         alt={item.title}
                         style={{
                           width: "100%",
                           height: "100%",
                           objectFit: "cover",
+                        }}
+                        onError={(e) => {
+                          e.target.src = "/placeholder-image.jpg";
                         }}
                       />
                     </Box>
@@ -304,9 +324,7 @@ const MainCart = ({ onClose }) => {
 
                   {/* Price */}
                   <Grid item xs={2} sx={{ textAlign: "center" }}>
-                    <Typography>
-                      {formatCurrency(item.price?.amount || 0)}
-                    </Typography>
+                    <Typography>{formatCurrency(item.price || 0)}</Typography>
                   </Grid>
 
                   {/* Quantity */}
@@ -344,6 +362,7 @@ const MainCart = ({ onClose }) => {
                         onClick={() =>
                           updateQuantity(item.id, item.quantity + 1)
                         }
+                        disabled={item.quantity >= 99}
                       >
                         <Add fontSize="small" />
                       </IconButton>
@@ -353,9 +372,7 @@ const MainCart = ({ onClose }) => {
                   {/* Total */}
                   <Grid item xs={2} sx={{ textAlign: "right" }}>
                     <Typography fontWeight="bold">
-                      {formatCurrency(
-                        (item.price?.amount || 0) * item.quantity
-                      )}
+                      {formatCurrency((item.price || 0) * item.quantity)}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -366,7 +383,6 @@ const MainCart = ({ onClose }) => {
         )}
       </Box>
 
-      {/* Order Summary */}
       {cartItems.length > 0 && (
         <Box
           sx={{
@@ -392,7 +408,6 @@ const MainCart = ({ onClose }) => {
             </Typography>
           </Box>
 
-          {/* Coupon Code */}
           <Box sx={{ mb: 2 }}>
             <Typography gutterBottom>Coupon Code</Typography>
             <TextField
@@ -410,7 +425,6 @@ const MainCart = ({ onClose }) => {
 
           <Divider sx={{ my: 2 }} />
 
-          {/* Total */}
           <Box
             sx={{
               display: "flex",
@@ -424,7 +438,6 @@ const MainCart = ({ onClose }) => {
             </Typography>
           </Box>
 
-          {/* Checkout Buttons */}
           <Button
             fullWidth
             variant="contained"
@@ -460,7 +473,6 @@ const MainCart = ({ onClose }) => {
         </Box>
       )}
 
-      {/* Continue Shopping Button (Empty Cart) */}
       {cartItems.length === 0 && (
         <Box sx={{ p: 2 }}>
           <Button
@@ -482,6 +494,10 @@ const MainCart = ({ onClose }) => {
       )}
     </Container>
   );
+};
+
+MainCart.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default MainCart;

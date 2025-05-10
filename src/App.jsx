@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
-import { Box } from "@mui/material";
 import { ContextProvider } from "./Context/FilterContaext";
-// import ProductContainer from "./components/ProductContainer";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import "./App.css";
+
 import ProductList from "./components/ProductList/ProductList";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import MainCart from "./components/Cart/MainCart";
