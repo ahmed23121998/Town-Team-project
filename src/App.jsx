@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-
-import { Box } from "@mui/material";
+import { useState } from "react";
 import { ContextProvider } from "./Context/FilterContaext";
-// import ProductContainer from "./components/ProductContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import "./App.css";
-import ProductList from "./components/ProductList/ProductList";
+import ProductList from "./Components/ProductList/ProductList";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import Wishlist from "./Pages/Wishlist";
+import MainCart from "./Components/Cart/MainCart";
 
 function App() {
   const [Filteration, setFilteration] = useState();
@@ -24,6 +22,8 @@ function App() {
         <Routes>
           <Route path="/" element={<ProductList />} />
           <Route path="/productDetails" element={<ProductDetails />} />
+          <Route path="/Wishlist" element={<Wishlist />} />
+          <Route path="/MainCart" element={<MainCart />} />
         </Routes>
       </BrowserRouter>
     </ContextProvider>

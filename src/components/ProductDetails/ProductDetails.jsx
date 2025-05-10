@@ -1,23 +1,11 @@
-import { useState } from "react";
-import {
-  Box,
-  Container,
-  Typography,
-  Button,
-  Grid,
-  IconButton,
-  Paper,
-  ButtonGroup,
-  Breadcrumbs,
-  CardMedia,
-  ToggleButtonGroup,
-  ToggleButton,
-} from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, Container, Typography, Button, Grid, IconButton, Paper, ButtonGroup, Breadcrumbs, CardMedia, ToggleButtonGroup, ToggleButton, } from "@mui/material";
 import { Add, Remove, LocalFireDepartment } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useLocation } from "react-router-dom";
+import { addToFavorites, removeFromFavorites, isFavorite } from "../../Components/favorites/favUtils";
 
 const theme = createTheme({
   palette: {
@@ -29,6 +17,8 @@ const theme = createTheme({
     },
   },
 });
+
+
 
 const ProductDetails = ({ onBackClick }) => {
   const location = useLocation();
@@ -42,6 +32,31 @@ const ProductDetails = ({ onBackClick }) => {
     product?.sizes?.[0] || "defaultSize"
   );
   const [quantity, setQuantity] = useState(1);
+  const [isFav, setIsFav] = useState(false);
+  const [isWishlistHovered, setIsWishlistHovered] = useState(false);
+  const userId = "u1234567890";
+
+
+  useEffect(() => {
+    if (userId && product?.id) {
+      isFavorite(userId, product.id).then(setIsFav);
+    }
+  }, [userId, product?.id]);
+
+  const toggleFavorite = async () => {
+    try {
+      if (isFav) {
+        await removeFromFavorites(userId, product.id);
+        setIsFav(false);
+      } else {
+        await addToFavorites(userId, product);
+        setIsFav(true);
+      }
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
+  };
+
 
   // Handle cases where the product is not found
   if (!product) {
@@ -80,11 +95,26 @@ const ProductDetails = ({ onBackClick }) => {
   const discountPercentage =
     product?.originalPrice && product?.price?.amount
       ? Math.round(
-          ((product.originalPrice - product.price.amount) /
-            product.originalPrice) *
-            100
-        )
+        ((product.originalPrice - product.price.amount) /
+          product.originalPrice) *
+        100
+      )
       : 0;
+
+  const toggleWishlist = async () => {
+    try {
+      if (isFav) {
+        await removeFromFavorites(userId, product.id);
+        setIsFav(false);
+      } else {
+        await addToFavorites(userId, product);
+        setIsFav(true);
+      }
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
+  };
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -382,46 +412,50 @@ const ProductDetails = ({ onBackClick }) => {
                   >
                     ADD TO CART
                   </Button>
-                  <IconButton
-                    aria-label="add to favorites"
-                    sx={{
-                      border: "1px solid #ddd",
-                      borderRadius: "50&",
-                      p: 1.5,
-                      backgroundColor: "white",
-                      color: "black",
-                      transition: "all 0.3s ease",
-                      "&:hover": {
-                        backgroundColor: "black",
-                        color: "#ffd700",
-                      },
-                    }}
-                  >
-                    <FavoriteBorderIcon />
-                  </IconButton>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <IconButton
+                      onClick={toggleWishlist}
+                      onMouseEnter={() => setIsWishlistHovered(true)}
+                      onMouseLeave={() => setIsWishlistHovered(false)}
+                      sx={{
+                        backgroundColor: 'black',
+                        color: isFav ? '#ffeb3b' : 'white',
+                        borderRadius: '50%',
+                        width: 48,
+                        height: 48,
+                        '&:hover': {
+                          backgroundColor: '#333',
+                        },
+                      }}
+                    >
+                      <FavoriteBorderIcon />
+                    </IconButton>
+                  </Box>
+
                 </Box>
-                <Button
-                  variant="contained"
-                  fullWidth
-                  sx={{
-                    backgroundColor: "#000",
-                    color: "#fff",
-                    padding: "12px",
-                    borderRadius: 0,
-                    "&:hover": {
-                      backgroundColor: "#333",
-                    },
-                  }}
-                >
-                  Buy it now
-                </Button>
               </Box>
             </Box>
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{
+                backgroundColor: "#000",
+                color: "#fff",
+                padding: "12px",
+                borderRadius: 0,
+                "&:hover": {
+                  backgroundColor: "#333",
+                },
+              }}
+            >
+              Buy it now
+            </Button>
           </Grid>
         </Grid>
       </Container>
     </ThemeProvider>
   );
 };
+
 
 export default ProductDetails;
