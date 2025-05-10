@@ -9,8 +9,11 @@ import img4 from './../../assets/Images/SHCen.webp';
 import img5 from './../../assets/Images/DeCen_1880x.webp';
 import img6 from './../../assets/Images/KCen_1880x.webp';
 import img7 from './../../assets/Images/TSHCen.webp';
+import { useTranslation } from 'react-i18next';
 
 export default function Sections() {
+     const { t } = useTranslation();
+
     const [sliderIndex, setSliderIndex] = useState(0);
     const navigate = useNavigate();
 
@@ -169,12 +172,9 @@ export default function Sections() {
                 </Link>
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', my: 2 }}>
+                    
                     <Tooltip
-                        title={
-                            <Typography sx={{ fontSize: '14px', color: 'black', backgroundColor: 'white', p: 1}}>
-                                cash on delivery
-                            </Typography>
-                        }
+                        title={t('Home.List.cash on delivery')}
                         slotProps={{
                             popper: {
                                 modifiers: [
@@ -193,21 +193,21 @@ export default function Sections() {
                                 <Box 
                                 component='img'
                                 src='src/assets/Images/card.png'
-                                alt='Cash on Delivery'
+                                alt={t('Home.List.cash on delivery')}
                                 sx={{
                                     width: '50px',
                                     height: '25px',
                                 }}
                                 />
                             <Typography sx={{ color: 'black', fontSize: '15px', fontWeight: 'bold' }}>
-                                Cash on Delivery
+                           {t('Home.List.cash on delivery')}
                             </Typography>
                             </Stack>
                         </Button>
-                    
                     </Tooltip>
+
                     <Tooltip
-                        title='Free Shipping over 1399 EGP'
+                        title={t('Home.List.Free Shipping over 1399 EGP')}
                         slotProps={{
                             popper: {
                                 modifiers: [
@@ -226,20 +226,20 @@ export default function Sections() {
                                 <Box 
                                 component='img'
                                 src='src/assets/Images/shipping.png'
-                                alt='Free Shipping over 1399 EGP'
+                                alt={t('Home.List.Free Shipping over 1399 EGP')}
                                 sx={{
                                     width: '50px',
                                     height: '25px',
                                 }}
                                 />
                             <Typography sx={{ color: 'black', fontSize: '15px', fontWeight: 'bold' }}>
-                            Free Shipping over 1399 EGP
+                            {t('Home.List.Free Shipping over 1399 EGP')}
                             </Typography>
                             </Stack>
                         </Button>
                     </Tooltip>
                     <Tooltip
-                        title='15 Days Return'
+                        title={t('Home.List.15 Days Return')}
                         slotProps={{
                             popper: {
                                 modifiers: [
@@ -258,20 +258,20 @@ export default function Sections() {
                                 <Box 
                                 component='img'
                                 src='src/assets/Images/return.png'
-                                alt='15 Days Return'
+                                alt={t('Home.List.15 Days Return')}
                                 sx={{
                                     width: '50px',
                                     height: '25px',
                                 }}
                                 />
                             <Typography sx={{ color: 'black', fontSize: '15px', fontWeight: 'bold' }}>
-                            15 Days Return
+                           {t('Home.List.15 Days Return')}
                             </Typography>
                             </Stack>
                         </Button>
                     </Tooltip>
                     <Tooltip
-                        title='Call Center 16579'
+                        title={t('Home.List.Call Center 16579')}
                         slotProps={{
                             popper: {
                                 modifiers: [
@@ -290,14 +290,14 @@ export default function Sections() {
                                 <Box 
                                 component='img'
                                 src='src/assets/Images/call-center.png'
-                                alt='Call Center 16579'
+                                alt={t('Home.List.Call Center 16579')}
                                 sx={{
                                     width: '50px',
                                     height: '25px',
                                 }}
                                 />
                             <Typography sx={{ color: 'black', fontSize: '15px', fontWeight: 'bold' }}>
-                            Call Center 16579
+                            {t('Home.List.Call Center 16579')}
                             </Typography>
                             </Stack>
                         </Button>

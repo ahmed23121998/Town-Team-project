@@ -6,8 +6,11 @@ import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
 import { userRegister } from "../../Firebase/auth";
+import { useTranslation } from 'react-i18next';
 
 function Footer() {
+  const { t } = useTranslation();
+
   const {
     register: formRegister,
     handleSubmit,
@@ -32,17 +35,17 @@ function Footer() {
         <Toaster position="top-center" />
         <Box textAlign="center" mb={6} mt={-2}>
           <Typography variant="h5" fontWeight="bold" gutterBottom>
-            SIGN-UP FOR TOWN TEAM NEWSLETTER
+            {t('Home.Footer.SIGN-UP')}
           </Typography>
           <Typography variant="body1" color="grey.400" mb={2}>
-            be the first to know about our newest arrivals, special offers and store events near you.
+            {t('Home.Footer.be the first to know about our newest arrivals, special offers and store events near you.')}
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", justifyContent: "center", gap: 12, flexWrap: "wrap", marginBottom: 16}}>
             
             {/* Email Input */}
             <TextField
               variant="outlined"
-              placeholder="enter your email address"
+              placeholder={t('Home.Footer.enter your email')}
               {...formRegister("email", {
                 required: "Email is required",
                 pattern: {
@@ -88,7 +91,7 @@ function Footer() {
             <TextField
               type="password"
               variant="outlined"
-              placeholder="enter your password"
+              placeholder={t('Home.Footer.enter your password')}
               {...formRegister("password", {
                 required: "Password is required",
                 minLength: {
@@ -141,7 +144,7 @@ function Footer() {
                 '&:hover': { bgcolor: '#e6be00' },
               }}
             >
-              SUBMIT
+             {t('Home.Footer.SUBMIT')}
             </Button>
           </form>
         </Box>
@@ -151,33 +154,33 @@ function Footer() {
         <Grid container spacing={26} justifyContent="center" textAlign={{ xs: 'center', sm: 'left' }}>
           <Grid item xs={12} sm={3}>
             <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-              Customer Service
+              {t('Home.Footer.Customer Service')}
             </Typography>
-            <Typography variant="body2" color="grey.500" mb={2}>Town Team Terms And Condition</Typography>
-            <Typography variant="body2" color="grey.500" mb={2}>TOWN TEAM Privacy Policy</Typography>
-            <Typography variant="body2" color="grey.500" mb={2}>Delivery And Returns</Typography>
-            <Typography variant="body2" color="grey.500" mb={2}>Terms Of Service</Typography>
-            <Typography variant="body2" color="grey.500">Refund Policy</Typography>
+            <Typography variant="body2" color="grey.500" mb={2}>{t('Home.Footer.Town Team Terms And Condition')}</Typography>
+            <Typography variant="body2" color="grey.500" mb={2}>{t('Home.Footer.TOWN TEAM Privacy Policy')}</Typography>
+            <Typography variant="body2" color="grey.500" mb={2}>{t('Home.Footer.Delivery And Returns')}</Typography>
+            <Typography variant="body2" color="grey.500" mb={2}>{t('Home.Footer.Terms of Service')}</Typography>
+            <Typography variant="body2" color="grey.500">{t('Home.Footer.Refund policy')}</Typography>
           </Grid>
 
           <Grid item xs={12} sm={3}>
             <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-              ABOUT
+              {t('Home.Footer.ABOUT US')}
             </Typography>
-            <Typography variant="body2" color="grey.500" mb={2}>About TOWN TEAM</Typography>
-            <Typography variant="body2" color="grey.500">How To Purchase</Typography>
+            <Typography variant="body2" color="grey.500" mb={2}>{t('Home.Footer.About TOWN TEAM')} </Typography>
+            <Typography variant="body2" color="grey.500">{t('Home.Footer.How To Purchase')}</Typography>
           </Grid>
 
           <Grid item xs={12} sm={3}>
             <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-              CONTACT US
+             {t('Home.Footer.CONTACT US')} 
             </Typography>
-            <Typography variant="body2" color="grey.500">Contact Us</Typography>
+            <Typography variant="body2" color="grey.500">{t('Home.Footer.Contact Us')}</Typography>
           </Grid>
 
           <Grid item xs={12} sm={3}>
             <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-              Keep In Touch
+              {t('Home.Footer.keep in touch')}
             </Typography>
             <Box display="flex" gap={3} justifyContent={{ xs: 'center', sm: 'flex-start' }}>
               <IconButton sx={{ color: 'white', opacity: 0.6 }}><Facebook /></IconButton>
@@ -190,7 +193,7 @@ function Footer() {
         {/* Payment Methods */}
         <Box mt={0} px={15} textAlign="right" display="flex" flexDirection="column" alignItems="right" gap={2}>
           <Typography variant="subtitle1" fontWeight="bold" mb={1} px={2} >
-            Payment Accept
+           {t('Home.Footer.payment accept')}
           </Typography>
 
           {/* imge  */}
@@ -206,7 +209,7 @@ function Footer() {
 
       <Box sx={{ bgcolor: 'white', color: 'white', pt: 1, pb: 2, px: 4 }}>
         <Typography variant="body2" color="grey.800" textAlign="center" mt={4}>
-          © TOWN TEAM 2025
+         {t('Home.Footer.copyright')} 
         </Typography>
       </Box>
     </>

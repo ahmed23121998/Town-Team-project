@@ -13,6 +13,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import CloseIcon from '@mui/icons-material/Close';
 import logo from './../../assets/TownTeamLogo.png';
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 // ============ Styled Components ============
 const SubMenu = styled(Paper)(({ theme }) => ({
@@ -79,13 +81,13 @@ const SubMenuItem = ({ item }) => {
                                 <MenuItem
                                     sx={{
                                         '&:hover': {
-                                            textDecoration: 'underline', 
+                                            textDecoration: 'underline',
                                         },
                                     }}
                                 >
                                     {label}
                                 </MenuItem>
-                                {i < item.submenu.length - 1 && <Divider />} 
+                                {i < item.submenu.length - 1 && <Divider />}
                             </React.Fragment>
                         ))}
                     </MenuList>
@@ -166,6 +168,11 @@ const NavItem = ({ item }) => {
 
 // ============ NavBar Component ============
 export default function NavBar() {
+    // =============== loclizatio ===============
+    const { t, i18n } = useTranslation();
+    // const changeLanguage = (lng) => {
+    //     i18n.changeLanguage(lng);
+    // };
     // =============== Router ===============
     const navigate = useNavigate();
 
@@ -207,50 +214,100 @@ export default function NavBar() {
     // =============== Nav Items ===============
     const navItems = [
         {
-            label: 'MEN',
-            submenu: [
-                { label: 'ACCESSORIES', submenu: ['BAGS', 'BELTS', 'BODY CARE', 'BODY SPLASH', 'BOXERS', 'DEODORANT', 'GLOVES', 'ICE CAPS', 'PERFUMES', 'SETS', 'SOCKS', 'WALLETS'] },
-                { label: 'CLOSES', submenu: ['BOYS JACKETS', 'BOYS PULLOVERS', 'BOYS SWEATSHIRTS'] },
-                { label: 'SHOES', submenu: ['CANVAS', 'CASUAL', 'LEATHER', 'SNEAKERS', 'SPORT'] },
-                { label: 'TROUSERS', submenu: ['JEANS', 'JOGGERS', 'PANTS', 'RELAXED FIT'] }
-            ]
-        },
-        {
-            label: 'KIDS',
-            submenu: [
-                { label: 'ACCESSORIES', submenu: ['BAGS', 'BELTS', 'BODY CARE', 'BODY SPLASH', 'BOXERS', 'DEODORANT', 'GLOVES', 'ICE CAPS', 'PERFUMES', 'SETS', 'SOCKS', 'WALLETS'] },
-                { label: 'CLOSES', submenu: ['BOYS JACKETS', 'BOYS PULLOVERS', 'BOYS SWEATSHIRTS'] },
-                { label: 'SHOES', submenu: ['CANVAS', 'CASUAL', 'LEATHER', 'SNEAKERS', 'SPORT'] },
-                { label: 'TROUSERS', submenu: ['JEANS', 'JOGGERS', 'PANTS', 'RELAXED FIT'] }
-            ]
-        },
-        {
-            label: 'SUMMER', tag: 'New', submenu: [
-                { label: 'SUMMER', submenu: ['MEN POLO SHIRTS', 'MEN T-SHIRTS'] }
-            ]
-        },
-        {
-            label: 'WINTER', tag: 'Sale', submenu: [
-                { label: 'WINTER', submenu: ['MEN AUTUMN SHIRTS', 'MEN JACKETS', 'MEN PULLOVERS', 'MEN SWEATSHIRTS'] }
-            ]
-        },
-        {
-            label: 'NEW ARRIVAL',
+            // label: 'MEN',
+            label: t('Home.NavBar.Menu.MEN'),
             submenu: [
                 {
-                    label: 'NEW ARRIVAL', submenu: [
-                        'MEN JACKETS', 'MEN OVER SHIRTS', 'MEN PULLOVERS', 'MEN SWEATSHIRTS'
+                    label: t('Home.NavBar.SubMenu.ACCESSORIES'),
+                    submenu: [t('Home.NavBar.SubMenu.BAGS'), t('Home.NavBar.SubMenu.BELTS'), t('Home.NavBar.SubMenu.BODY CARE'), t('Home.NavBar.SubMenu.BODY SPLASH'), t('Home.NavBar.SubMenu.BOXERS'), t('Home.NavBar.SubMenu.DEODORANT'), t('Home.NavBar.SubMenu.GLOVES'), t('Home.NavBar.SubMenu.ICE CAPS'), t('Home.NavBar.SubMenu.PERFUMES'), t('Home.NavBar.SubMenu.SETS'), t('Home.NavBar.SubMenu.SOCKS'), t('Home.NavBar.SubMenu.WALLETS')]
+                },
+                {
+                    label: t('Home.NavBar.SubMenu.CLOSES'),
+                    submenu: [t('Home.NavBar.SubMenu.BOYS JACKETS'), t('Home.NavBar.SubMenu.BOYS PULLOVERS'), t('Home.NavBar.SubMenu.BOYS SWEATSHIRTS')]
+                },
+                {
+                    label: t('Home.NavBar.SubMenu.SHOES'),
+                    submenu: [t('Home.NavBar.SubMenu.CANVAS'), t('Home.NavBar.SubMenu.LEATHER'), t('Home.NavBar.SubMenu.SNEAKERS'), t('Home.NavBar.SubMenu.SPORT')]
+                },
+                {
+                    label: t('Home.NavBar.SubMenu.TROUSERS'),
+                    submenu: [t('Home.NavBar.SubMenu.JEANS'), t('Home.NavBar.SubMenu.JOGGERS'), t('Home.NavBar.SubMenu.PANTS'), t('Home.NavBar.SubMenu.RELAXED FIT')]
+                }
+            ]
+        },
+        {
+            // label: 'KIDS',
+            label: t('Home.NavBar.Menu.KIDS'),
+            submenu: [
+                {
+                    label: t('Home.NavBar.SubMenu.ACCESSORIES'),
+                    submenu: [t('Home.NavBar.SubMenu.BAGS'), t('Home.NavBar.SubMenu.BELTS'), t('Home.NavBar.SubMenu.BODY CARE'), t('Home.NavBar.SubMenu.BODY SPLASH'), t('Home.NavBar.SubMenu.BOXERS'), t('Home.NavBar.SubMenu.DEODORANT'), t('Home.NavBar.SubMenu.GLOVES'), t('Home.NavBar.SubMenu.ICE CAPS'), t('Home.NavBar.SubMenu.PERFUMES'), t('Home.NavBar.SubMenu.SETS'), t('Home.NavBar.SubMenu.SOCKS'), t('Home.NavBar.SubMenu.WALLETS')]
+                },
+                {
+                    label: t('Home.NavBar.SubMenu.CLOSES'),
+                    submenu: [t('Home.NavBar.SubMenu.BOYS JACKETS'), t('Home.NavBar.SubMenu.BOYS PULLOVERS'), t('Home.NavBar.SubMenu.BOYS SWEATSHIRTS')]
+                },
+                {
+                    label: t('Home.NavBar.SubMenu.SHOES'),
+                    submenu: [t('Home.NavBar.SubMenu.CANVAS'), t('Home.NavBar.SubMenu.LEATHER'), t('Home.NavBar.SubMenu.SNEAKERS'), t('Home.NavBar.SubMenu.SPORT')]
+                },
+                {
+                    label: t('Home.NavBar.SubMenu.TROUSERS'),
+                    submenu: [t('Home.NavBar.SubMenu.JEANS'), t('Home.NavBar.SubMenu.JOGGERS'), t('Home.NavBar.SubMenu.PANTS'), t('Home.NavBar.SubMenu.RELAXED FIT')]
+                }
+            ]
+        },
+        {
+            // label: 'SUMMER',
+            label: t('Home.NavBar.Menu.SUMMER'),
+            tag: 'New', submenu: [
+                {
+                    label: t('Home.NavBar.SubMenu.SUMMER'),
+                    submenu: [t('Home.NavBar.SubMenu.MEN POLO SHIRTS'), t('Home.NavBar.SubMenu.MEN T-SHIRTS')]
+                }
+            ]
+        },
+        {
+            // label: 'WINTER',
+            label: t('Home.NavBar.Menu.WINTER'),
+            tag: 'Sale', submenu: [
+                {
+                    label: t('Home.NavBar.SubMenu.WINTER'),
+                    submenu: [t('Home.NavBar.SubMenu.MEN AUTUMN SHIRTS'), t('Home.NavBar.SubMenu.MEN JACKETS'), t('Home.NavBar.SubMenu.MEN PULLOVERS'), t('Home.NavBar.SubMenu.MEN SWEATSHIRTS')]
+                }
+            ]
+        },
+        {
+            // label: 'NEW ARRIVAL',
+            label: t('Home.NavBar.Menu.NEW ARRIVAL'),
+            submenu: [
+                {
+                    label: t('Home.NavBar.SubMenu.NEW ARRIVAL'), submenu: [
+                        t('Home.NavBar.SubMenu.MEN JACKETS'), t('Home.NavBar.SubMenu.MEN OVER SHIRTS'), t('Home.NavBar.SubMenu.MEN PULLOVERS'), t('Home.NavBar.SubMenu.MEN SWEATSHIRTS')
                     ]
                 }
             ]
         },
         {
-            label: 'ALL COLLECTIONS',
+            // label: 'ALL COLLECTIONS',
+            label: t('Home.NavBar.Menu.ALL COLLECTIONS'),
             submenu: [
-                { label: 'SHOES', submenu: ['CANVAS', 'CASUAL', 'LEATHER', 'SNEAKERS', 'SPORT'] },
-                { label: 'SUMMER', submenu: ['MEN POLO SHIRTS', 'MEN T-SHIRTS'] },
-                { label: 'TROUSERS', submenu: ['JEANS', 'JOGGERS', 'PANTS', 'RELAXED FIT'] },
-                { label: 'WINTER', submenu: ['MEN AUTUMN SHIRTS', 'MEN JACKETS', 'MEN PULLOVERS', 'MEN SWEATSHIRTS'] }
+                {
+                    label: t('Home.NavBar.SubMenu.SHOES'),
+                    submenu: [t('Home.NavBar.SubMenu.CANVAS'), t('Home.NavBar.SubMenu.LEATHER'), t('Home.NavBar.SubMenu.SNEAKERS'), t('Home.NavBar.SubMenu.SPORT')]
+                },
+                {
+                    label: t('Home.NavBar.SubMenu.SUMMER'),
+                    submenu: [t('Home.NavBar.SubMenu.MEN POLO SHIRTS'), t('Home.NavBar.SubMenu.MEN T-SHIRTS')]
+                },
+                {
+                    label: t('Home.NavBar.SubMenu.TROUSERS'),
+                    submenu: [t('Home.NavBar.SubMenu.JEANS'), t('Home.NavBar.SubMenu.JOGGERS'), t('Home.NavBar.SubMenu.PANTS'), t('Home.NavBar.SubMenu.RELAXED FIT')]
+                },
+                {
+                    label: t('Home.NavBar.SubMenu.WINTER'),
+                    submenu: [t('Home.NavBar.SubMenu.MEN AUTUMN SHIRTS'), t('Home.NavBar.SubMenu.MEN JACKETS'), t('Home.NavBar.SubMenu.MEN PULLOVERS'), t('Home.NavBar.SubMenu.MEN SWEATSHIRTS')]
+                }
             ]
         },
     ];
@@ -331,14 +388,24 @@ export default function NavBar() {
                                 }}
                             >
                                 {language === 'EN' ? (
-                                    <MenuItem onClick={() => handleLanguageChange('AR')}>
+                                    <MenuItem
+                                        onClick={() => {
+                                            handleLanguageChange('AR'); // Update the state
+                                            i18n.changeLanguage('ar'); // Change the language in i18n
+                                        }}
+                                    >
                                         <Stack direction="row" spacing={1} alignItems="center">
                                             <img src="https://flagcdn.com/eg.svg" alt="AR" width={20} />
                                             <Typography>AR</Typography>
                                         </Stack>
                                     </MenuItem>
                                 ) : (
-                                    <MenuItem onClick={() => handleLanguageChange('EN')}>
+                                    <MenuItem
+                                        onClick={() => {
+                                            handleLanguageChange('EN'); 
+                                            i18n.changeLanguage('en'); 
+                                        }}
+                                    >
                                         <Stack direction="row" spacing={1} alignItems="center">
                                             <img src="https://flagcdn.com/gb.svg" alt="EN" width={20} />
                                             <Typography>EN</Typography>
@@ -368,7 +435,7 @@ export default function NavBar() {
                                     }}
                                 >
                                     <Box
-                                        onClick={(e) => e.stopPropagation()} 
+                                        onClick={(e) => e.stopPropagation()}
                                         sx={{
                                             bgcolor: 'white',
                                             width: '100%',
@@ -419,31 +486,31 @@ export default function NavBar() {
                                                         <Button sx={{ backgroundColor: '#f7f7f7' }}>
                                                             <Stack direction="row" spacing={1}>
                                                                 <SearchIcon sx={{ color: 'gray' }} />
-                                                                <Typography sx={{ color: 'gray' }}>men jackets</Typography>
+                                                                <Typography sx={{ color: 'gray' }}>{t('Home.NavBar.Search.men jackets')}</Typography>
                                                             </Stack>
                                                         </Button>
                                                         <Button sx={{ backgroundColor: '#f7f7f7' }}>
                                                             <Stack direction="row" spacing={1}>
                                                                 <SearchIcon sx={{ color: 'gray' }} />
-                                                                <Typography sx={{ color: 'gray' }}>pullover</Typography>
+                                                                <Typography sx={{ color: 'gray' }}>{t('Home.NavBar.Search.pullover')}</Typography>
                                                             </Stack>
                                                         </Button>
                                                         <Button sx={{ backgroundColor: '#f7f7f7' }}>
                                                             <Stack direction="row" spacing={1}>
                                                                 <SearchIcon sx={{ color: 'gray' }} />
-                                                                <Typography sx={{ color: 'gray' }}>sweatshirts</Typography>
+                                                                <Typography sx={{ color: 'gray' }}>{t('Home.NavBar.Search.sweatshirts')}</Typography>
                                                             </Stack>
                                                         </Button>
                                                         <Button sx={{ backgroundColor: '#f7f7f7' }}>
                                                             <Stack direction="row" spacing={1}>
                                                                 <SearchIcon sx={{ color: 'gray' }} />
-                                                                <Typography sx={{ color: 'gray' }}>shirt</Typography>
+                                                                <Typography sx={{ color: 'gray' }}>{t('Home.NavBar.Search.t-shirt')}</Typography>
                                                             </Stack>
                                                         </Button>
                                                         <Button sx={{ backgroundColor: '#f7f7f7' }}>
                                                             <Stack direction="row" spacing={1}>
                                                                 <SearchIcon sx={{ color: 'gray' }} />
-                                                                <Typography sx={{ color: 'gray' }}>polo shirt</Typography>
+                                                                <Typography sx={{ color: 'gray' }}>{t('Home.NavBar.Search.polo shirt')}</Typography>
                                                             </Stack>
                                                         </Button>
                                                     </Stack>

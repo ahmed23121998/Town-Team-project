@@ -1,0 +1,88 @@
+{
+    "Home": {
+        "NavBar": {
+            "Menu": {
+                "MEN": "MEN",
+                "KIDS": "KIDS",
+                "SUMMER": "SUMMER",
+                "WINTER": "WINTER",
+                "NEW ARRIVAL": "NEW ARRIVAL",
+                "ALL COLLECTIONS": "ALL COLLECTIONS"
+            },
+            "SubMenu": {
+                "ACCESSORIES": "ACCESSORIES",
+                "BAGS": "BAGS",
+                "BELTS": "BELTS",
+                "BODY CARE": "BODY CARE",
+                "BODY SPLASH": "BODY SPLASH",
+                "BOXERS": "BOXERS",
+                "DEODORANT": "DEODORANT",
+                "GLOVES": "GLOVES",
+                "ICE CAPS": "ICE CAPS",
+                "PERFUMES": "PERFUMES",
+                "SETS": "SETS",
+                "SOCKS": "SOCKS",
+                "WALLETS": "WALLETS",
+                "CLOSES": "CLOSES",
+                "BOYS JACKETS": "BOYS JACKETS",
+                "BOYS PULLOVERS": "BOYS PULLOVERS",
+                "BOYS SWEATSHIRTS": "BOYS SWEATSHIRTS",
+                "SHOES": "SHOES",
+                "CANVAS": "CANVAS",
+                "LEATHER": "LEATHER",
+                "SNEAKERS": "SNEAKERS",
+                "SPORT": "SPORT",
+                "TROUSERS": "TROUSERS",
+                "JEANS": "JEANS",
+                "JOGGERS": "JOGGERS",
+                "PANTS": "PANTS",
+                "RELAXED FIT": "RELAXED FIT",
+                "SUMMER": "SUMMER",
+                "MEN POLO SHIRTS": "MEN POLO SHIRTS",
+                "MEN T-SHIRTS": "MEN T-SHIRTS",
+                "WINTER": "WINTER",
+                "MEN AUTUMN SHIRTS": "MEN AUTUMN SHIRTS",
+                "MEN JACKETS": "MEN JACKETS",
+                "MEN PULLOVERS": "MEN PULLOVERS",
+                "MEN SWEATSHIRTS": "MEN SWEATSHIRTS",
+                "NEW ARRIVAL": "NEW ARRIVAL",
+                "MEN OVER SHIRTS": "MEN OVER SHIRTS"
+            },
+            "Search":{
+                "Search products...":"Search products...",
+                "men jackets":"men jackets",
+                "pullover":"pullover",
+                "sweatshirts":"sweatshirts",
+                "shirt":"shirt",
+                "polo shirt":"polo shirt"
+            }
+        },
+        "List": {
+            "cash on delivery": "cash on delivery",
+            "Free Shipping over 1399 EGP": "Free Shipping over 1399 EGP",
+            "15 Days Return": "15 Days Return",
+            "Call Center 16579": "Call Center 16579"
+        },
+        "Footer": {
+            "SIGN-UP": "SIGN-UP FOR TOWN TEAM NEWSLETTER",
+            "be the first to know about our newest arrivals, special offers and store events near you.": "be the first to know about our newest arrivals, special offers and store events near you.",
+            "enter your password": "enter your password",
+            "enter your email": "enter your email",
+            "SUBMIT": "SUBMIT",
+            "Customer Service": "Customer Service",
+            "Town Team Terms And Condition": "Town Team Terms And Condition",
+            "TOWN TEAM Privacy Policy": "TOWN TEAM Privacy Policy",
+            "Delivery And Returns": "Delivery And Returns",
+            "Terms of Service": "Terms of Service",
+            "Refund policy": "Refund policy",
+            "ABOUT US": "ABOUT US",
+            "About TOWN TEAM": "About TOWN TEAM",
+            "How To Purchase": "How To Purchase",
+            "CONTACT US": "CONTACT US",
+            "Contact Us": "Contact Us",
+            "keep in touch": "keep in touch",
+            "payment accept": "payment accept",
+            "copyright": "© TOWN TEAM 2025"
+        }
+    }
+}

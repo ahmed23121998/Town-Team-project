@@ -1,0 +1,88 @@
+{
+    "Home": {
+        "NavBar": {
+            "Menu": {
+                "MEN": "رجال",
+                "KIDS": "اطفال",
+                "SUMMER": "تصنيفات الصيف",
+                "WINTER": "تصنيفات الشتاء",
+                "NEW ARRIVAL": "وصل حديثا ",
+                "ALL COLLECTIONS": "جميع الاصناف"
+            },
+            "SubMenu": {
+                "ACCESSORIES": "اكسسوار",
+                "BAGS": "شنطة",
+                "BELTS": "أحذمه",
+                "BODY CARE": "عنايه للشعر",
+                "BODY SPLASH": "عناية للجسم",
+                "BOXERS": "بوكسرات",
+                "DEODORANT": "مزيل عرق",
+                "GLOVES": "قفازات",
+                "ICE CAPS": "كابات",
+                "PERFUMES": "بارفان",
+                "SETS": "قفازات",
+                "SOCKS": "شراب",
+                "WALLETS": "محفظه",
+                "CLOSES": "ملابس",
+                "BOYS JACKETS": "جاكيت",
+                "BOYS PULLOVERS": "بلوفر",
+                "BOYS SWEATSHIRTS": "سويت شيرت",
+                "SHOES": "أحذية",
+                "CANVAS": "قماش",
+                "LEATHER": "جلد",
+                "SNEAKERS": "احذيه رياضيه",
+                "SPORT": " حذاء رياضي ",
+                "TROUSERS": "بنطلون",
+                "JEANS": "جينز",
+                "JOGGERS": "جوجر",
+                "PANTS": "سويت بانتس",
+                "RELAXED FIT": "مقاس مريح",
+                "SUMMER": "منتجات الصيف",
+                "MEN POLO SHIRTS": "بولو شيرت",
+                "MEN T-SHIRTS": "تي شيرت",
+                "WINTER": "منتجات الشتاء",
+                "MEN AUTUMN SHIRTS": "قمصان الخريف",
+                "MEN JACKETS": "جاكيت",
+                "MEN PULLOVERS": "بلوفر",
+                "MEN SWEATSHIRTS": "سويت شيرت",
+                "NEW ARRIVAL": "وصل حديثا",
+                "MEN OVER SHIRTS": "قمصان  خارجية"
+            },
+            "Search":{
+                "Search products...":"ابحث عن منتج...",
+                "men jackets":"جاكيت",
+                "pullover":"بلوفر",
+                "sweatshirts":"سويت شيرت",
+                "t-shirt":"تي شيرت",
+                "polo shirt":"بولو شيرت"
+            }
+        },
+        "List": {
+            "cash on delivery": "لدفع عند الاستلام (COD)",
+            "Free Shipping over 1399 EGP": "شحن مجاني عند الطلب فوق 1399 جنيه",
+            "15 Days Return": "15 يوم للمرتجع",
+            "Call Center 16579": "مركز الاتصال 16579"
+        },
+        "Footer": {
+            "SIGN-UP": " سجل بريدك الإلكتروني لتصلك أحدث العروض والمنتجات من تاون تيم",
+            "be the first to know about our newest arrivals, special offers and store events near you.": "كن أول من يعرف عن أحدث المنتجات، العروض الخاصة وفعاليات المتجر القريبة منك.",
+            "enter your password": "ادخل كلمه المرور",
+            "enter your email": "ادخل البريد الالكتروني",
+            "SUBMIT": "إرسال",
+            "Customer Service": "خدمة العملاء",
+            "Town Team Terms And Condition": "الشروط والأحكام",
+            "TOWN TEAM Privacy Policy": "سياسة الخصوصية",
+            "Delivery And Returns": "التوصيل والمرتجع",
+            "Terms of Service": "شروط الخدمه ",
+            "Refund policy": "سياسه المرتجع",
+            "ABOUT US": "عنا",
+            "About TOWN TEAM": "عن تاون تيم",
+            "How To Purchase": "الشراء عن طريق التطبيق",
+            "CONTACT US": "تواصل معنا ",
+            "Contact Us": "اتصل بنا",
+            "keep in touch": "تابعونا على",
+            "payment accept": "وسائل الدفع",
+            "copyright": "© تاون تيم 2025"
+        }
+    }
+}
