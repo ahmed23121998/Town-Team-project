@@ -16,7 +16,13 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/SWS25WHNK26342TM1-Khaki.jpg?v=1735476754"
           },
-          "title": "Khaki / 4XL"
+          "title": "Khaki / 4XL",
+          "in_stock": true,
+          "quantity": 83,
+          "brand": ["Town Team"],
+          "sizes": ["4XL", "S"],
+          "colors": ["Black", "Green"],
+          "colors_ar":[]
         },
         {
           "price": {
@@ -32,7 +38,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/SWS25WHNK26343TM1-OFFWHIT.jpg?v=1735476756"
           },
-          "title": "OFF WHIT / M"
+          "title": "OFF WHIT / M",
+          "in_stock": false,
+          "quantity": 85,
+          "brand": ["River Nine"],
+          "sizes": ["M", "XS"],
+          "colors": ["Yellow", "White"]
         },
         {
           "price": {
@@ -48,7 +59,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/SWS25WHNK26347TM1-Navy.jpg?v=1735476758"
           },
-          "title": "Navy / 4XL"
+          "title": "Navy / 4XL",
+          "in_stock": true,
+          "quantity": 71,
+          "brand": ["Cuba"],
+          "sizes": ["XS", "4XL"],
+          "colors": ["White", "Navy"]
         },
         {
           "price": {
@@ -64,7 +80,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/SWS25WRNL26325TM1-Silver.jpg?v=1735476781"
           },
-          "title": "Silver / 2XL"
+          "title": "Silver / 2XL",
+          "in_stock": false,
+          "quantity": 72,
+          "brand": ["Town Team"],
+          "sizes": ["2XL"],
+          "colors": ["red", "Grey"]
         },
         {
           "price": {
@@ -80,7 +101,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/SWS25WRNL26329TM1-Green.jpg?v=1735476784"
           },
-          "title": "Green / XL"
+          "title": "Green / XL",
+          "in_stock": true,
+          "quantity": 60,
+          "brand": ["Town Team"],
+          "sizes": ["XL", "2XL"],
+          "colors": ["Green", "Grey"]
         },
         {
           "price": {
@@ -96,7 +122,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/SWS25WHNK26097TM1-Brick.jpg?v=1735476689"
           },
-          "title": "Brick / M"
+          "title": "Brick / M",
+          "in_stock": true,
+          "quantity": 16,
+          "brand": ["River Nine"],
+          "sizes": ["XL", "M"],
+          "colors": ["Black", "White"]
         }
       ],
       "Men Pullovers": [
@@ -114,7 +145,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/PUL25WPPX27837TM1-Cafe.jpg?v=1735476610"
           },
-          "title": "Caf\u00e9 / L"
+          "title": "Caf\u00e9 / L",
+          "in_stock": true,
+          "quantity": 44,
+          "brand": ["Cuba"],
+          "sizes": ["L", "2XL", "4XL"],
+          "colors": ["White", "Grey"]
         },
         {
           "price": {
@@ -130,7 +166,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/PUL25WPSH27800TM1-BEG-BRN.jpg?v=1735458623"
           },
-          "title": "BEG/BRN / M"
+          "title": "BEG/BRN / M",
+          "in_stock": true,
+          "quantity": 58,
+          "brand": ["Town Team"],
+          "sizes": ["M", "XS"],
+          "colors": ["Yellow", "Navy", "Black"]
         },
         {
           "price": {
@@ -146,7 +187,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/PUL25WPCH27801TM1-BEG-OFF.jpg?v=1735458582"
           },
-          "title": "BEG/OFF / S"
+          "title": "BEG/OFF / S",
+          "in_stock": true,
+          "quantity": 82,
+          "brand": ["River Nine"],
+          "sizes": ["S", "M", "L"],
+          "colors": ["Green", "Navy"]
         },
         {
           "price": {
@@ -162,7 +208,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/PUL25WPPH27836TM1-Navy.jpg?v=1735458603"
           },
-          "title": "Navy / M"
+          "title": "Navy / M",
+          "in_stock": false,
+          "quantity": 77,
+          "brand": ["River Nine"],
+          "sizes": ["S", "M", "XL"],
+          "colors": ["Black", "Green", "Navy"]
         },
         {
           "price": {
@@ -178,7 +229,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/PUL25WPSR27850TM1-NVY-BRN.jpg?v=1735476626"
           },
-          "title": "NVY/BRN / M"
+          "title": "NVY/BRN / M",
+          "in_stock": false,
+          "quantity": 59,
+          "brand": ["Cuba"],
+          "sizes": ["XS", "M", "L", "2XL"],
+          "colors": ["White", "Black"]
         },
         {
           "price": {
@@ -194,7 +250,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/PUL25WPPM27832TM1-Black.jpg?v=1735476606"
           },
-          "title": "Black / L"
+          "title": "Black / L",
+          "in_stock": true,
+          "quantity": 94,
+          "brand": ["Cuba"],
+          "sizes": ["L", "M", "S"],
+          "colors": ["Black", "Grey"]
         }
       ],
       "Men Jackets": [
@@ -212,7 +273,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/JAC25WchBH19124TM1-BLK-WHT.jpg?v=1730283096"
           },
-          "title": "BLK/WHT / XL"
+          "title": "BLK/WHT / XL",
+          "in_stock": true,
+          "quantity": 20,
+          "brand": ["Town Team"],
+          "sizes": ["6XL", "XL", "L", "S"],
+          "colors": ["Black", "White"]
         },
         {
           "price": {
@@ -228,7 +294,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/JAC25WWBP28019TM1-Black.jpg?v=1735476527"
           },
-          "title": "Black / M"
+          "title": "Black / M",
+          "in_stock": false,
+          "quantity": 15,
+          "brand": ["River Nine"],
+          "sizes": ["M", "L", "S"],
+          "colors": ["Black", "Grey"]
         },
         {
           "price": {
@@ -244,7 +315,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/JAC25WWBP28028TM1-L-BLUE.jpg?v=1735476536"
           },
-          "title": "L-BLUE / S"
+          "title": "L-BLUE / S",
+          "in_stock": false,
+          "quantity": 5,
+          "brand": ["Cuba"],
+          "sizes": ["S", "L"],
+          "colors": ["Black", "Grey"]
         },
         {
           "price": {
@@ -260,7 +336,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/JAC25WWBP28466TM1-L-CAMEL.jpg?v=1735476542"
           },
-          "title": "L-CAMEL / L"
+          "title": "L-CAMEL / L",
+          "in_stock": true,
+          "quantity": 22,
+          "brand": ["River Nine"],
+          "sizes": ["L", "M", "S"],
+          "colors": ["Black", "Grey"]
         },
         {
           "price": {
@@ -276,7 +357,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/JAC25WWCP28465TM1-WHT-BLK.jpg?v=1735476565"
           },
-          "title": "WHT/BLK / L"
+          "title": "WHT/BLK / L",
+          "in_stock": false,
+          "quantity": 53,
+          "brand": ["Town Team"],
+          "sizes": ["M", "L"],
+          "colors": ["Black", "White"]
         },
         {
           "price": {
@@ -292,7 +378,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/JAC25WWPP28471TM1-Black.jpg?v=1735476569"
           },
-          "title": "Black / S"
+          "title": "Black / S",
+          "in_stock": true,
+          "quantity": 98,
+          "brand": ["Cuba"],
+          "sizes": ["L", "4XL", "S", "M"],
+          "colors": ["White", "Black"]
         }
       ],
       "Men Over Shirts": [
@@ -310,7 +401,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/OSH25WCCR19108TM1-BLK-WHT.jpg?v=1735476579"
           },
-          "title": "BLK/WHT / L"
+          "title": "BLK/WHT / L",
+          "in_stock": true,
+          "quantity": 74,
+          "brand": ["Town Team"],
+          "sizes": ["2XL", "M", "L"],
+          "colors": ["Yellow", "Black", "White"]
         },
         {
           "price": {
@@ -326,7 +422,12 @@
           "image": {
             "src": "//townteam.com/cdn/shop/files/OSH25WCCR19104TM1-BLK-WHT.jpg?v=1735476578"
           },
-          "title": "BLK/WHT / XS"
+          "title": "BLK/WHT / XS",
+          "in_stock": true,
+          "quantity": 42,
+          "brand": ["Cuba"],
+          "sizes": ["4XL", "M", "XS", "S"],
+          "colors": ["White", "Black"]
         }
       ]
     }

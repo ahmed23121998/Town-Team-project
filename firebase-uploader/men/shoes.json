@@ -15,7 +15,11 @@
           "label": "Sale"
         },
         "fit": "Standard",
+        "in_stock": true,
+        "quantity": 10,
         "color": "White",
+        "color_ar": "ابيض",
+        "brand": ["Town Team"],
         "id": "44011863834848"
       },
       {
@@ -32,7 +36,11 @@
           "label": "Sale"
         },
         "fit": "Standard",
+        "in_stock": false,
+        "quantity": 15,
         "color": "White",
+        "color_ar": "ابيض",
+        "brand": ["River Nine"],
         "id": "44011863834850"
       },
       {
@@ -49,7 +57,11 @@
           "label": "Sale"
         },
         "fit": "Standard",
+        "in_stock": true,
+        "quantity": 5,
         "color": "White/Green",
+        "color_ar": "ابيض/اخضر",
+        "brand": ["Town Team"],
         "id": "44011863834851"
       }
     ],
@@ -68,7 +80,11 @@
           "label": "Sale"
         },
         "fit": "Standard",
+        "in_stock": false,
+        "quantity": 8,
         "color": "Navy",
+        "color_ar": "كحلي",
+        "brand": ["Cuba"],
         "id": "44011863834852"
       },
       {
@@ -85,7 +101,11 @@
           "label": "Sale"
         },
         "fit": "Standard",
+        "in_stock": true,
+        "quantity": 12,
         "color": "Beige",
+        "color_ar": "بيج",
+        "brand": ["Town Team"],
         "id": "44011863834853"
       }
     ],
@@ -104,7 +124,11 @@
           "label": "Sale"
         },
         "fit": "Standard",
+        "in_stock": false,
+        "quantity": 20,
         "color": "Black",
+        "color_ar": "اسود",
+        "brand": ["River Nine"],
         "id": "44011863834856"
       },
       {
@@ -121,7 +145,11 @@
           "label": "Sale"
         },
         "fit": "Standard",
+        "in_stock": true,
+        "quantity": 7,
         "color": "Camel",
+        "color_ar": "جملي",
+        "brand": ["Cuba"],
         "id": "44011863834857"
       }
     ],
@@ -140,7 +168,11 @@
           "label": "Sale"
         },
         "fit": "Standard",
+        "in_stock": false,
+        "quantity": 1,
         "color": "Black",
+        "color_ar": "اسود",
+        "brand": ["River Nine"],
         "id": "44011863834858"
       }
     ],
@@ -159,7 +191,11 @@
           "label": "New"
         },
         "fit": "Performance",
+        "in_stock": true,
+        "quantity": 2,
         "color": "Olive",
+        "color_ar": "زيتي",
+        "brand": ["River Nine"],
         "id": "44011863834855"
       },
       {
@@ -176,7 +212,11 @@
           "label": "New"
         },
         "fit": "Performance",
-        "color": "Black/Beige",
+        "in_stock": false,
+        "quantity": 9,
+        "color": "Black",
+        "color_ar": "اسود",
+        "brand": ["Town Team"],
         "id": "44011863834859"
       }
     ]

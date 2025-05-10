@@ -15,7 +15,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/SWS24WHNK26028TB1-D-TEAL.jpg?v=1735141890"
         },
-        "title": "Dark Teal / 10"
+        "title": "Dark Teal / 10",
+        "in_stock": false,
+        "quantity": 41,
+        "brand": ["Town Team"],
+        "sizes": ["XS", "2XL"],
+        "colors": ["Red", "Green"],
+        "colors_ar": ["احمر", "اخضر"]
       },
       {
         "price": {
@@ -31,7 +37,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/SWS23WMIL26722TB1-Orange.jpg?v=1735141760"
         },
-        "title": "Orange / 4"
+        "title": "Orange / 4",
+        "in_stock": true,
+        "quantity": 1,
+        "brand": ["Cuba"],
+        "sizes": ["S", "4XL", "XL", "L"],
+        "colors": ["Orange", "Green"],
+        "colors_ar": ["برتقالي", "اخضر"]
       },
       {
         "price": {
@@ -47,7 +59,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/SWS23WMIL31423TB1-Navy_a26aa6a7-05f0-4246-b079-d1f2e649fb14.jpg?v=1735141798"
         },
-        "title": "Navy / 4"
+        "title": "Navy / 4",
+        "in_stock": true,
+        "quantity": 97,
+        "brand": ["River Nine"],
+        "sizes": ["4XL", "S", "6XL"],
+        "colors": ["green", "Black"],
+        "colors_ar": ["اخضر", "اسود"]
       },
       {
         "price": {
@@ -63,7 +81,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/SWS24WHNK26060TB1-WHT-NVY.jpg?v=1735141895"
         },
-        "title": "White*Navy / 10"
+        "title": "White*Navy / 10",
+        "in_stock": false,
+        "quantity": 66,
+        "brand": ["Town Team"],
+        "sizes": ["L", "4XL"],
+        "colors": ["White", "Black"],
+        "colors_ar": ["ابيض", "اسود"]
       },
       {
         "price": {
@@ -79,7 +103,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/SWS24WRAL26042TB1-Beige.jpg?v=1735141951"
         },
-        "title": "Beige / 10"
+        "title": "Beige / 10",
+        "in_stock": true,
+        "quantity": 54,
+        "brand": ["Town Team"],
+        "sizes": ["2XL", "XS"],
+        "colors": ["Blue", "White"],
+        "colors_ar": ["ازرق", "ابيض"]
       },
       {
         "price": {
@@ -95,7 +125,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/SWS24WHAK26021TB1-Beige.jpg?v=1735141851"
         },
-        "title": "Beige / 10"
+        "title": "Beige / 10",
+        "in_stock": false,
+        "quantity": 31,
+        "brand": ["River Nine"],
+        "sizes": ["XS", "2XL", "3XL"],
+        "colors": ["Blue", "White"],
+        "colors_ar": ["ازرق", "ابيض"]
       }
     ],
     "Boys Pullovers": [
@@ -113,7 +149,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/PUL23WAYC27506TB1-Wine.jpg?v=1735141517"
         },
-        "title": "Wine / 4"
+        "title": "Wine / 4",
+        "in_stock": false,
+        "quantity": 61,
+        "brand": ["Town Team"],
+        "sizes": ["4XL", "2XL"],
+        "colors": ["Grey", "White"],
+        "colors_ar": ["رمادي", "ابيض"]
       },
       {
         "price": {
@@ -129,7 +171,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/PUL23WAYC27516TB1-LightGrey.jpg?v=1735141528"
         },
-        "title": "Light Grey / 4"
+        "title": "Light Grey / 4",
+        "in_stock": true,
+        "quantity": 16,
+        "brand": ["River Nine"],
+        "sizes": ["S", "6XL", "M"],
+        "colors": ["Grey", "Black"],
+        "colors_ar": ["رمادي", "اسود"]
       },
       {
         "price": {
@@ -145,7 +193,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/PUL23WAYC27500TB1-Navy.jpg?v=1735141514"
         },
-        "title": "Navy / 4"
+        "title": "Navy / 4",
+        "in_stock": true,
+        "quantity": 43,
+        "brand": ["Town Team"],
+        "sizes": ["4"],
+        "colors": ["Red", "Black"],
+        "colors_ar": ["احمر", "اسود"]
       },
       {
         "price": {
@@ -161,7 +215,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/PUL24WPSD27703TB1-Navy.jpg?v=1735141633"
         },
-        "title": "Navy / 10"
+        "title": "Navy / 10",
+        "in_stock": false,
+        "quantity": 48,
+        "brand": ["River Nine"],
+        "sizes": ["3XL", "XL", "L"],
+        "colors": ["Orange", "Grey"],
+        "colors_ar": ["برتقالي", "رمادي"]
       },
       {
         "price": {
@@ -177,7 +237,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/PUL24WPPH27634TB1-OYSTERW.jpg?v=1735141590"
         },
-        "title": "Beige / 10"
+        "title": "Beige / 10",
+        "in_stock": true,
+        "quantity": 13,
+        "brand": ["Cuba"],
+        "sizes": ["3XL", "2XL"],
+        "colors": ["Black", "green"],
+        "colors_ar": ["اسود", "اخضر"]
       },
       {
         "price": {
@@ -193,7 +259,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/PUL24WPPD27633TB1-Natural-2.jpg?v=1735141582"
         },
-        "title": "Natural / 10"
+        "title": "Natural / 10",
+        "in_stock": true,
+        "quantity": 36,
+        "brand": ["River Nine"],
+        "sizes": ["3XL", "2XL"],
+        "colors": ["Black", "green"],
+        "colors_ar": ["اسود", "اخضر"]
       },
       {
         "price": {
@@ -209,7 +281,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/PUL24WPCH27615TB1-NVY-BRN.jpg?v=1735141565"
         },
-        "title": "Navy*Brown / 10"
+        "title": "Navy*Brown / 10",
+        "in_stock": false,
+        "quantity": 24,
+        "brand": ["Town Team"],
+        "sizes": ["S", "6XL", "M"],
+        "colors": ["White", "Red"],
+        "colors_ar": ["ابيض", "احمر"]
       },
       {
         "price": {
@@ -225,7 +303,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/PUL24WPPZ27623TB1-L-BEIGE.jpg?v=1735141619"
         },
-        "title": "Light Beige / 10"
+        "title": "Light Beige / 10",
+        "in_stock": true,
+        "quantity": 16,
+        "brand": ["Cuba"],
+        "sizes": ["3XL", "2XL"],
+        "colors": ["White", "Orange"],
+        "colors_ar": ["ابيض", "برتقالي"]
       },
       {
         "price": {
@@ -241,7 +325,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/PUL23WCOT27433TB1-Indigo.jpg?v=1698407612"
         },
-        "title": "Indigo / 4"
+        "title": "Indigo / 4",
+        "in_stock": false,
+        "quantity": 86,
+        "brand": ["Town Team"],
+        "sizes": ["M", "6XL", "XS"],
+        "colors": ["green", "Black"],
+        "colors_ar": ["اخضر", "اسود"]
       }
     ],
     "Boys Jackets": [
@@ -259,7 +349,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/JAC23WLET28365TB1-LightBrown.jpg?v=1707995543"
         },
-        "title": "Light Brown / 4"
+        "title": "Light Brown / 4",
+        "in_stock": false,
+        "quantity": 23,
+        "brand": ["Cuba"],
+        "sizes": ["4XL", "XS", "2XL"],
+        "colors": ["Black", "Blue"],
+        "colors_ar": ["اسود", "ازرق"]
       },
       {
         "price": {
@@ -275,7 +371,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/JAC23WFWP28808TB1-Mustard.jpg?v=1699371916"
         },
-        "title": "Mustard / 4"
+        "title": "Mustard / 4",
+        "in_stock": true,
+        "quantity": 83,
+        "brand": ["River Nine"],
+        "sizes": ["3XL", "4XL"],
+        "colors": ["White", "Green"],
+        "colors_ar": ["ابيض", "اخضر"]
       },
       {
         "price": {
@@ -291,7 +393,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/JAC24WHCP28428TB1-Black.jpg?v=1735141271"
         },
-        "title": "Black / 10"
+        "title": "Black / 10",
+        "in_stock": false,
+        "quantity": 18,
+        "brand": ["River Nine"],
+        "sizes": ["4XL", "XS", "2XL"],
+        "colors": ["Black", "Grey"],
+        "colors_ar": ["اسود", "رمادي"]
       },
       {
         "price": {
@@ -307,7 +415,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/files/JAC24WFWP28817TB1-Grey-Neon-4.jpg?v=1735141262"
         },
-        "title": "Grey/Neon / 4"
+        "title": "Grey/Neon / 4",
+        "in_stock": false,
+        "quantity": 18,
+        "brand": ["Town Team"],
+        "sizes": ["4XL", "XS", "2XL"],
+        "colors": ["White", "Green"],
+        "colors_ar": ["ابيض", "اخضر"]
       },
       {
         "price": {
@@ -323,7 +437,13 @@
         "image": {
           "src": "//townteam.com/cdn/shop/products/JAC23WFWP28816TB1-OLIVE_2of4.jpg?v=1707995642"
         },
-        "title": "Green / 4"
+        "title": "Green / 4",
+        "in_stock": false,
+        "quantity": 32,
+        "brand": ["River Nine"],
+        "sizes": ["L", "XL", "3XL"],
+        "colors": ["Green", "Black"],
+        "colors_ar": ["اخضر", "اسود"]
       }
     ]
   }
