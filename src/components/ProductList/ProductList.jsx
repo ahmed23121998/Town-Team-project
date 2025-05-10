@@ -16,6 +16,7 @@ import Subcart from "../Cart/Subcart";
 import { MyContext } from "../../Context/FilterContaext";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import "./ProductList.css";
+import { useTranslation } from 'react-i18next';
 
 const theme = createTheme({
   palette: {
@@ -31,6 +32,8 @@ const ProductList = ({ category }) => {
   const [error, setError] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  const { t } = useTranslation();
 
   const normalizeFilterValue = (value) => {
     return String(value).toLowerCase().trim().replace(/['"]/g, "");
@@ -184,11 +187,11 @@ const ProductList = ({ category }) => {
             <FilterListIcon />
           </IconButton>
           <Typography variant="h4" gutterBottom>
-            Products
+              {t('Products.Products')}
           </Typography>
         </Box>
         <Typography variant="subtitle1" gutterBottom>
-          {filteredProducts.length} products found
+          {filteredProducts.length}   {t('Products.products found')}
         </Typography>
         <button
           onClick={toggleCart}
@@ -201,7 +204,7 @@ const ProductList = ({ category }) => {
             cursor: "pointer",
           }}
         >
-          Cart
+           {t('Products.Cart')}
         </button>
       </Box>
 
@@ -269,7 +272,7 @@ const ProductList = ({ category }) => {
             ) : filteredProducts.length === 0 ? (
               <Box textAlign="center" py={8}>
                 <Typography variant="h5">
-                  No products match the current filters
+                    {t('Products.No products match the current filters')}
                 </Typography>
               </Box>
             ) : (

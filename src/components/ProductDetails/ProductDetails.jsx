@@ -6,6 +6,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useLocation } from "react-router-dom";
 import { addToFavorites, removeFromFavorites, isFavorite } from "../../Components/favorites/favUtils";
+import { useTranslation } from 'react-i18next';
 
 const theme = createTheme({
   palette: {
@@ -20,14 +21,26 @@ const theme = createTheme({
 
 
 
+ 
 const ProductDetails = ({ onBackClick }) => {
   const location = useLocation();
   const product = location.state?.product;
+ const [randomPrice, setRandomPrice] = useState(null);
+
+ const { t } = useTranslation(); 
+const isArabic = t.language === "ar";
+
+const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+
+const selectedColor = isArabic
+  ? product?.colors_ar?.[selectedColorIndex]
+  : product?.colors?.[selectedColorIndex];
 
   // Initialize hooks at the top of the component
-  const [selectedColor, setSelectedColor] = useState(
-    product?.colors?.[0] || "defaultColor"
-  );
+  // const [selectedColor, setSelectedColor] = useState(
+  //   product?.colors?.[0] || "defaultColor"
+  // );
+
   const [selectedSize, setSelectedSize] = useState(
     product?.sizes?.[0] || "defaultSize"
   );
@@ -35,6 +48,14 @@ const ProductDetails = ({ onBackClick }) => {
   const [isFav, setIsFav] = useState(false);
   const [isWishlistHovered, setIsWishlistHovered] = useState(false);
   const userId = "u1234567890";
+
+  useEffect(() => {
+     const basePrice = parseFloat(
+       product.price?.toString().replace(/[^\d.]/g, "")
+     );
+     const generatedPrice = basePrice || Math.floor(Math.random() * 900 + 1000);
+     setRandomPrice(generatedPrice.toFixed(2));
+   }, [product.price]);
 
 
   useEffect(() => {
@@ -81,7 +102,7 @@ const ProductDetails = ({ onBackClick }) => {
     );
   }
 
-  const handleColorChange = (color) => setSelectedColor(color);
+  // const handleColorChange = (color) => setSelectedColor(color);
   const handleSizeChange = (event, newSize) =>
     newSize && setSelectedSize(newSize);
   const handleQuantityChange = (action) => {
@@ -91,15 +112,6 @@ const ProductDetails = ({ onBackClick }) => {
       setQuantity(quantity - 1);
     }
   };
-
-  const discountPercentage =
-    product?.originalPrice && product?.price?.amount
-      ? Math.round(
-        ((product.originalPrice - product.price.amount) /
-          product.originalPrice) *
-        100
-      )
-      : 0;
 
   const toggleWishlist = async () => {
     try {
@@ -125,11 +137,12 @@ const ProductDetails = ({ onBackClick }) => {
             onClick={onBackClick}
             sx={{ ml: 3, color: "grey", "&:hover": { color: "black" } }}
           >
-            Home
+           {t('Products.Home')}
+            
             <ArrowForwardIosIcon sx={{ maxWidth: "15px", ml: "5px" }} />
           </Button>
           <Breadcrumbs aria-label="breadcrumb">
-            <Typography color="inherit">Products</Typography>
+            <Typography color="inherit">{t('Products.Products')}</Typography>
             <Typography color="inherit">
               {product.name || product.productCode || "Unknown Product"}
             </Typography>
@@ -152,7 +165,7 @@ const ProductDetails = ({ onBackClick }) => {
                   zIndex: 2,
                 }}
               >
-                Sale {discountPercentage}%
+               {t('Products.Sale 70%')}
               </Box>
               <CardMedia
                 component="img"
@@ -195,7 +208,7 @@ const ProductDetails = ({ onBackClick }) => {
                     color="rgb(243, 92, 47)"
                     fontWeight="bold"
                   >
-                    {product.recentSales} sold in last 25 hours
+                    {product.recentSales} {t('Products.sold in last 25 hours')}
                   </Typography>
                 </Box>
 
@@ -207,7 +220,7 @@ const ProductDetails = ({ onBackClick }) => {
 
                 {/* Availability */}
                 <Typography variant="body2" sx={{ mb: 2 }}>
-                  Availability:{" "}
+                   {t('Products.Availability')}:{" "}
                   {product.stock > 0
                     ? `${product.stock} In Stock`
                     : "Out of Stock"}
@@ -226,7 +239,7 @@ const ProductDetails = ({ onBackClick }) => {
                       mr: 2,
                     }}
                   >
-                    EGP {(product.originalPrice || 0).toLocaleString()}
+                   {randomPrice} EGP
                   </Typography>
                   <Typography
                     variant="h5"
@@ -239,7 +252,7 @@ const ProductDetails = ({ onBackClick }) => {
                 </Box>
 
                 {/* Color Selection */}
-                {product.colors?.length > 0 && (
+                {/* {product.colors?.length > 0 && (
                   <Box sx={{ mb: 3 }}>
                     <Typography
                       variant="subtitle1"
@@ -268,7 +281,39 @@ const ProductDetails = ({ onBackClick }) => {
                       ))}
                     </Box>
                   </Box>
-                )}
+                )} */}
+
+                {product.colors?.length > 0 && (
+  <Box sx={{ mb: 3 }}>
+    <Typography
+      variant="subtitle1"
+      gutterBottom
+      sx={{ fontWeight: "bold" }}
+    >
+      Color : {selectedColor}
+    </Typography>
+    <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
+      {product.colors.map((color, index) => (
+        <Box
+          key={color}
+          onClick={() => setSelectedColorIndex(index)}
+          sx={{
+            width: 40,
+            height: 40,
+            borderRadius: "50%",
+            bgcolor: color,
+            border:
+              selectedColorIndex === index
+                ? "2px solid #000"
+                : "1px solid #ddd",
+            cursor: "pointer",
+          }}
+        />
+      ))}
+    </Box>
+  </Box>
+)}
+
 
                 {/* Size Selection */}
                 {product.sizes?.length > 0 && (
@@ -278,7 +323,7 @@ const ProductDetails = ({ onBackClick }) => {
                       gutterBottom
                       sx={{ fontWeight: "bold" }}
                     >
-                      Size: {selectedSize}
+                        {t('Products.Size')}: {selectedSize}
                     </Typography>
                     <ToggleButtonGroup
                       value={selectedSize}
@@ -322,7 +367,7 @@ const ProductDetails = ({ onBackClick }) => {
                     gutterBottom
                     sx={{ fontWeight: "bold" }}
                   >
-                    Quantity:
+                     {t('Products.Quantity')}:
                   </Typography>
                   <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
                     <ButtonGroup
@@ -359,7 +404,7 @@ const ProductDetails = ({ onBackClick }) => {
                   fontWeight="bold"
                   sx={{ mb: 3 }}
                 >
-                  Subtotal: EGP{" "}
+                   {t('Products.Subtotal')}: EGP{" "}
                   {(product.price?.amount * quantity).toLocaleString()}
                 </Typography>
 
@@ -383,7 +428,7 @@ const ProductDetails = ({ onBackClick }) => {
                     borderLeft={0}
                   >
                     <Typography variant="body1" fontWeight="bold" fontSize={18}>
-                      Free shipping on orders over 499
+                      {t('Products.Free shipping on orders over 499')}
                     </Typography>
                     <Typography fontSize={10} fontWeight="bold">
                       EGP
@@ -410,7 +455,7 @@ const ProductDetails = ({ onBackClick }) => {
                       },
                     }}
                   >
-                    ADD TO CART
+                     {t('Products.ADD TO CART')}
                   </Button>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <IconButton
@@ -448,7 +493,7 @@ const ProductDetails = ({ onBackClick }) => {
                 },
               }}
             >
-              Buy it now
+             {t('Products.Buy it now')}
             </Button>
           </Grid>
         </Grid>

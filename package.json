@@ -12,8 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^7.0.2",
+    "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.0.2",
+    "@paypal/react-paypal-js": "^8.8.3",
     "firebase": "^11.6.0",
     "firebase-admin": "^13.2.0",
     "react": "^19.0.0",

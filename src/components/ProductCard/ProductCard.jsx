@@ -12,12 +12,15 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./ProductCard.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const ProductCard = ({ product, toggleCart }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [inWishlist, setInWishlist] = useState(false);
   const [isWishlistHovered, setIsWishlistHovered] = useState(false);
   const [selectedSize] = useState(null);
+
+  const { t } = useTranslation();
 
   const [hoveredSize, setHoveredSize] = useState(null);
 
@@ -64,8 +67,8 @@ const ProductCard = ({ product, toggleCart }) => {
   const extraSizes = 3;
   // const random = (randomPrice * 0.6).toFixed(2);
   return (
-    <Card className="product-card">
-      <Box className="sale-tag">Sale 70%</Box>
+    <Card className="product-card" >
+      <Box className="sale-tag" > {t('Products.Sale 70%')}</Box>
 
       <Box
         className={`wishlist-container ${isWishlistHovered ? "hovered" : ""} ${
@@ -82,7 +85,7 @@ const ProductCard = ({ product, toggleCart }) => {
         )}
         {(isWishlistHovered || inWishlist) && (
           <span className="wishlist-text">
-            {inWishlist ? "Added To Wishlist" : "Add To Wishlist"}
+            {inWishlist ? t('Products.Added To Wishlist')  : t('Products.Add To Wishlist')}
           </span>
         )}
       </Box>
@@ -110,6 +113,8 @@ const ProductCard = ({ product, toggleCart }) => {
                   key={size}
                   onMouseEnter={() => handleSizeMouseEnter(size)}
                   onMouseLeave={handleSizeMouseLeave}
+                    onClick={() =>
+            navigate("/productDetails", { state: { product, randomPrice } })}
                   className="size-circle"
                   sx={{
                     backgroundColor:
@@ -149,7 +154,7 @@ const ProductCard = ({ product, toggleCart }) => {
             className="quick-add-button"
             onClick={() => addProductToCart(product)}
           >
-            QUICK ADD
+              {t('Products.QUICK ADD')}
           </Button>
         )}
       </Box>
@@ -168,6 +173,8 @@ const ProductCard = ({ product, toggleCart }) => {
             variant="h6"
             component="a"
             // onClick={() => onProductClick(product)}
+              onClick={() =>
+            navigate("/productDetails", { state: { product, randomPrice } })}
             className="product-title"
             sx={{
               fontSize: "16px",
@@ -228,6 +235,8 @@ const ProductCard = ({ product, toggleCart }) => {
           {product.colors.map((color, index) => (
             <Box
               key={index}
+                onClick={() =>
+            navigate("/productDetails", { state: { product, randomPrice } })}
               sx={{
                 width: 28,
                 height: 28,
