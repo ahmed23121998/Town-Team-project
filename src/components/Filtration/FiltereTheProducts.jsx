@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./FilterTheProducts.css";
 import { MyContext } from "../../Context/FilterContaext";
+import { useTranslation } from 'react-i18next';
+
 
 const defaultAvailabilityFilters = {
   inStock: false,
@@ -47,6 +49,9 @@ function FilterComponent() {
     size: true,
     color: true,
   });
+
+  
+const { t } = useTranslation();
 
   const [availabilityFilters, setAvailabilityFilters] = useState(
     defaultAvailabilityFilters
@@ -163,7 +168,8 @@ function FilterComponent() {
           marginLeft: "0 ",
         }}
       >
-        <h3>Selected Filters:</h3>
+        
+        <h3> {t('FilterComponent.Selected Filters:')}</h3>
         {filterlist.length > 0 && (
           <div className="filter-list-container">
             <ul>
@@ -176,7 +182,7 @@ function FilterComponent() {
           </div>
         )}
 
-        <button onClick={ClearFilter}>Clear</button>
+        <button onClick={ClearFilter}>{t('FilterComponent.Clear')}</button>
 
         <div className="filter-container">
           <div className="filter-section">
@@ -184,7 +190,7 @@ function FilterComponent() {
               className="filter-header"
               onClick={() => toggleSection("availability")}
             >
-              <div className="filter-title">AVAILABILITY</div>
+              <div className="filter-title">{t('FilterComponent.Availability.Title')}</div>
               <div className="filter-arrow">
                 {expanded.availability ? "∧" : "∨"}
               </div>
@@ -203,7 +209,7 @@ function FilterComponent() {
                     }
                   />
                   <label htmlFor="inStock" className="checkbox-label">
-                    In Stock (2479)
+                      {t('FilterComponent.Availability.InStock')}
                   </label>
                 </div>
                 <div className="checkbox-container">
@@ -217,7 +223,7 @@ function FilterComponent() {
                     }
                   />
                   <label htmlFor="outOfStock" className="checkbox-label">
-                    Out Of Stock (1585)
+                      {t('FilterComponent.Availability.OutOfStock')}
                   </label>
                 </div>
               </div>
@@ -229,7 +235,7 @@ function FilterComponent() {
               className="filter-header"
               onClick={() => toggleSection("price")}
             >
-              <div className="filter-title">PRICE</div>
+              <div className="filter-title">{t('FilterComponent.Price.Title')}</div>
               <div className="filter-arrow">{expanded.price ? "∧" : "∨"}</div>
             </div>
             <div className="filter-divider"></div>
@@ -246,10 +252,10 @@ function FilterComponent() {
                   />
                   <div className="price-inputs">
                     <span>EGP {priceRange.min}</span>
-                    <span>to</span>
+                    <span>{t('FilterComponent.Price.To')}</span>
                     <span>EGP {priceRange.max}</span>
                   </div>
-                  <button className="apply-button">APPLY</button>
+                  <button className="apply-button">{t('FilterComponent.Price.APPLY')}</button>
                 </div>
               </div>
             )}
