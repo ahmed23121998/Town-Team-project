@@ -1,6 +1,7 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { Box, Typography } from '@mui/material';
 
+
 const PayPalPayment = ({ cartItems, onApprove, onError, onCancel }) => {
     const paypalClientId = "Ad9g0phb6pFlTnHqb8kBtqTFBsPnXGZx5ozK7x_ADl3QZHDyva-OP_VWDQROT_3kvOMbMeMU6flVCyQF";
     const conversionRate = 50; // 1 USD = 50 EGP

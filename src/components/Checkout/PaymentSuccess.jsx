@@ -12,7 +12,6 @@ const PaymentSuccess = () => {
   const orderData = location.state?.orderData || {};
   
   const { t } = useTranslation();
-
   // Calculate total if not directly available
   const total = orderData.total || 
                 (orderData.cartItems?.reduce((sum, item) => sum + (item.price * item.quantity), 0)) || 0;
