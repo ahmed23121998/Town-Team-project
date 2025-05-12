@@ -28,7 +28,7 @@ const MainCart = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [couponCode, setCouponCode] = useState("");
-  const [timeRemaining, setTimeRemaining] = useState(60 * 60); // 60 minutes in seconds
+  const [timeRemaining, setTimeRemaining] = useState(60 * 60);
   const [userId] = useState(`u1234567890`);
   const navigate = useNavigate();
 
@@ -165,7 +165,6 @@ const MainCart = () => {
       </Box>
     );
   }
-
   const onClose = () => {
     navigate("/");
   };
@@ -276,17 +275,7 @@ const MainCart = () => {
                   justifyContent: "center",
                   py: 8,
                 }}
-              >
-                {/* <ShoppingBag
-                  sx={{ fontSize: { xs: 50, sm: 60 }, color: "#9e9e9e", mb: 2 }}
-                />
-                <Typography
-                  variant="h6"
-                  sx={{ fontSize: { xs: "1.2rem", sm: "1.5rem" } }}
-                >
-                  Your cart is empty
-                </Typography> */}
-              </Box>
+              ></Box>
             ) : (
               <>
                 <Divider />
@@ -402,21 +391,7 @@ const MainCart = () => {
                           {formatCurrency((item.price || 0) * item.quantity)}
                         </Typography>
                       </Grid>
-                      {/* <Button
-                        variant="text"
-                        color="error"
-                        size="small"
-                        sx={{
-                          p: 0,
-                          mt: 1,
-                          minWidth: "auto",
-                          fontSize: { xs: "0.8rem", sm: "0.875rem" },
-                          marginRight: "0px",
-                        }}
-                        onClick={() => removeItem(item.id)}
-                      >
-                        Remove
-                      </Button> */}
+
                       <IconButton
                         sx={{ color: "red", marginRight: "Auto" }}
                         onClick={() => removeItem(item.id)}

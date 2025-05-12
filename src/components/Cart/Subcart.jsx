@@ -13,7 +13,7 @@ const SubCart = ({ toggleCart }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const [userId] = useState("u1234567890"); // Replace "u1234567890" with a valid user ID or fetch it dynamically
+  const [userId] = useState("u1234567890");
   useEffect(() => {
     const fetchCartItems = async () => {
       if (!userId) return alert("gg bro");

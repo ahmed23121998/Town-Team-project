@@ -1,14 +1,7 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
 import { db } from "../../Firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Typography,
-  IconButton,
-  Drawer,
-} from "@mui/material";
+import {Box,CircularProgress,Container,Typography,IconButton,Drawer,} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ProductCard from "../ProductCard/ProductCard";
 import FiltereTheProducts from "../Filtration/FiltereTheProducts";
@@ -108,19 +101,14 @@ const ProductList = ({ category }) => {
       try {
         setLoading(true);
         setError(null);
-
-        const collectionPath = [category || "men", "closes", "Boys Pullovers"];
-        console.log("Fetching from collection:", collectionPath.join("/"));
-
+        const collectionPath = [category || "men", "closes", "Boys Jackets"];
         const colRef = collection(db, ...collectionPath);
         const snapshot = await getDocs(colRef);
-
         if (snapshot.empty) {
           setError("No products found in this category");
           setRawProducts([]);
           return;
         }
-
         const data = snapshot.docs.map((doc) => {
           const docData = doc.data();
           return {
@@ -139,8 +127,6 @@ const ProductList = ({ category }) => {
             image: docData.image || "",
           };
         });
-
-        console.log("Raw data from Firestore:", data);
         setRawProducts(data);
       } catch (error) {
         console.error("Firebase error:", error);
@@ -150,7 +136,6 @@ const ProductList = ({ category }) => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, [category]);
 
@@ -280,7 +265,7 @@ const ProductList = ({ category }) => {
                     xs: "1fr",
                     sm: "repeat(2, 1fr)",
                     md: "repeat(3, 1fr)",
-                    lg: "repeat(4, 1fr)",
+                    lg: "repeat(3, 1fr)",
                   },
                   gap: { xs: "2px", sm: "5px", md: "10px", lg: "15px" },
                 }}

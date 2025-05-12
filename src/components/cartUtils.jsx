@@ -1,14 +1,5 @@
 import { db } from "../Firebase/firebase";
-import {
-  doc,
-  setDoc,
-  deleteDoc,
-  getDoc,
-  updateDoc,
-  getDocs,
-  collection,
-  increment,
-} from "firebase/firestore";
+import { doc, setDoc, deleteDoc, getDoc, updateDoc, getDocs, collection, increment } from "firebase/firestore";
 
 export const addToCart = async (userId, product, quantity = 1) => {
   try {
@@ -20,6 +11,7 @@ export const addToCart = async (userId, product, quantity = 1) => {
     if (existingDoc.exists()) {
       await updateDoc(ref, {
         quantity: increment(quantity),
+        price: increment(product.price?.amount * quantity),
       });
     } else {
       await setDoc(ref, {
@@ -57,8 +49,7 @@ export const updateCartQuantity = async (userId, productId, newQty) => {
 
     if (docSnap.exists()) {
       const productData = docSnap.data();
-      const unitPrice =
-        productData.unitPrice || productData.price / productData.quantity;
+      const unitPrice = productData.unitPrice || productData.price / productData.quantity;
 
       await updateDoc(ref, {
         quantity: newQty,

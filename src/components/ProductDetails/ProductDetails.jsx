@@ -5,26 +5,24 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useLocation } from "react-router-dom";
-import { addToFavorites, removeFromFavorites, isFavorite } from "../../Components/favorites/favUtils";
+import { addToFavorites, removeFromFavorites, isFavorite, } from "../favorites/favUtils";
+import { addToCart } from "../cartUtils";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#ffeb3b", // Yellow flagship color for primary
+      main: "#ffeb3b",
     },
     secondary: {
-      main: "#f44336", // Red color for sale tag
+      main: "#f44336",
     },
   },
 });
-
-
 
 const ProductDetails = ({ onBackClick }) => {
   const location = useLocation();
   const product = location.state?.product;
 
-  // Initialize hooks at the top of the component
   const [selectedColor, setSelectedColor] = useState(
     product?.colors?.[0] || "defaultColor"
   );
@@ -33,9 +31,8 @@ const ProductDetails = ({ onBackClick }) => {
   );
   const [quantity, setQuantity] = useState(1);
   const [isFav, setIsFav] = useState(false);
-  const [isWishlistHovered, setIsWishlistHovered] = useState(false);
+  const [setIsWishlistHovered] = useState(false);
   const userId = "u1234567890";
-
 
   useEffect(() => {
     if (userId && product?.id) {
@@ -43,22 +40,7 @@ const ProductDetails = ({ onBackClick }) => {
     }
   }, [userId, product?.id]);
 
-  const toggleFavorite = async () => {
-    try {
-      if (isFav) {
-        await removeFromFavorites(userId, product.id);
-        setIsFav(false);
-      } else {
-        await addToFavorites(userId, product);
-        setIsFav(true);
-      }
-    } catch (error) {
-      console.error("Error toggling favorite:", error);
-    }
-  };
 
-
-  // Handle cases where the product is not found
   if (!product) {
     return (
       <ThemeProvider theme={theme}>
@@ -92,14 +74,9 @@ const ProductDetails = ({ onBackClick }) => {
     }
   };
 
-  const discountPercentage =
-    product?.originalPrice && product?.price?.amount
-      ? Math.round(
-        ((product.originalPrice - product.price.amount) /
-          product.originalPrice) *
-        100
-      )
-      : 0;
+  const discountedPrice = product?.price?.amount;
+  const originalPrice = discountedPrice ? discountedPrice * 2 : undefined;
+  const discountPercentage = 50;
 
   const toggleWishlist = async () => {
     try {
@@ -114,7 +91,14 @@ const ProductDetails = ({ onBackClick }) => {
       console.error("Error toggling favorite:", error);
     }
   };
-
+  const addProductToCart = async (product) => {
+    const userId = "u1234567890";
+    try {
+      await addToCart(userId, product, quantity);
+    } catch (error) {
+      console.error("Cart update failed:", error);
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -215,28 +199,39 @@ const ProductDetails = ({ onBackClick }) => {
 
                 {/* Price */}
                 <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-                  <Typography
-                    variant="h6"
-                    component="span"
-                    sx={{
-                      textDecoration: "line-through",
-                      color: "black",
-                      fontWeight: "bold",
-                      fontSize: "25px",
-                      mr: 2,
-                    }}
-                  >
-                    EGP {(product.originalPrice || 0).toLocaleString()}
-                  </Typography>
+                  {/* السعر الأصلي */}
+                  {originalPrice && (
+                    <Typography
+                      variant="h6"
+                      component="span"
+                      sx={{
+                        textDecoration: "line-through",
+                        color: "black",
+                        fontWeight: "bold",
+                        fontSize: "25px",
+                        mr: 2,
+                      }}
+                    >
+                      EGP {originalPrice.toLocaleString()}
+                    </Typography>
+                  )}
+
+                  {/* السعر المخفض */}
                   <Typography
                     variant="h5"
                     component="span"
-                    color="rgb(243, 92, 47)"
+                    color="rgb(243, 92, 47)"  
                     fontWeight="bold"
                   >
-                    EGP {(product.price?.amount || 0).toLocaleString()}
+                    EGP {discountedPrice.toLocaleString()}
                   </Typography>
+
+                  {discountPercentage > 0 && (
+                    <Typography variant="body2" color="error" fontWeight="bold" sx={{ ml: 2 }}>
+                    </Typography>
+                  )}
                 </Box>
+
 
                 {/* Color Selection */}
                 {product.colors?.length > 0 && (
@@ -409,29 +404,35 @@ const ProductDetails = ({ onBackClick }) => {
                         backgroundColor: "white",
                       },
                     }}
+                    onClick={() => addProductToCart(product)}
                   >
                     ADD TO CART
                   </Button>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
                     <IconButton
                       onClick={toggleWishlist}
                       onMouseEnter={() => setIsWishlistHovered(true)}
                       onMouseLeave={() => setIsWishlistHovered(false)}
                       sx={{
-                        backgroundColor: 'black',
-                        color: isFav ? '#ffeb3b' : 'white',
-                        borderRadius: '50%',
+                        backgroundColor: "black",
+                        color: isFav ? "#ffeb3b" : "white",
+                        borderRadius: "50%",
                         width: 48,
                         height: 48,
-                        '&:hover': {
-                          backgroundColor: '#333',
+                        "&:hover": {
+                          backgroundColor: "#333",
                         },
                       }}
                     >
                       <FavoriteBorderIcon />
                     </IconButton>
                   </Box>
-
                 </Box>
               </Box>
             </Box>
@@ -456,6 +457,5 @@ const ProductDetails = ({ onBackClick }) => {
     </ThemeProvider>
   );
 };
-
 
 export default ProductDetails;

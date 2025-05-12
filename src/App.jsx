@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProductList from "./Components/ProductList/ProductList";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Wishlist from "./Pages/Wishlist";
-import MainCart from "./Components/Cart/MainCart";
+import MainCart from "./components/Cart/MainCart";
 
 function App() {
   const [Filteration, setFilteration] = useState();
