@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.products-grid {
+    display: grid;
+    gap: 25px;
+    width: 100%;
+}
+
+
+/* Large screens (1200px and above): 4 products per row */
+
+@media (min-width: 1200px) {
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+/* Medium-large screens (992px to 1199px): 3 products per row */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* Medium screens (768px to 991px): 2 products per row */
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+
+/* Small screens (576px to 767px): 2 products per row */
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+
+/* Extra small screens (below 576px): 1 product per row */
+
+@media (max-width: 575px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+.Float-Cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #06111c;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+    margin-right: 100px;
+}

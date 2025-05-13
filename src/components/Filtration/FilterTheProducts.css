@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.filter-container {
+    font-family: Arial, sans-serif;
+    width: 250px;
+    /* Adjust based on your design */
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 0;
+}
+
+.filter-title {
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.filter-arrow {
+    font-size: 12px;
+}
+
+.filter-divider {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.filter-content {
+    padding: 10px 0;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.filter-checkbox {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.price-range-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.price-slider {
+    width: 90%;
+}
+
+.price-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.price-inputs span {
+    flex: 1;
+    text-align: center;
+}
+
+.apply-button {
+    background-color: #ffcc00;
+    border: none;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.size-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.size-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.size-button.selected {
+    background-color: #007bff;
+}
+
+.color-buttons-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.color-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.color-button.selected::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: inherit;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #000;
+}
+
+.show-all-button {
+    background: none;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 0;
+    text-align: left;
+    text-transform: uppercase;
+}
