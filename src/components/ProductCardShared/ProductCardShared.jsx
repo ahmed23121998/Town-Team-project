@@ -255,7 +255,8 @@ const ProductCardShared = ({ product, view, onAddToCart, onToggleWishlist, onDel
                             }}
                             onClick={navigateToDetails}
                         >
-                            {product.product.title}
+                            {product?.title || "No title available"}
+
                             <Box component="span" sx={{ mx: 1, fontWeight: "normal" }}>
                                 -
                             </Box>

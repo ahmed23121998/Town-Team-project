@@ -7,8 +7,10 @@ import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../Firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { addToCart } from "../components/cartUtils";
-import ProductCardShared from "../components/ProductCardShared/ProductCardShared";
+import ProductCardShared from "../Components/ProductCardShared/ProductCardShared";
+import { addToCart } from "../Components/cartUtils";
+// import { addToCart } from "../components/cartUtils";
+// import ProductCardShared from "../components/ProductCardShared/ProductCardShared";
 
 const StyledToggleButton = styled(ToggleButton)(() => ({
   border: "2px solid transparent",
@@ -85,9 +87,12 @@ const Wishlist = () => {
   const idxFirst = idxLast - itemsPerPage;
   const currentItems = view === "list" ? wishlist.slice(idxFirst, idxLast) : wishlist;
 
-  const renderCard = (item) => {
-    const discount = item.discount || 0;
+ const renderCard = (item) => {
+  if (!item || !item.id) return null;
 
+  console.log("Rendering item", item); // للمساعدة في تتبع الـ data
+
+  try {
     return (
       <ProductCardShared
         key={item.id}
@@ -98,12 +103,16 @@ const Wishlist = () => {
         onDelete={() => handleDelete(item.id)}
         showDelete={true}
         inWishlist={true}
-        discount={50}
+        discount={item.discount || 0} // استخدمي الخصم الحقيقي بدل ما هو ثابت 50
         navigateToDetails={() => navigate(`/product/${item.id}`)}
         showFullDetails={false}
       />
     );
-  };
+  } catch (error) {
+    console.error("Error rendering item:", item, error);
+    return null;
+  }
+};
 
   return (
     <Box sx={{ p: 3 }}>
