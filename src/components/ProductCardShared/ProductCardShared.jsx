@@ -3,6 +3,7 @@ import { Box, Card, CardMedia, CardContent, Typography, Button, IconButton, } fr
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const ProductCardShared = ({ product, view, onAddToCart, onToggleWishlist, onDelete, showDelete = false, showWishlist = true, inWishlist = false, discount = 50, }) => {
     const [isHovered, setIsHovered] = useState(false);
@@ -13,7 +14,7 @@ const ProductCardShared = ({ product, view, onAddToCart, onToggleWishlist, onDel
         : undefined;
     const salePrice = discountedPrice?.toFixed(2);
     const navigate = useNavigate();
-
+    const { t } = useTranslation();
     const navigateToDetails = () => {
         navigate("/productDetails", { state: { product } });
     };
@@ -65,7 +66,7 @@ const ProductCardShared = ({ product, view, onAddToCart, onToggleWishlist, onDel
                                 fontSize: "13px",
                             }}
                         >
-                            Sale {discount}%
+                          %  {t('Products.Sale')} {discount}
                         </Box>
                     )}
 
@@ -130,7 +131,7 @@ const ProductCardShared = ({ product, view, onAddToCart, onToggleWishlist, onDel
                                     <FavoriteBorderIcon sx={{ fontSize: 18 }} />
                                     {isWishlistHovered && (
                                         <Typography sx={{ fontSize: "14px" }}>
-                                            {inWishlist ? "Added to Wishlist" : "Add to Wishlist"}
+                                             {inWishlist ? t('Products.Added To Wishlist')  : t('Products.Add To Wishlist')}
                                         </Typography>
                                     )}
                                 </Box>
@@ -230,7 +231,7 @@ const ProductCardShared = ({ product, view, onAddToCart, onToggleWishlist, onDel
                                 padding: "12px",
                             }}
                         >
-                            QUICK ADD
+                           {t('Products.QUICK ADD')}
                         </Button>
                     )}
                 </Box>
@@ -311,7 +312,7 @@ const ProductCardShared = ({ product, view, onAddToCart, onToggleWishlist, onDel
                                     width: "30%",
                                 }}
                             >
-                                QUICK ADD
+                               {t('Products.QUICK ADD')}
                             </Button>
                         )}
                     </CardContent>

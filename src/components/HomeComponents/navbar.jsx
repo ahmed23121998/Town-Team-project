@@ -215,11 +215,23 @@ export default function NavBar() {
     const navItems = [
         {
             // label: 'MEN',
-            label: t('Home.NavBar.Menu.MEN'),
+            label: t('Home.NavBar.Menu.MEN'),        
             submenu: [
                 {
                     label: t('Home.NavBar.SubMenu.ACCESSORIES'),
-                    submenu: [t('Home.NavBar.SubMenu.BAGS'), t('Home.NavBar.SubMenu.BELTS'), t('Home.NavBar.SubMenu.BODY CARE'), t('Home.NavBar.SubMenu.BODY SPLASH'), t('Home.NavBar.SubMenu.BOXERS'), t('Home.NavBar.SubMenu.DEODORANT'), t('Home.NavBar.SubMenu.GLOVES'), t('Home.NavBar.SubMenu.ICE CAPS'), t('Home.NavBar.SubMenu.PERFUMES'), t('Home.NavBar.SubMenu.SETS'), t('Home.NavBar.SubMenu.SOCKS'), t('Home.NavBar.SubMenu.WALLETS')]
+                    category: 'accessories',
+                    submenu: [t('Home.NavBar.SubMenu.BAGS'), 
+                        t('Home.NavBar.SubMenu.BELTS'), 
+                        t('Home.NavBar.SubMenu.BODY CARE'),
+                         t('Home.NavBar.SubMenu.BODY SPLASH'),
+                          t('Home.NavBar.SubMenu.BOXERS'),
+                           t('Home.NavBar.SubMenu.DEODORANT'), 
+                           t('Home.NavBar.SubMenu.GLOVES'),
+                            t('Home.NavBar.SubMenu.ICE CAPS'),
+                             t('Home.NavBar.SubMenu.PERFUMES'),
+                              t('Home.NavBar.SubMenu.SETS'),
+                               t('Home.NavBar.SubMenu.SOCKS'),
+                                t('Home.NavBar.SubMenu.WALLETS')]
                 },
                 {
                     label: t('Home.NavBar.SubMenu.CLOSES'),

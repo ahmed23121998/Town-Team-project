@@ -1,11 +1,10 @@
 import { useEffect, useState, useCallback } from "react";
 import { doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
 import { db } from "../../Firebase/firebase";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 import ProductCardShared from "../ProductCardShared/ProductCardShared";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../cartUtils";
-
 const ProductCard = ({ product, toggleCart }) => {
   const [inWishlist, setInWishlist] = useState(false);
   const userId = "u1234567890";
@@ -17,7 +16,7 @@ const ProductCard = ({ product, toggleCart }) => {
       await addToCart(userId, product, 1);
     } catch (error) {
       console.error("Cart update failed:", error);
-      toast.error("Failed to add product to cart.");
+      // toast.error("Failed to add product to cart.");
     }
   }, [toggleCart]);
 
@@ -40,18 +39,18 @@ const ProductCard = ({ product, toggleCart }) => {
       if (inWishlist) {
         await deleteDoc(favRef);
         setInWishlist(false);
-        toast.success("❌ Product removed from wishlist");
+        // toast.success("❌ Product removed from wishlist");
       } else {
         await setDoc(favRef, {
           ...product,
           addedAt: new Date().toISOString(),
         });
         setInWishlist(true);
-        toast.success("✅ Product added to wishlist");
+        // toast.success("✅ Product added to wishlist");
       }
     } catch (error) {
       console.error("Error updating favorite:", error);
-      toast.error("Error updating favorite.");
+      // toast.error("Error updating favorite.");
     }
   }, [inWishlist, product]);
 

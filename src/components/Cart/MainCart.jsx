@@ -22,6 +22,7 @@ import {
 import { db } from "../../Firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useTranslation } from 'react-i18next';
 
 const MainCart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -31,6 +32,7 @@ const MainCart = () => {
   const [timeRemaining, setTimeRemaining] = useState(60 * 60); // 60 minutes in seconds
   const [userId] = useState(`u1234567890`);
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const formatCurrency = (amount) => {
     return `LE ${amount.toLocaleString("en-US", {
@@ -196,7 +198,7 @@ const MainCart = () => {
               fontSize: { xs: "1.2rem", sm: "1.5rem" },
             }}
           >
-            YOUR CART
+            {t('MainCart.YourCart')}
           </Typography>
           <IconButton onClick={onClose}>
             <Close />
@@ -208,11 +210,11 @@ const MainCart = () => {
             <Typography
               sx={{ color: "#009688", fontSize: { xs: "0.9rem", sm: "1rem" } }}
             >
-              You You qualify for free shipping!
+             {t('MainCart.FreeShippingQualify')}
             </Typography>
           ) : (
             <Typography sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-              Free shipping for all orders over LE 1,399.00!
+              {t('MainCart.FreeShippingThreshold')}
             </Typography>
           )}
           <Box
@@ -252,9 +254,8 @@ const MainCart = () => {
               variant="body2"
               sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem" } }}
             >
-              Please, hurry! Someone has placed an order on one of the items you
-              have in the cart. We'll keep it for you for{" "}
-              {formatTimeRemaining()} minutes.
+             {t('MainCart.HurryMessage')}{" "}
+              {formatTimeRemaining()} .
             </Typography>
           </Paper>
         )}
@@ -449,14 +450,14 @@ const MainCart = () => {
                   fontSize: { xs: "1.2rem", sm: "1.5rem" },
                 }}
               >
-                ORDER SUMMARY
+                {t('MainCart.OrderSummary')}
               </Typography>
 
               <Box
                 sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}
               >
                 <Typography sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}>
-                  Subtotal
+                  {t('MainCart.Subtotal')}
                 </Typography>
                 <Typography
                   sx={{
@@ -473,11 +474,11 @@ const MainCart = () => {
                   gutterBottom
                   sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}
                 >
-                  Coupon Code
+                  {t('MainCart.CouponCode')}
                 </Typography>
                 <TextField
                   fullWidth
-                  placeholder="Enter Coupon Code"
+                  placeholder={t('MainCart.EnterCouponCode')}
                   size="small"
                   value={couponCode}
                   onChange={handleCouponChange}
@@ -488,7 +489,7 @@ const MainCart = () => {
                   color="textSecondary"
                   sx={{ fontSize: { xs: "0.7rem", sm: "0.75rem" } }}
                 >
-                  Coupon code will be applied on the checkout page
+                  {t('MainCart.CouponCodeNote')}
                 </Typography>
               </Box>
 
@@ -503,7 +504,7 @@ const MainCart = () => {
                     fontSize: { xs: "1rem", sm: "1.2rem" },
                   }}
                 >
-                  TOTAL:
+                  {t('MainCart.TotalLabel')}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -529,7 +530,7 @@ const MainCart = () => {
                 }}
                 onClick={handleCheckout}
               >
-                PROCEED TO CHECKOUT
+               {t('MainCart.ProceedToCheckout')}
               </Button>
 
               <Button
@@ -544,7 +545,7 @@ const MainCart = () => {
                 }}
                 onClick={onClose}
               >
-                CONTINUE SHOPPING
+                {t('MainCart.ContinueShopping')}
               </Button>
             </Box>
           )}
@@ -563,7 +564,7 @@ const MainCart = () => {
                 }}
                 onClick={onClose}
               >
-                CONTINUE SHOPPING
+                {t('MainCart.ContinueShopping')}
               </Button>
             </Box>
           )}

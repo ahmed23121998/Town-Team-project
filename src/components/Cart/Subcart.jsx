@@ -7,12 +7,15 @@ import { Close } from "@mui/icons-material";
 
 import { IconButton } from "@mui/material";
 
+import { useTranslation } from 'react-i18next';
+
 const SubCart = ({ toggleCart }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+     const { t, i18n } = useTranslation();
   const [userId] = useState("u1234567890"); // Replace "u1234567890" with a valid user ID or fetch it dynamically
   useEffect(() => {
     const fetchCartItems = async () => {
@@ -83,7 +86,7 @@ const SubCart = ({ toggleCart }) => {
           paddingBottom: ".5rem",
         }}
       >
-        Shopping Cart
+        {t('SubCart.ShoppingCart')}
         <h4 style={{ opacity: "0.5", fontWeight: "bolder" }}>
           {cartItems.length} items
         </h4>
@@ -261,7 +264,7 @@ const SubCart = ({ toggleCart }) => {
               color: "#2d3436",
             }}
           >
-            Total:
+           {t('SubCart.Total')}
           </h4>
           <h2>{total}EGP</h2>
         </div>
@@ -285,7 +288,7 @@ const SubCart = ({ toggleCart }) => {
             })
           }
         >
-          Checkout
+         {t('SubCart.Checkout')}
         </button>
         <button
           style={{

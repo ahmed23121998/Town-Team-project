@@ -6,11 +6,12 @@ import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../Firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import ProductCardShared from "../Components/ProductCardShared/ProductCardShared";
 import { addToCart } from "../Components/cartUtils";
 // import { addToCart } from "../components/cartUtils";
 // import ProductCardShared from "../components/ProductCardShared/ProductCardShared";
+import { useTranslation } from 'react-i18next';
 
 const StyledToggleButton = styled(ToggleButton)(() => ({
   border: "2px solid transparent",
@@ -23,6 +24,7 @@ const StyledToggleButton = styled(ToggleButton)(() => ({
   alignItems: "center",
   justifyContent: "center",
 }));
+
 
 const SaleBadge = styled(Box)(() => ({
   backgroundColor: "#f44336",
@@ -45,6 +47,7 @@ const Wishlist = () => {
   const userId = "u1234567890";
   const itemsPerPage = 3;
 
+  const { t } = useTranslation();
   useEffect(() => {
     const unsubscribe = onSnapshot(
       collection(db, "favorites", userId, "items"),
@@ -67,19 +70,19 @@ const Wishlist = () => {
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(db, "favorites", userId, "items", id));
-      toast.success("Product removed from wishlist");
+      // toast.success("Product removed from wishlist");
     } catch {
-      toast.error("Delete error");
+      // toast.error("Delete error");
     }
   };
 
   const AddToCart = async (item) => {
     try {
       await addToCart(userId, item, 1);
-      toast.success("Added to cart!");
+      // toast.success("Added to cart!");
     } catch (err) {
       console.error(err);
-      toast.error("Failed to add to cart");
+      // toast.error("Failed to add to cart");
     }
   };
 
@@ -123,18 +126,19 @@ const Wishlist = () => {
           onClick={() => navigate("/")}
           sx={{ cursor: "pointer" }}
         >
-          Home
+          {/* Home */}
+          {t('WISHLIST.HOME')}
         </Link>
-        <Typography color="text.primary">Wishlist</Typography>
+        <Typography color="text.primary">{t('WISHLIST.WISHLIST')}</Typography>
       </Breadcrumbs>
 
       <Typography variant="h5" sx={{ mb: 2, fontWeight: "bold", mt: -1 }}>
-        WISHLIST
+        {t('WISHLIST.WISHLIST')}
       </Typography>
 
       {/* Switch View */}
       <Box sx={{ display: "flex", alignItems: "center", mb: 2, gap: 1 }}>
-        <Typography>VIEW AS</Typography>
+        <Typography>{t('WISHLIST.View as')}</Typography>
         <ToggleButtonGroup
           value={view}
           exclusive
