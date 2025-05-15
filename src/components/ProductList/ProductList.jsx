@@ -1,7 +1,14 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
 import { db } from "../../Firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import {Box,CircularProgress,Container,Typography,IconButton,Drawer,} from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Typography,
+  IconButton,
+  Drawer,
+} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ProductCard from "../ProductCard/ProductCard";
 import FiltereTheProducts from "../Filtration/FiltereTheProducts";
@@ -9,6 +16,7 @@ import Subcart from "../Cart/Subcart";
 import { MyContext } from "../../Context/FilterContaext";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import "./ProductList.css";
+import { useLocation } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -17,13 +25,16 @@ const theme = createTheme({
   },
 });
 
-const ProductList = ({ category }) => {
+const ProductList = () => {
   const { Filteration } = useContext(MyContext);
   const [rawProducts, setRawProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const location = useLocation();
+
+  const { category = "default/category" } = location.state || {};
 
   const normalizeFilterValue = (value) => {
     return String(value).toLowerCase().trim().replace(/['"]/g, "");
@@ -96,12 +107,16 @@ const ProductList = ({ category }) => {
     () => JSON.stringify(Filteration),
     [Filteration]
   );
+
+  // let category = "kids/closes/Boys Jackets";
+  // let cat = "men/accessories/bags";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-        const collectionPath = [category || "men", "closes", "Boys Jackets"];
+        const collectionPath = category.split("/"); // Split path
         const colRef = collection(db, ...collectionPath);
         const snapshot = await getDocs(colRef);
         if (snapshot.empty) {
@@ -130,12 +145,17 @@ const ProductList = ({ category }) => {
         setRawProducts(data);
       } catch (error) {
         console.error("Firebase error:", error);
-        setError(`Failed to load products: ${error.message}`);
+        setError("Failed to load products. Please try again.");
         setRawProducts([]);
       } finally {
         setLoading(false);
       }
     };
+    if (!category) {
+      setError("No category selected");
+      setLoading(false);
+      return;
+    }
     fetchData();
   }, [category]);
 
@@ -146,8 +166,14 @@ const ProductList = ({ category }) => {
   }, [rawProducts, filterString]);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <Box
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh", marginTop: "100px" }}>
+      <IconButton
+        onClick={toggleFilters}
+        sx={{ display: { xs: "block", md: "none" }, color: "black", marginLeft: "20px" }}
+      >
+        <FilterListIcon />
+      </IconButton>
+      {/* <Box
         sx={{
           margin: { xs: "10px 0", md: "20px 0" },
           padding: "5px",
@@ -188,7 +214,7 @@ const ProductList = ({ category }) => {
         >
           Cart
         </button>
-      </Box>
+      </Box> */}
 
       <Box sx={{ display: "flex", position: "relative", flexGrow: 1 }}>
         <Drawer
@@ -248,7 +274,8 @@ const ProductList = ({ category }) => {
                 sx={{ width: "100%", flexGrow: 1 }}
               >
                 <Typography variant="h5" color="error">
-                  {error}
+                  {error}---
+                  {category}
                 </Typography>
               </Box>
             ) : filteredProducts.length === 0 ? (

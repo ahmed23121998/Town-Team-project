@@ -29,7 +29,7 @@ function App() {
     <ContextProvider value={contextObject}>
       <AuthProvider value={{ isAuth, setIsAuth }}>
         <BrowserRouter>
-           {/* <NavBar /> */}
+           <NavBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
@@ -40,7 +40,7 @@ function App() {
             <Route path="/CheckoutForm" element={<CheckoutForm />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
           <Toaster />
         </BrowserRouter>
       </AuthProvider>
