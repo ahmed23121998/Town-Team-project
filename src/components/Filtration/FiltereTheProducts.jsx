@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./FilterTheProducts.css";
 import { MyContext } from "../../Context/FilterContaext";
+import { useTranslation } from "react-i18next";
+import { Close } from "@mui/icons-material";
+
+import { IconButton } from "@mui/material"; 
 
 const defaultAvailabilityFilters = {
   inStock: false,
@@ -12,11 +16,20 @@ const defaultPriceRange = {
   max: 2999,
 };
 
-const defaultBrandFilters = {
-  cuba: false,
-  rivernine: false,
-  townteam: false,
-};
+function normalizeBrand(name) {
+  return String(name).toLowerCase().replace(/\s+/g, "");
+}
+
+const brandOptions = [
+  "Cuba",
+  "River Nine",
+  "Town Team"
+];
+
+const defaultBrandFilters = {};
+brandOptions.forEach(brand => {
+  defaultBrandFilters[normalizeBrand(brand)] = false;
+});
 
 const defaultSizeFilters = {
   XS: false,
@@ -38,7 +51,9 @@ const defaultColorFilters = {
   darkteal: false,
 };
 
-function FilterComponent() {
+function FilterComponent({ toggleFilters }) {
+  const { t } = useTranslation();
+
   const { Filteration, setFilteration } = useContext(MyContext);
   const [expanded, setExpanded] = useState({
     availability: true,
@@ -89,12 +104,11 @@ function FilterComponent() {
   }
 
   function handleBrandChange(name, checked) {
-    const normalizedBrand = name.toLowerCase().replace(/\s+/g, "");
     setBrandFilters((prev) => ({
       ...prev,
-      [normalizedBrand]: checked,
+      [name]: checked,
     }));
-    handleFilterList(checked, normalizedBrand);
+    handleFilterList(checked, name);
   }
 
   function handleSizeChange(size) {
@@ -140,7 +154,7 @@ function FilterComponent() {
     black: "#000000",
     green: "#008000",
     blue: "#0000FF",
-    // الألوان الأصلية
+    darkteal: "#008080",
   };
 
   function ClearFilter() {
@@ -163,7 +177,11 @@ function FilterComponent() {
           marginLeft: "0 ",
         }}
       >
-        <h3>Selected Filters:</h3>
+      <IconButton sx={{color:"black",borderRadius:"50%"}} onClick={() => toggleFilters()}>
+              <Close sx={{color:"black",borderRadius:"50%"}}/>
+            </IconButton>
+      
+        <h3>{t("FilterComponent.SelectedFilters")}</h3>
         {filterlist.length > 0 && (
           <div className="filter-list-container">
             <ul>
@@ -176,7 +194,7 @@ function FilterComponent() {
           </div>
         )}
 
-        <button onClick={ClearFilter}>Clear</button>
+        <button onClick={ClearFilter}>{t("FilterComponent.Clear")}</button>
 
         <div className="filter-container">
           <div className="filter-section">
@@ -184,7 +202,9 @@ function FilterComponent() {
               className="filter-header"
               onClick={() => toggleSection("availability")}
             >
-              <div className="filter-title">AVAILABILITY</div>
+              <div className="filter-title">
+                {t("FilterComponent.Availability.Title")}
+              </div>
               <div className="filter-arrow">
                 {expanded.availability ? "∧" : "∨"}
               </div>
@@ -203,7 +223,7 @@ function FilterComponent() {
                     }
                   />
                   <label htmlFor="inStock" className="checkbox-label">
-                    In Stock (2479)
+                    {t("FilterComponent.Availability.InStock")}
                   </label>
                 </div>
                 <div className="checkbox-container">
@@ -217,7 +237,7 @@ function FilterComponent() {
                     }
                   />
                   <label htmlFor="outOfStock" className="checkbox-label">
-                    Out Of Stock (1585)
+                    {t("FilterComponent.Availability.OutOfStock")}
                   </label>
                 </div>
               </div>
@@ -229,7 +249,9 @@ function FilterComponent() {
               className="filter-header"
               onClick={() => toggleSection("price")}
             >
-              <div className="filter-title">PRICE</div>
+              <div className="filter-title">
+                {t("FilterComponent.Price.Title")}
+              </div>
               <div className="filter-arrow">{expanded.price ? "∧" : "∨"}</div>
             </div>
             <div className="filter-divider"></div>
@@ -245,11 +267,17 @@ function FilterComponent() {
                     className="price-slider"
                   />
                   <div className="price-inputs">
-                    <span>EGP {priceRange.min}</span>
-                    <span>to</span>
-                    <span>EGP {priceRange.max}</span>
+                    <span>
+                      {t("FilterComponent.Price.Min")} {priceRange.min}
+                    </span>
+                    <span>{t("FilterComponent.Price.To")}</span>
+                    <span>
+                      {t("FilterComponent.Price.Max")} {priceRange.max}
+                    </span>
                   </div>
-                  <button className="apply-button">APPLY</button>
+                  <button className="apply-button">
+                    {t("FilterComponent.Price.Apply")}
+                  </button>
                 </div>
               </div>
             )}
@@ -260,30 +288,31 @@ function FilterComponent() {
               className="filter-header"
               onClick={() => toggleSection("brand")}
             >
-              <div className="filter-title">BRAND</div>
+              <div className="filter-title">
+                {t("FilterComponent.Brand.Title")}
+              </div>
               <div className="filter-arrow">{expanded.brand ? "∧" : "∨"}</div>
             </div>
             <div className="filter-divider"></div>
             {expanded.brand && (
               <div className="filter-content">
-                {Object.entries({
-                  cuba: "Cuba",
-                  rivernine: "River Nine",
-                  townteam: "Town Team",
-                }).map(([key, label]) => (
-                  <div key={key} className="checkbox-container">
-                    <input
-                      type="checkbox"
-                      id={key}
-                      className="filter-checkbox"
-                      checked={brandFilters[key]}
-                      onChange={(e) => handleBrandChange(key, e.target.checked)}
-                    />
-                    <label htmlFor={key} className="checkbox-label">
-                      {label}
-                    </label>
-                  </div>
-                ))}
+                {brandOptions.map((brand) => {
+                  const key = normalizeBrand(brand);
+                  return (
+                    <div key={key} className="checkbox-container">
+                      <input
+                        type="checkbox"
+                        id={key}
+                        className="filter-checkbox"
+                        checked={brandFilters[key]}
+                        onChange={(e) => handleBrandChange(key, e.target.checked)}
+                      />
+                      <label htmlFor={key} className="checkbox-label">
+                        {brand}
+                      </label>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -293,7 +322,9 @@ function FilterComponent() {
               className="filter-header"
               onClick={() => toggleSection("size")}
             >
-              <div className="filter-title">SIZE</div>
+              <div className="filter-title">
+                {t("FilterComponent.Size.Title")}
+              </div>
               <div className="filter-arrow">{expanded.size ? "∧" : "∨"}</div>
             </div>
             <div className="filter-divider"></div>
@@ -321,7 +352,9 @@ function FilterComponent() {
               className="filter-header"
               onClick={() => toggleSection("color")}
             >
-              <div className="filter-title">COLOR</div>
+              <div className="filter-title">
+                {t("FilterComponent.Color.Title")}
+              </div>
               <div className="filter-arrow">{expanded.color ? "∧" : "∨"}</div>
             </div>
             {expanded.color && (

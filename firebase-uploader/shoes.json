@@ -1,0 +1,182 @@
+{
+    "collection": {
+      "shoes": [
+        {
+          "price": {
+            "amount": 1799.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GSFB25417TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834848",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/2_afc23515-cecf-4b5c-9b56-69b90440ba03.png?v=1740922833"
+          },
+          "color": "White"
+        },
+        {
+          "price": {
+            "amount": 2249.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GCML25600TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834850",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/2_31dd4bb3-e25f-4e1f-84ad-d77e5eec7765.png?v=1740922820"
+          },
+          "color": "White"
+        },
+        {
+          "price": {
+            "amount": 1999.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GCML25607TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834851",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/2_9e6e4511-90b1-4deb-bf72-a4d7f2d455c1.png?v=1740922828"
+          },
+          "color": "WHT/GRN"
+        },
+        {
+          "price": {
+            "amount": 2249.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GCML25602TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834852",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_b5db7b26-f18c-49ee-b40a-6e594881a868.png?v=1742041402"
+          },
+          "color": "Navy"
+        },
+        {
+          "price": {
+            "amount": 2249.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GCML25610TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834853",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/3_409ce5e9-3b92-40f5-a138-9d657d4a5e3c.png?v=1740922830"
+          },
+          "color": "Beige"
+        },
+        {
+          "price": {
+            "amount": 1999.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GCML25603TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834854",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_b60dae2b-fc05-4b61-8050-55074dfdf577.png?v=1740922826"
+          },
+          "color": "White"
+        },
+        {
+          "price": {
+            "amount": 2249.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GCML25612TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834855",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/4_e5ce257d-1e59-43e4-9cc1-7c095aaf9eb1.png?v=1744115836"
+          },
+          "color": "Olive"
+        },
+        {
+          "price": {
+            "amount": 1749.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GCWL25624TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834856",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_5bf43774-9799-47f4-a604-f9fced59d05d.png?v=1742454642"
+          },
+          "color": "Black"
+        },
+        {
+          "price": {
+            "amount": 1999.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GSTL25620TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834857",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_34222a93-a6e6-4c36-91c6-14950b0aaca9.png?v=1742454512"
+          },
+          "color": "Camel"
+        },
+        {
+          "price": {
+            "amount": 719.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO23GCAN25361TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834858",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_fdbc9db2-da40-4574-a96c-c700c4fdf168.jpg?v=1744117606"
+          },
+          "color": "Black"
+        },
+        {
+          "price": {
+            "amount": 1999.00,
+            "currencyCode": "EGP"
+          },
+          "product": {
+            "title": "SHO25GCML25614TM1",
+            "id": "8045876773088",
+            "type": "Shoes - SHO"
+          },
+          "id": "44011863834859",
+          "image": {
+            "src": "//townteam.com/cdn/shop/files/1_1077a2ea-ce2c-4168-8583-32105800b956.png?v=1743858524"
+          },
+          "color": "BLK/BEG"
+        }
+      ]
+    }
+  }

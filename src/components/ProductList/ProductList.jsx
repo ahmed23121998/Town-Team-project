@@ -16,7 +16,7 @@ import Subcart from "../Cart/Subcart";
 import { MyContext } from "../../Context/FilterContaext";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import "./ProductList.css";
-import { useTranslation } from 'react-i18next';
+import { useLocation } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -25,15 +25,25 @@ const theme = createTheme({
   },
 });
 
-const ProductList = ({ category }) => {
+function normalizeBrand(name) {
+  return String(name).toLowerCase().replace(/\s+/g, "");
+}
+
+const ProductList = () => {
   const { Filteration } = useContext(MyContext);
   const [rawProducts, setRawProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [cartOpen, setCartOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const location = useLocation();
+  const userId = localStorage.getItem("userId") || "guest";
 
-  const { t } = useTranslation();
+  // جلب كلمة البحث من URL
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get("q")?.toLowerCase().trim() || "";
+
+  const { category = "default/category" } = location.state || {};
 
   const normalizeFilterValue = (value) => {
     return String(value).toLowerCase().trim().replace(/['"]/g, "");
@@ -65,11 +75,11 @@ const ProductList = ({ category }) => {
 
       if (filters.brand) {
         const productBrands = Array.isArray(product.brand)
-          ? product.brand.map(normalizeFilterValue)
-          : [normalizeFilterValue(product.brand || "")];
-        const activeBrands = Object.keys(filters.brand)
-          .filter((b) => filters.brand[b])
-          .map(normalizeFilterValue);
+          ? product.brand.map(normalizeBrand)
+          : [normalizeBrand(product.brand || "")];
+        const activeBrands = Object.keys(filters.brand).filter(
+          (b) => filters.brand[b]
+        );
         if (activeBrands.length > 0) {
           if (!productBrands.some((brand) => activeBrands.includes(brand)))
             return false;
@@ -106,107 +116,216 @@ const ProductList = ({ category }) => {
     () => JSON.stringify(Filteration),
     [Filteration]
   );
+
+  // let category = "kids/closes/Boys Jackets";
+  // let cat = "men/accessories/bags";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-
-        const collectionPath = [category || "men", "closes", "Boys Pullovers"];
-        console.log("Fetching from collection:", collectionPath.join("/"));
-
-        const colRef = collection(db, ...collectionPath);
-        const snapshot = await getDocs(colRef);
-
-        if (snapshot.empty) {
-          setError("No products found in this category");
-          setRawProducts([]);
-          return;
+        if (searchQuery) {
+          const mainCollections = [
+            "men",
+            "kids",
+            "accessories",
+            "shoes",
+            "summer",
+            "winter",
+            "newarrival",
+          ];
+          // جلب كل المنتجات من جميع الكوليكشنات والساب كوليكشنز بشكل متوازي بالكامل
+          const allProductsNested = await Promise.all(
+            mainCollections.map(async (mainCol) => {
+              try {
+                const colRef = collection(db, mainCol);
+                const snapshot = await getDocs(colRef);
+                // لكل document، جلب كل الـ subcollections دفعة واحدة
+                const subProductsNested = await Promise.all(
+                  snapshot.docs.map(async (doc) => {
+                    const docData = doc.data();
+                    const subcollections = docData.subcollections || [];
+                    // جلب كل المنتجات من جميع الـ subcollections لهذا الـ doc دفعة واحدة
+                    const subColProductsNested = await Promise.all(
+                      subcollections.map(async (subColName) => {
+                        try {
+                          const subColRef = collection(
+                            db,
+                            mainCol,
+                            doc.id,
+                            subColName
+                          );
+                          const subColSnap = await getDocs(subColRef);
+                          return subColSnap.docs.map((subDoc) => {
+                            const subDocData = subDoc.data();
+                            return {
+                              id: subDoc.id,
+                              ...subDocData,
+                              brand: subDocData.brand || ["Unknown Brand"],
+                              colors: Array.isArray(subDocData.colors)
+                                ? subDocData.colors
+                                : subDocData.colors
+                                ? [subDocData.colors]
+                                : subDocData.color
+                                ? [subDocData.color]
+                                : [],
+                              sizes: (subDocData.sizes || []).map((s) =>
+                                s.replace(/['"]/g, "")
+                              ),
+                              price: {
+                                amount: subDocData.price?.amount || 0,
+                                currencyCode:
+                                  subDocData.price?.currencyCode || "USD",
+                              },
+                              in_stock: subDocData.in_stock || false,
+                              quantity: subDocData.quantity || 0,
+                              title: subDocData.title || "Untitled Product",
+                              image: subDocData.image || "",
+                              category: mainCol,
+                              subColName: subColName,
+                            };
+                          });
+                        } catch (subErr) {
+                          // Error fetching subcollection, log if needed
+                          return [];
+                        }
+                      })
+                    );
+                    // دمج كل المنتجات من جميع الـ subcollections لهذا الـ doc
+                    return subColProductsNested.flat();
+                  })
+                );
+                // دمج كل المنتجات من جميع الـ docs في هذا الكوليكشن
+                return subProductsNested.flat();
+              } catch (err) {
+                // Error fetching main collection, log if needed
+                return [];
+              }
+            })
+          );
+          // دمج كل المنتجات من جميع الكوليكشنات
+          let allProducts = allProductsNested
+            .flat(2)
+            .filter((prod) => prod && !prod.dummy);
+          setRawProducts(allProducts);
+          console.log("All products fetched from Firebase:", allProducts);
+          console.log("searchQuery:", searchQuery);
+        } else {
+          // نفس المنطق القديم لو مفيش بحث
+          const collectionPath = category.split("/");
+          const colRef = collection(db, ...collectionPath);
+          const snapshot = await getDocs(colRef);
+          if (snapshot.empty) {
+            setError("No products found in this category");
+            setRawProducts([]);
+            return;
+          }
+          const data = snapshot.docs.map((doc) => {
+            const docData = doc.data();
+            return {
+              id: doc.id,
+              ...docData,
+              brand: docData.brand || ["Unknown Brand"],
+              colors: docData.colors || [],
+              sizes: (docData.sizes || []).map((s) => s.replace(/['"]/g, "")),
+              price: {
+                amount: docData.price?.amount || 0,
+                currencyCode: docData.price?.currencyCode || "USD",
+              },
+              in_stock: docData.in_stock || false,
+              quantity: docData.quantity || 0,
+              title: docData.title || "Untitled Product",
+              image: docData.image || "",
+            };
+          });
+          setRawProducts(data);
+          console.log("Category products fetched from Firebase:", data);
         }
-
-        const data = snapshot.docs.map((doc) => {
-          const docData = doc.data();
-          return {
-            id: doc.id,
-            ...docData,
-            brand: docData.brand || ["Unknown Brand"],
-            colors: docData.colors || [],
-            sizes: (docData.sizes || []).map((s) => s.replace(/['"]/g, "")),
-            price: {
-              amount: docData.price?.amount || 0,
-              currencyCode: docData.price?.currencyCode || "USD",
-            },
-            in_stock: docData.in_stock || false,
-            quantity: docData.quantity || 0,
-            title: docData.title || "Untitled Product",
-            image: docData.image || "",
-          };
-        });
-
-        console.log("Raw data from Firestore:", data);
-        setRawProducts(data);
       } catch (error) {
         console.error("Firebase error:", error);
-        setError(`Failed to load products: ${error.message}`);
+        setError("Failed to load products. Please try again.");
         setRawProducts([]);
       } finally {
         setLoading(false);
       }
     };
-
+    if (!searchQuery && !category) {
+      setError("No category selected");
+      setLoading(false);
+      return;
+    }
     fetchData();
-  }, [category]);
+  }, [category, searchQuery]);
 
-  const userId = "u1234567890";
-
+  // فلترة المنتجات حسب كلمة البحث
   const filteredProducts = useMemo(() => {
+    if (searchQuery && searchQuery.length > 0) {
+      const results = rawProducts.filter((product) => {
+        const title = (product.title || "").toLowerCase();
+        const type = (
+          product.type ||
+          product.product?.type ||
+          ""
+        ).toLowerCase();
+        const productTitle = (product.product?.title || "").toLowerCase();
+        const brand = Array.isArray(product.brand)
+          ? product.brand.join(" ")
+          : product.brand || "";
+        const colors = Array.isArray(product.colors)
+          ? product.colors.join(" ")
+          : product.colors || "";
+        const category = (product.category || "").toLowerCase();
+        const subColName = (product.subColName || "").toLowerCase();
+        return (
+          (title && title.includes(searchQuery)) ||
+          (type && type.includes(searchQuery)) ||
+          (productTitle && productTitle.includes(searchQuery)) ||
+          (brand && brand.toLowerCase().includes(searchQuery)) ||
+          (colors && colors.toLowerCase().includes(searchQuery)) ||
+          (category && category.includes(searchQuery)) ||
+          (subColName && subColName.includes(searchQuery))
+        );
+      });
+      // طباعة تشخيصية عند البحث عن kids
+      if (searchQuery === "kids") {
+        console.log(
+          "Filtered products for 'kids':",
+          results.map((p) => ({
+            id: p.id,
+            category: p.category,
+            subColName: p.subColName,
+            title: p.title,
+          }))
+        );
+      }
+      return results;
+    }
+    // إذا لم توجد كلمة بحث، استخدم الفلاتر العادية
     return filterProducts(rawProducts, Filteration);
-  }, [rawProducts, filterString]);
+  }, [rawProducts, filterString, searchQuery, Filteration, filterProducts]);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <Box
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        marginTop: "100px",
+        gap: { xs: "0", md: "20px" },
+        // margin: "20px",
+      }}
+    >
+      <IconButton
+        onClick={toggleFilters}
         sx={{
-          margin: { xs: "10px 0", md: "20px 0" },
-          padding: "5px",
-          backgroundColor: "black",
-          color: "white",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: { xs: "10px", md: "20px" },
-          width: "100%",
-          flexWrap: "wrap",
+          display: { xs: "block", md: "none" },
+          color: "black",
+          marginLeft: "20px",
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <IconButton
-            onClick={toggleFilters}
-            sx={{ display: { xs: "block", md: "none" }, color: "white" }}
-          >
-            <FilterListIcon />
-          </IconButton>
-          <Typography variant="h4" gutterBottom>
-              {t('Products.Products')}
-          </Typography>
-        </Box>
-        <Typography variant="subtitle1" gutterBottom>
-          {filteredProducts.length}   {t('Products.products found')}
-        </Typography>
-        <button
-          onClick={toggleCart}
-          style={{
-            padding: "8px 16px",
-            backgroundColor: "#ffeb3b",
-            color: "black",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-           {t('Products.Cart')}
-        </button>
-      </Box>
+        <FilterListIcon />
+      </IconButton>
 
       <Box sx={{ display: "flex", position: "relative", flexGrow: 1 }}>
         <Drawer
@@ -226,6 +345,7 @@ const ProductList = ({ category }) => {
             padding: { md: "20px" },
             display: { xs: "none", md: "block" },
             marginRight: "50px",
+            marginLeft: "50px",
           }}
         >
           <FiltereTheProducts />
@@ -266,13 +386,14 @@ const ProductList = ({ category }) => {
                 sx={{ width: "100%", flexGrow: 1 }}
               >
                 <Typography variant="h5" color="error">
-                  {error}
+                  {error}---
+                  {category}
                 </Typography>
               </Box>
             ) : filteredProducts.length === 0 ? (
               <Box textAlign="center" py={8}>
                 <Typography variant="h5">
-                    {t('Products.No products match the current filters')}
+                  No products match the current filters
                 </Typography>
               </Box>
             ) : (
@@ -283,14 +404,17 @@ const ProductList = ({ category }) => {
                     xs: "1fr",
                     sm: "repeat(2, 1fr)",
                     md: "repeat(3, 1fr)",
-                    lg: "repeat(4, 1fr)",
+                    lg: "repeat(3, 1fr)",
                   },
                   gap: { xs: "2px", sm: "5px", md: "10px", lg: "15px" },
                 }}
                 className="products-grid"
               >
                 {filteredProducts.map((product) => (
-                  <Box key={product.id} className="product-item">
+                  <Box
+                    key={`${product.id}-${product.category}-${product.subColName}`}
+                    className="product-item"
+                  >
                     <ProductCard product={product} toggleCart={toggleCart} />
                   </Box>
                 ))}

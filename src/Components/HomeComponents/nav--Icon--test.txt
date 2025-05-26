@@ -1,0 +1,149 @@
+{
+  /* Nav icons for desktop */
+}
+<Box
+  sx={{
+    display: { xs: "none", md: "none", lg: "none" },
+    alignItems: "center",
+    gap: { xs: 0.5, sm: 2 },
+    width: { xs: "100%", md: "auto" },
+    justifyContent: { xs: "flex-end", md: "flex-end" },
+    mt: { xs: -4, md: 0 },
+  }}
+>
+  <Box
+    sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: { xs: 0.5, sm: 2 },
+      width: { xs: "100%", md: "auto" },
+      justifyContent: { xs: "flex-end", md: "flex-end" },
+      mt: { xs: -4, md: 0 },
+    }}
+  >
+    {/* <Box>
+            <IconButton onClick={handleClick} sx={{ padding: 0 }}>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <img
+                  src={
+                    language === "EN"
+                      ? "https://flagcdn.com/gb.svg"
+                      : "https://flagcdn.com/eg.svg"
+                  }
+                  alt={language}
+                  width={20}
+                />
+                <Typography sx={{ color: "white", fontSize: 14 }}>
+                  {language}
+                </Typography>
+                {anchorEl ? (
+                  <KeyboardArrowUpIcon sx={{ color: "white", fontSize: 20 }} />
+                ) : (
+                  <KeyboardArrowDownIcon
+                    sx={{ color: "white", fontSize: 20 }}
+                  />
+                )}
+              </Stack>
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              MenuListProps={{ "aria-labelledby": "language-selector" }}
+              sx={{
+                "& .MuiPaper-root": {
+                  backgroundColor: "black",
+                  color: "white",
+                },
+              }}
+            >
+              {language === "EN" ? (
+                <MenuItem onClick={() => handleLanguageChange("AR")}>
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <img src="https://flagcdn.com/eg.svg" alt="AR" width={20} />
+                    <Typography>AR</Typography>
+                  </Stack>
+                </MenuItem>
+              ) : (
+                <MenuItem onClick={() => handleLanguageChange("EN")}>
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <img src="https://flagcdn.com/gb.svg" alt="EN" width={20} />
+                    <Typography>EN</Typography>
+                  </Stack>
+                </MenuItem>
+              )}
+            </Menu>
+          </Box> */}
+    {/* <Stack direction="row" spacing={1} sx={{ display: { md: "none" } }}> */}
+    {/* <IconButton
+              onClick={() => setOpenSearch(true)}
+              sx={{
+                bgcolor: {
+                  xs: "transparent",
+                  md: "transparent",
+                  lg: "black",
+                },
+              }}
+            >
+              <SearchIcon sx={{ color: "white", fontSize: 30 }} />
+            </IconButton> */}
+    {/* <IconButton
+              aria-label="user"
+              onClick={() => navigate("/login")}
+              sx={{
+                bgcolor: {
+                  xs: "transparent",
+                  md: "transparent",
+                  lg: "black",
+                },
+              }}
+            >
+              <PermIdentityIcon sx={{ color: "white", fontSize: 30 }} />
+            </IconButton> */}
+    <IconButton
+      aria-label="favorite"
+      // onClick={() => navigate("/Wishlist")}
+      sx={{
+        bgcolor: {
+          xs: "transparent",
+          md: "transparent",
+          lg: "black",
+        },
+      }}
+    >
+      <Badge color="success" showZero>
+        {/* <FavoriteBorderIcon sx={{ color: "white", fontSize: 30 }} /> */}
+      </Badge>
+      {/* <FavoriteBorderIcon sx={{ color: "white", fontSize: 30 }} /> */}
+    </IconButton>
+    {/* <IconButton
+              aria-label="add to shopping cart"
+              onClick={() => navigate("/MainCart")}
+              sx={{
+                bgcolor: {
+                  xs: "transparent",
+                  md: "transparent",
+                  lg: "black",
+                },
+              }}
+            >
+              <Badge badgeContent={cartItems.length} color="success" showZero>
+                <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
+              </Badge>
+            </IconButton> */}
+    {/* <IconButton
+              aria-label="menu"
+              onClick={toggleDrawer(true)}
+              sx={{
+                bgcolor: {
+                  xs: "transparent",
+                  md: "transparent",
+                  lg: "black",
+                },
+              }}
+            >
+              <MenuIcon sx={{ color: "white", fontSize: 30 }} />
+            </IconButton> */}
+    {/* </Stack> */}
+  </Box>
+</Box>;

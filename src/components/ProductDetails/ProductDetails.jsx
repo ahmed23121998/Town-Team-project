@@ -1,62 +1,50 @@
 import { useEffect, useState } from "react";
-import { Box, Container, Typography, Button, Grid, IconButton, Paper, ButtonGroup, Breadcrumbs, CardMedia, ToggleButtonGroup, ToggleButton, } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Grid,
+  IconButton,
+  Paper,
+  ButtonGroup,
+  Breadcrumbs,
+  CardMedia,
+  ToggleButtonGroup,
+  ToggleButton,
+} from "@mui/material";
 import { Add, Remove, LocalFireDepartment } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useLocation } from "react-router-dom";
-import { addToFavorites, removeFromFavorites, isFavorite } from "../../Components/favorites/favUtils";
-import { useTranslation } from 'react-i18next';
+import {
+  addToFavorites,
+  removeFromFavorites,
+  isFavorite,
+} from "../favorites/favUtils";
+import { addToCart } from "../cartUtils";
+import { useTranslation } from "react-i18next";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#ffeb3b", // Yellow flagship color for primary
+      main: "#ffeb3b",
     },
     secondary: {
-      main: "#f44336", // Red color for sale tag
+      main: "#f44336",
     },
   },
 });
 
-
-
- 
 const ProductDetails = ({ onBackClick }) => {
   const location = useLocation();
   const product = location.state?.product;
- const [randomPrice, setRandomPrice] = useState(null);
 
- const { t } = useTranslation(); 
-const isArabic = t.language === "ar";
-
-const [selectedColorIndex, setSelectedColorIndex] = useState(0);
-
-const selectedColor = isArabic
-  ? product?.colors_ar?.[selectedColorIndex]
-  : product?.colors?.[selectedColorIndex];
-
-  // Initialize hooks at the top of the component
-  // const [selectedColor, setSelectedColor] = useState(
-  //   product?.colors?.[0] || "defaultColor"
-  // );
-
-  const [selectedSize, setSelectedSize] = useState(
-    product?.sizes?.[0] || "defaultSize"
-  );
   const [quantity, setQuantity] = useState(1);
   const [isFav, setIsFav] = useState(false);
-  const [isWishlistHovered, setIsWishlistHovered] = useState(false);
-  const userId = "u1234567890";
-
-  useEffect(() => {
-     const basePrice = parseFloat(
-       product.price?.toString().replace(/[^\d.]/g, "")
-     );
-     const generatedPrice = basePrice || Math.floor(Math.random() * 900 + 1000);
-     setRandomPrice(generatedPrice.toFixed(2));
-   }, [product.price]);
-
+  const [setIsWishlistHovered] = useState(false);
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     if (userId && product?.id) {
@@ -64,22 +52,18 @@ const selectedColor = isArabic
     }
   }, [userId, product?.id]);
 
-  const toggleFavorite = async () => {
-    try {
-      if (isFav) {
-        await removeFromFavorites(userId, product.id);
-        setIsFav(false);
-      } else {
-        await addToFavorites(userId, product);
-        setIsFav(true);
-      }
-    } catch (error) {
-      console.error("Error toggling favorite:", error);
-    }
-  };
+  const { t } = useTranslation();
+  const isArabic = t.language === "ar";
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
 
+  const selectedColor = isArabic
+    ? product?.colors_ar?.[selectedColorIndex]
+    : product?.colors?.[selectedColorIndex];
 
-  // Handle cases where the product is not found
+  const [selectedSize, setSelectedSize] = useState(
+    product?.sizes?.[0] || "defaultSize"
+  );
+
   if (!product) {
     return (
       <ThemeProvider theme={theme}>
@@ -102,7 +86,7 @@ const selectedColor = isArabic
     );
   }
 
-  // const handleColorChange = (color) => setSelectedColor(color);
+  const handleColorChange = (index) => setSelectedColorIndex(index);
   const handleSizeChange = (event, newSize) =>
     newSize && setSelectedSize(newSize);
   const handleQuantityChange = (action) => {
@@ -112,6 +96,10 @@ const selectedColor = isArabic
       setQuantity(quantity - 1);
     }
   };
+
+  const discountedPrice = product?.price?.amount;
+  const originalPrice = discountedPrice ? discountedPrice * 2 : undefined;
+  const discountPercentage = 50;
 
   const toggleWishlist = async () => {
     try {
@@ -126,7 +114,14 @@ const selectedColor = isArabic
       console.error("Error toggling favorite:", error);
     }
   };
-
+  const addProductToCart = async (product) => {
+    const userId = localStorage.getItem("userId");
+    try {
+      await addToCart(userId, product, quantity);
+    } catch (error) {
+      console.error("Cart update failed:", error);
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -137,12 +132,11 @@ const selectedColor = isArabic
             onClick={onBackClick}
             sx={{ ml: 3, color: "grey", "&:hover": { color: "black" } }}
           >
-           {t('Products.Home')}
-            
+            {t("Products.Home")}
             <ArrowForwardIosIcon sx={{ maxWidth: "15px", ml: "5px" }} />
           </Button>
           <Breadcrumbs aria-label="breadcrumb">
-            <Typography color="inherit">{t('Products.Products')}</Typography>
+            <Typography color="inherit">{t("Products.Products")}</Typography>
             <Typography color="inherit">
               {product.name || product.productCode || "Unknown Product"}
             </Typography>
@@ -165,7 +159,7 @@ const selectedColor = isArabic
                   zIndex: 2,
                 }}
               >
-               {t('Products.Sale 70%')}
+                % {t("Products.Sale")} {discountPercentage}
               </Box>
               <CardMedia
                 component="img"
@@ -208,7 +202,7 @@ const selectedColor = isArabic
                     color="rgb(243, 92, 47)"
                     fontWeight="bold"
                   >
-                    {product.recentSales} {t('Products.sold in last 25 hours')}
+                    {product.recentSales} {t("Products.sold in last 25 hours")}
                   </Typography>
                 </Box>
 
@@ -220,7 +214,7 @@ const selectedColor = isArabic
 
                 {/* Availability */}
                 <Typography variant="body2" sx={{ mb: 2 }}>
-                   {t('Products.Availability')}:{" "}
+                  {t("Products.Availability")}:{" "}
                   {product.stock > 0
                     ? `${product.stock} In Stock`
                     : "Out of Stock"}
@@ -228,51 +222,65 @@ const selectedColor = isArabic
 
                 {/* Price */}
                 <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-                  <Typography
-                    variant="h6"
-                    component="span"
-                    sx={{
-                      textDecoration: "line-through",
-                      color: "black",
-                      fontWeight: "bold",
-                      fontSize: "25px",
-                      mr: 2,
-                    }}
-                  >
-                   {randomPrice} EGP
-                  </Typography>
+                  {/* السعر الأصلي */}
+                  {originalPrice && (
+                    <Typography
+                      variant="h6"
+                      component="span"
+                      sx={{
+                        textDecoration: "line-through",
+                        color: "black",
+                        fontWeight: "bold",
+                        fontSize: "25px",
+                        mr: 2,
+                      }}
+                    >
+                      EGP {originalPrice.toLocaleString()}
+                    </Typography>
+                  )}
+
+                  {/* السعر المخفض */}
                   <Typography
                     variant="h5"
                     component="span"
                     color="rgb(243, 92, 47)"
                     fontWeight="bold"
                   >
-                    EGP {(product.price?.amount || 0).toLocaleString()}
+                    EGP {discountedPrice.toLocaleString()}
                   </Typography>
+
+                  {discountPercentage > 0 && (
+                    <Typography
+                      variant="body2"
+                      color="error"
+                      fontWeight="bold"
+                      sx={{ ml: 2 }}
+                    ></Typography>
+                  )}
                 </Box>
 
                 {/* Color Selection */}
-                {/* {product.colors?.length > 0 && (
+                {product.colors?.length > 0 && (
                   <Box sx={{ mb: 3 }}>
                     <Typography
                       variant="subtitle1"
                       gutterBottom
                       sx={{ fontWeight: "bold" }}
                     >
-                      Color: {selectedColor}
+                      {t("Products.Color")}: {selectedColor}
                     </Typography>
                     <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
-                      {product.colors.map((color) => (
+                      {product.colors.map((color, idx) => (
                         <Box
                           key={color}
-                          onClick={() => handleColorChange(color)}
+                          onClick={() => handleColorChange(idx)}
                           sx={{
                             width: 40,
                             height: 40,
                             borderRadius: "50%",
                             bgcolor: color,
                             border:
-                              selectedColor === color
+                              selectedColorIndex === idx
                                 ? "2px solid #000"
                                 : "1px solid #ddd",
                             cursor: "pointer",
@@ -281,39 +289,7 @@ const selectedColor = isArabic
                       ))}
                     </Box>
                   </Box>
-                )} */}
-
-                {product.colors?.length > 0 && (
-  <Box sx={{ mb: 3 }}>
-    <Typography
-      variant="subtitle1"
-      gutterBottom
-      sx={{ fontWeight: "bold" }}
-    >
-      Color : {selectedColor}
-    </Typography>
-    <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
-      {product.colors.map((color, index) => (
-        <Box
-          key={color}
-          onClick={() => setSelectedColorIndex(index)}
-          sx={{
-            width: 40,
-            height: 40,
-            borderRadius: "50%",
-            bgcolor: color,
-            border:
-              selectedColorIndex === index
-                ? "2px solid #000"
-                : "1px solid #ddd",
-            cursor: "pointer",
-          }}
-        />
-      ))}
-    </Box>
-  </Box>
-)}
-
+                )}
 
                 {/* Size Selection */}
                 {product.sizes?.length > 0 && (
@@ -323,7 +299,7 @@ const selectedColor = isArabic
                       gutterBottom
                       sx={{ fontWeight: "bold" }}
                     >
-                        {t('Products.Size')}: {selectedSize}
+                      {t("Products.Size")} {selectedSize}
                     </Typography>
                     <ToggleButtonGroup
                       value={selectedSize}
@@ -367,7 +343,7 @@ const selectedColor = isArabic
                     gutterBottom
                     sx={{ fontWeight: "bold" }}
                   >
-                     {t('Products.Quantity')}:
+                    {t("Products.Quantity")}:
                   </Typography>
                   <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
                     <ButtonGroup
@@ -404,7 +380,7 @@ const selectedColor = isArabic
                   fontWeight="bold"
                   sx={{ mb: 3 }}
                 >
-                   {t('Products.Subtotal')}: EGP{" "}
+                  {t("Products.Subtotal")}:EGP{" "}
                   {(product.price?.amount * quantity).toLocaleString()}
                 </Typography>
 
@@ -428,11 +404,11 @@ const selectedColor = isArabic
                     borderLeft={0}
                   >
                     <Typography variant="body1" fontWeight="bold" fontSize={18}>
-                      {t('Products.Free shipping on orders over 499')}
+                      {t("Products.Free shipping on order over 499")}
                     </Typography>
-                    <Typography fontSize={10} fontWeight="bold">
-                      EGP
-                    </Typography>
+                    {/* <Typography fontSize={10} fontWeight="bold">
+                      {t('Products.EGP')}
+                    </Typography> */}
                   </Box>
                 </Paper>
 
@@ -454,29 +430,35 @@ const selectedColor = isArabic
                         backgroundColor: "white",
                       },
                     }}
+                    onClick={() => addProductToCart(product)}
                   >
-                     {t('Products.ADD TO CART')}
+                    {t("Products.ADD TO CART")}
                   </Button>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
                     <IconButton
                       onClick={toggleWishlist}
                       onMouseEnter={() => setIsWishlistHovered(true)}
                       onMouseLeave={() => setIsWishlistHovered(false)}
                       sx={{
-                        backgroundColor: 'black',
-                        color: isFav ? '#ffeb3b' : 'white',
-                        borderRadius: '50%',
+                        backgroundColor: "black",
+                        color: isFav ? "#ffeb3b" : "white",
+                        borderRadius: "50%",
                         width: 48,
                         height: 48,
-                        '&:hover': {
-                          backgroundColor: '#333',
+                        "&:hover": {
+                          backgroundColor: "#333",
                         },
                       }}
                     >
                       <FavoriteBorderIcon />
                     </IconButton>
                   </Box>
-
                 </Box>
               </Box>
             </Box>
@@ -493,7 +475,7 @@ const selectedColor = isArabic
                 },
               }}
             >
-             {t('Products.Buy it now')}
+              {t("Products.Buy it now")}
             </Button>
           </Grid>
         </Grid>
@@ -501,6 +483,5 @@ const selectedColor = isArabic
     </ThemeProvider>
   );
 };
-
 
 export default ProductDetails;
