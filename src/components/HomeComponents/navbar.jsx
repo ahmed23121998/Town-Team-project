@@ -1203,6 +1203,7 @@ export default function NavBar() {
                 sx={{
                   textAlign: language === "AR" ? "right" : "left",
                   direction: language === "AR" ? "rtl" : "ltr",
+                  cursor: "pointer",
                 }}
               />
             </ListItem>
