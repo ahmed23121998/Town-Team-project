@@ -1,7 +1,7 @@
-import Footer from "../../components/HomeComponents/Footer";
-import Header from "../../components/HomeComponents/header";
-import NavBar from "../../components/HomeComponents/navbar";
-import Sections from "../../components/HomeComponents/sections";
+import Footer from "../../component/HomeComponents/Footer";
+import Header from "../../component/HomeComponents/header";
+import NavBar from "../../component/HomeComponents/navbar";
+import Sections from "../../component/HomeComponents/sections";
 
 export default function HomePage() {
   return (
