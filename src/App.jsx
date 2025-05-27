@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { ContextProvider } from "./Context/FilterContaext";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import ProductList from "./Components/ProductList/ProductList";
+import ProductList from "./components/ProductList/ProductList";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Wishlist from "./Pages/Wishlist";
-import MainCart from "./Components/Cart/MainCart";
+import MainCart from "./components/Cart/MainCart";
 import CheckoutForm from "./components/Checkout/CheckoutForm";
 import PaymentSuccess from "./components/Checkout/PaymentSuccess";
 import { Toaster } from "react-hot-toast";
