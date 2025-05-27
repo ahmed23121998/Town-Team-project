@@ -12,7 +12,7 @@ import HomePage from "./Pages/HomePage/homepage";
 import Login from "./Pages/LoginPage/Login";
 import { AuthProvider } from "./Context/auth";
 import NavBar from "./components/HomeComponents/navbar";
-import Footer from "./components/HomeComponents/footer";
+import Footer from "./components/HomeComponents/Footer.jsx";
 import { useTranslation } from "react-i18next";
 import AIContextProvider from "./AI-CHAT-PUT/context/aiTownteam.jsx";
 import MainPage from "./AI-CHAT-PUT/components/MainPage/MianPage";

@@ -202,7 +202,7 @@ export default function Sections() {
           to={{
             pathname: "/ProductList",
           }}
-          state={{ category: "men/trousers" }}
+          state={{ category: "men/trousers/Jeans" }}
         >
           <Box
             component="img"
