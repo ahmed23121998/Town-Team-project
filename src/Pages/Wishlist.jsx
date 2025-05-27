@@ -17,7 +17,7 @@ import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../Firebase/firebase";
 import { useNavigate } from "react-router-dom";
 // import toast from "react-hot-toast";
-import ProductCardShared from "../Components/ProductCardShared/ProductCardShared";
+import ProductCardShared from "../components/ProductCardShared/ProductCardShared";
 import { addToCart } from "../components/cartUtils";
 // import { addToCart } from "../components/cartUtils";
 // import ProductCardShared from "../components/ProductCardShared/ProductCardShared";

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
-import { db } from "../../Firebase/firebase";
+import { db } from "../../Firebase/firebase.js";
 // import { toast } from "react-hot-toast";
 import ProductCardShared from "../ProductCardShared/ProductCardShared.jsx";
 import { useNavigate } from "react-router-dom";

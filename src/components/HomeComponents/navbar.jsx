@@ -36,7 +36,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import logo from "./../../assets/TownTeamLogo.png";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
-import { MyContext } from "../../Context/FilterContaext";
+import { MyContext } from "../../Context/FilterContaext.js";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import MainPage from "../../AI-CHAT-PUT/components/MainPage/MianPage.jsx";
 
@@ -166,8 +166,8 @@ const NavItem = ({ item }) => {
                   item.tag === "New"
                     ? "green"
                     : item.tag === "Sale"
-                    ? "red"
-                    : "orange",
+                      ? "red"
+                      : "orange",
                 color: "white",
                 fontSize: 12,
                 px: 0.5,
@@ -1125,7 +1125,7 @@ export default function NavBar() {
               <React.Fragment
                 sx={{ direction: language === "AR" ? "rtl" : "ltr" }}
                 key={item.label}
-                // right={position === "right" ? true : false}
+              // right={position === "right" ? true : false}
               >
                 <ListItem
                   button
