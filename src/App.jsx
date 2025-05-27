@@ -9,7 +9,7 @@ import CheckoutForm from "./components/Checkout/CheckoutForm";
 import PaymentSuccess from "./components/Checkout/PaymentSuccess";
 import HomePage from "./Pages/HomePage/homepage";
 import Login from "./Pages/LoginPage/Login";
-import Footer from "./components/HomeComponents/Footer";
+import Footer from "./components/HomeComponents/FooterComponent.jsx";
 import { AuthProvider } from "./Context/auth";
 import NavBar from "./components/HomeComponents/navbar";
 import { useTranslation } from "react-i18next";
