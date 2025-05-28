@@ -219,6 +219,7 @@ export default function NavBar() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const showSuggestions = isFocused || searchValue.length > 0;
   const { cartItems, position } = useContext(MyContext);
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -226,6 +227,14 @@ export default function NavBar() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      setUserId(localStorage.getItem("userId"));
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const toggleDrawer = (open) => (event) => {
@@ -1005,9 +1014,12 @@ export default function NavBar() {
                   },
                 }}
               >
-                <Badge badgeContent={cartItems.length} color="success" showZero>
+                <Badge 
+                  badgeContent={userId ? (cartItems?.length || 0) : 0} 
+                  color="primary" 
+                  showZero
+                >
                   <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
-                  {/* {length} */}
                 </Badge>
               </IconButton>
               <IconButton
@@ -1070,7 +1082,11 @@ export default function NavBar() {
           onClick={() => navigate("/MainCart")}
           sx={{ bgcolor: "white" }}
         >
-          <Badge badgeContent={cartItems.length} color="success" showZero>
+          <Badge 
+            badgeContent={userId ? (cartItems?.length || 0) : 0} 
+            color="primary" 
+            showZero
+          >
             <ShoppingCartIcon sx={{ color: "black", fontSize: 28 }} />
           </Badge>
         </IconButton>
