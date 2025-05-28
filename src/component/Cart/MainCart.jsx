@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Box,
   Typography,
@@ -23,9 +23,11 @@ import { db } from "../../Firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { MyContext } from "../../Context/FilterContaext";
+import { getCartItems } from "../cartUtils"; // Adjust the import path as needed
 
 const MainCart = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartIttems, setCartIttems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [couponCode, setCouponCode] = useState("");
@@ -33,6 +35,7 @@ const MainCart = () => {
   const [userId] = useState(() => localStorage.getItem("userId"));
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { setCartItems } = useContext(MyContext);
 
   const formatCurrency = (amount) => {
     return `LE ${amount.toLocaleString("en-US", {
@@ -41,10 +44,8 @@ const MainCart = () => {
     })}`;
   };
 
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + (item.price || 0) * item.quantity,
-    0
-  );
+  // Fix subtotal calculation: item.price is already total for that item
+  const subtotal = cartIttems.reduce((sum, item) => sum + (item.price || 0), 0);
   const total = subtotal;
 
   useEffect(() => {
@@ -60,13 +61,13 @@ const MainCart = () => {
         cartRef,
         (snapshot) => {
           if (snapshot.empty) {
-            setCartItems([]);
+            setCartIttems([]);
           } else {
             const items = snapshot.docs.map((doc) => ({
               id: doc.id,
               ...doc.data(),
             }));
-            setCartItems(items);
+            setCartIttems(items);
           }
           setLoading(false);
         },
@@ -116,11 +117,31 @@ const MainCart = () => {
     try {
       const itemRef = doc(db, "users", userId, "cart", itemId);
       await deleteDoc(itemRef);
+      // Update cartItems in context after deletion
+      const items = await getCartItems(userId);
+      setCartItems(items);
     } catch (error) {
       console.error("Error removing item:", error);
       setError("Failed to remove item");
     }
   };
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const items = await getCartItems(userId);
+        setCartItems(items);
+        // setcartProducts(items);
+      } catch (err) {
+        setError("Failed to load cart items.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCartItems();
+  }, [userId, setCartItems]);
 
   const handleCouponChange = (e) => {
     setCouponCode(e.target.value);
@@ -129,7 +150,7 @@ const MainCart = () => {
   const handleCheckout = () => {
     navigate("/CheckoutForm", {
       state: {
-        cartItems,
+        cartIttems,
         total,
       },
     });
@@ -237,7 +258,7 @@ const MainCart = () => {
           </Box>
         </Box>
 
-        {cartItems.length > 0 && (
+        {cartIttems.length > 0 && (
           <Paper
             elevation={0}
             sx={{
@@ -267,7 +288,7 @@ const MainCart = () => {
           }}
         >
           <Box sx={{ flex: 1, overflow: "auto", p: 2 }}>
-            {cartItems.length === 0 ? (
+            {cartIttems.length === 0 ? (
               <Box
                 sx={{
                   display: "flex",
@@ -290,7 +311,7 @@ const MainCart = () => {
             ) : (
               <>
                 <Divider />
-                {cartItems.map((item) => (
+                {cartIttems.map((item) => (
                   <Box key={item.id} sx={{ py: 2 }}>
                     <Grid container spacing={2} alignItems="center">
                       <Grid
@@ -399,7 +420,7 @@ const MainCart = () => {
                           fontWeight="bold"
                           sx={{ fontSize: { xs: "0.9rem", sm: "1rem" } }}
                         >
-                          {formatCurrency((item.price || 0) * item.quantity)}
+                          {formatCurrency(item.price || 0)}
                         </Typography>
                       </Grid>
                       {/* <Button
@@ -431,7 +452,7 @@ const MainCart = () => {
             )}
           </Box>
 
-          {cartItems.length > 0 && (
+          {cartIttems.length > 0 && (
             <Box
               sx={{
                 p: 3,
@@ -549,7 +570,7 @@ const MainCart = () => {
             </Box>
           )}
 
-          {cartItems.length === 0 && (
+          {cartIttems.length === 0 && (
             <Box sx={{ p: 2, width: "100%" }}>
               <Button
                 fullWidth

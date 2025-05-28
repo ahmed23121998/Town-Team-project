@@ -25,6 +25,9 @@ import {
 } from "../favorites/favUtils";
 import { addToCart } from "../cartUtils";
 import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { MyContext } from "../../Context/FilterContaext";
+import { getCartItems } from "../cartUtils";
 
 const theme = createTheme({
   palette: {
@@ -45,6 +48,7 @@ const ProductDetails = ({ onBackClick }) => {
   const [isFav, setIsFav] = useState(false);
   const [setIsWishlistHovered] = useState(false);
   const userId = localStorage.getItem("userId");
+  const { setCartItems } = useContext(MyContext);
 
   useEffect(() => {
     if (userId && product?.id) {
@@ -102,6 +106,10 @@ const ProductDetails = ({ onBackClick }) => {
   const discountPercentage = 50;
 
   const toggleWishlist = async () => {
+    if (!userId || !product?.id) {
+      alert("You must be logged in to use the wishlist.");
+      return;
+    }
     try {
       if (isFav) {
         await removeFromFavorites(userId, product.id);
@@ -118,6 +126,18 @@ const ProductDetails = ({ onBackClick }) => {
     const userId = localStorage.getItem("userId");
     try {
       await addToCart(userId, product, quantity);
+      const fetchCartItems = async () => {
+        try {
+          const items = await getCartItems(userId);
+          setCartItems(items);
+          // setcartProducts(items);
+        } catch (err) {
+          console.log(err);
+          console.error(err);
+        }
+      };
+
+      fetchCartItems();
     } catch (error) {
       console.error("Cart update failed:", error);
     }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   Box,
   Typography,
@@ -19,9 +19,10 @@ import { useNavigate } from "react-router-dom";
 // import toast from "react-hot-toast";
 import ProductCardShared from "../component/ProductCardShared/ProductCardShared";
 import { addToCart } from "../component/cartUtils";
-// import { addToCart } from "../components/cartUtils";
-// import ProductCardShared from "../components/ProductCardShared/ProductCardShared";
 import { useTranslation } from "react-i18next";
+import { MyContext } from "../Context/FilterContaext";
+import { getCartItems } from "../component/cartUtils";
+// import { addToCart } from "../component/cartUtils";
 
 const StyledToggleButton = styled(ToggleButton)(() => ({
   border: "2px solid transparent",
@@ -53,9 +54,11 @@ const Wishlist = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  // const { setFav } = useContext(MyContext);
+
   const userId = localStorage.getItem("userId");
   const itemsPerPage = 3;
+
+  const { setCartItems } = useContext(MyContext);
 
   const { t } = useTranslation();
   useEffect(() => {
@@ -73,6 +76,11 @@ const Wishlist = () => {
             id: d.id,
             ...data,
             discount: data.discount || 0,
+            image: data.image
+              ? typeof data.image === "string"
+                ? { src: data.image }
+                : data.image
+              : { src: "" },
           };
         });
         setWishlist(items);
@@ -93,13 +101,26 @@ const Wishlist = () => {
     }
   };
 
-  const AddToCart = async (item) => {
+  const addProductToCart = async (product) => {
     try {
-      await addToCart(userId, item, 1);
-      // toast.success("Added to cart!");
-    } catch (err) {
-      console.error(err);
-      // toast.error("Failed to add to cart");
+      // Ensure price and unitPrice are never undefined
+      const safeProduct = {
+        ...product,
+        price:
+          product.price && typeof product.price === "object"
+            ? { ...product.price, amount: product.price.amount ?? 0 }
+            : { amount: 0 },
+        // Ensure unitPrice is never undefined for Firestore
+        unitPrice:
+          product.price && typeof product.price === "object"
+            ? product.price.amount ?? 0
+            : 0,
+      };
+      await addToCart(userId, safeProduct, 1);
+      const cartItems = await getCartItems(userId);
+      setCartItems(cartItems);
+    } catch (error) {
+      console.error("Cart update failed:", error);
     }
   };
 
@@ -111,7 +132,7 @@ const Wishlist = () => {
   const renderCard = (item) => {
     if (!item || !item.id) return null;
 
-    console.log("Rendering item", item); // للمساعدة في تتبع الـ data
+    console.log("Rendering item", item);
 
     try {
       return (
@@ -119,13 +140,12 @@ const Wishlist = () => {
           key={item.id}
           product={item}
           view={view}
-          onAddToCart={() => AddToCart(item)}
+          onAddToCart={() => addProductToCart(item)}
           onToggleWishlist={() => console.log("Toggle Wishlist")}
           onDelete={() => handleDelete(item.id)}
           showDelete={true}
           inWishlist={true}
-          discount={item.discount || 0} // استخدمي الخصم الحقيقي بدل ما هو ثابت 50
-          navigateToDetails={() => navigate(`/product/${item.id}`)}
+          discount={item.discount || 0}
           showFullDetails={false}
         />
       );

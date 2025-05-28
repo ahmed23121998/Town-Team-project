@@ -39,7 +39,6 @@ const ProductList = () => {
   const location = useLocation();
   const userId = localStorage.getItem("userId") || "guest";
 
-  // جلب كلمة البحث من URL
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("q")?.toLowerCase().trim() || "";
 
@@ -348,7 +347,7 @@ const ProductList = () => {
             marginLeft: "50px",
           }}
         >
-          <FiltereTheProducts />
+          <FiltereTheProducts toggleFilters={toggleFilters} />
         </Box>
 
         <ThemeProvider theme={theme}>

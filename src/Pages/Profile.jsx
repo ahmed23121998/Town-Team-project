@@ -155,7 +155,7 @@ const Profile = () => {
   };
 
   // Handlers for address
-  const handleAddressChange = (e) => {
+  const handleAddressChange = (e) => {b
     setAddress({ ...address, [e.target.name]: e.target.value });
   };
   const handleAddressCheckbox = (e) => {
@@ -199,7 +199,7 @@ const Profile = () => {
   if (!user) return <Typography>You must signup</Typography>;
 
   return (
-    <Box sx={{ minHeight: "100vh", bgcolor: "#f7f8fa", py: 6, mt: 0 }}>
+    <Box sx={{ minHeight: "100vh", bgcolor: "#f7f8fa", py: 6, mt: 0 ,gap:2}}>
       {/* Home Link */}
       <Box sx={{ position: "absolute", top: 24, left: 40, zIndex: 10 }}>
         <Button
@@ -249,14 +249,14 @@ const Profile = () => {
             </Box>
           </Box>
           <Divider sx={{ mb: 1 }} />
-          <MenuItem
+          {/* <MenuItem
             onClick={() => {
               handleProfileMenuClose();
-              navigate("/profile");
+              // navigate("/profile");
             }}
           >
             Profile
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem onClick={handleLogout}>Log out</MenuItem>
         </Menu>
       </Box>
@@ -269,6 +269,7 @@ const Profile = () => {
           display: "flex",
           flexDirection: "column",
           gap: 4,
+          marginTop: 10,
         }}
       >
         {/* Profile Card */}
@@ -545,7 +546,7 @@ const Profile = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                label={t("Home.NavBar.Profile.governorate")}
+                label={t("Home.NavBar.Profile.address")}
                 name="address"
                 value={address.address}
                 onChange={handleAddressChange}

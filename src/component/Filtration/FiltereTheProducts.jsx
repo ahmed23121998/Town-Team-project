@@ -4,7 +4,7 @@ import { MyContext } from "../../Context/FilterContaext";
 import { useTranslation } from "react-i18next";
 import { Close } from "@mui/icons-material";
 
-import { IconButton } from "@mui/material"; 
+import { IconButton } from "@mui/material";
 
 const defaultAvailabilityFilters = {
   inStock: false,
@@ -20,14 +20,10 @@ function normalizeBrand(name) {
   return String(name).toLowerCase().replace(/\s+/g, "");
 }
 
-const brandOptions = [
-  "Cuba",
-  "River Nine",
-  "Town Team"
-];
+const brandOptions = ["Cuba", "River Nine", "Town Team"];
 
 const defaultBrandFilters = {};
-brandOptions.forEach(brand => {
+brandOptions.forEach((brand) => {
   defaultBrandFilters[normalizeBrand(brand)] = false;
 });
 
@@ -177,11 +173,35 @@ function FilterComponent({ toggleFilters }) {
           marginLeft: "0 ",
         }}
       >
-      <IconButton sx={{color:"black",borderRadius:"50%"}} onClick={() => toggleFilters()}>
-              <Close sx={{color:"black",borderRadius:"50%"}}/>
-            </IconButton>
-      
-        <h3>{t("FilterComponent.SelectedFilters")}</h3>
+        <IconButton
+          sx={{
+            display: { md: "none", xs: "block" },
+            color: "#fff",
+            backgroundColor: "#f44336",
+            borderRadius: "50%",
+            boxShadow: 1,
+            position: "absolute",
+            top: 10,
+            right: 10,
+            "&:hover": { backgroundColor: "#d32f2f" },
+          }}
+          onClick={() => toggleFilters()}
+        >
+          <Close sx={{ color: "#fff" }} />
+        </IconButton>
+        <h3
+          style={{
+            fontWeight: "bold",
+            fontSize: "1.2rem",
+            color: "#222",
+            marginTop: "30px",
+            marginBottom: "10px",
+            letterSpacing: "1px",
+            textTransform: "uppercase",
+          }}
+        >
+          {t("FilterComponent.SelectedFilters")}
+        </h3>
         {filterlist.length > 0 && (
           <div className="filter-list-container">
             <ul>
@@ -193,8 +213,28 @@ function FilterComponent({ toggleFilters }) {
             </ul>
           </div>
         )}
-
-        <button onClick={ClearFilter}>{t("FilterComponent.Clear")}</button>
+        <button
+          onClick={ClearFilter}
+          style={{
+            backgroundColor: "#222",
+            color: "#fff",
+            border: "none",
+            borderRadius: "20px",
+            padding: "8px 24px",
+            margin: "10px 0 20px 0",
+            fontWeight: "bold",
+            fontSize: "1rem",
+            cursor: "pointer",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+            transition: "background 0.2s",
+          }}
+          onMouseOver={(e) =>
+            (e.currentTarget.style.backgroundColor = "#f44336")
+          }
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#222")}
+        >
+          {t("FilterComponent.Clear")}
+        </button>
 
         <div className="filter-container">
           <div className="filter-section">
@@ -305,7 +345,9 @@ function FilterComponent({ toggleFilters }) {
                         id={key}
                         className="filter-checkbox"
                         checked={brandFilters[key]}
-                        onChange={(e) => handleBrandChange(key, e.target.checked)}
+                        onChange={(e) =>
+                          handleBrandChange(key, e.target.checked)
+                        }
                       />
                       <label htmlFor={key} className="checkbox-label">
                         {brand}

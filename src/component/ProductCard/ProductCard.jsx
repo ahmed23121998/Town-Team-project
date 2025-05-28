@@ -1,7 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
 import { db } from "../../Firebase/firebase.js";
-// import { toast } from "react-hot-toast";
 import ProductCardShared from "../ProductCardShared/ProductCardShared.jsx";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../cartUtils.jsx";
@@ -41,18 +40,15 @@ const ProductCard = ({ product, toggleCart }) => {
       if (inWishlist) {
         await deleteDoc(favRef);
         setInWishlist(false);
-        // toast.success("❌ Product removed from wishlist");
       } else {
         await setDoc(favRef, {
           ...product,
           addedAt: new Date().toISOString(),
         });
         setInWishlist(true);
-        // toast.success("✅ Product added to wishlist");
       }
     } catch (error) {
       console.error("Error updating favorite:", error);
-      // toast.error("Error updating favorite.");
     }
   }, [inWishlist, product]);
 

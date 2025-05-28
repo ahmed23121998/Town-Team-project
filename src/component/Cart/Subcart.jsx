@@ -19,10 +19,10 @@ const SubCart = ({ toggleCart }) => {
   const { t } = useTranslation();
 
   const [userId] = useState(() => localStorage.getItem("userId"));
- 
+
   useEffect(() => {
     const fetchCartItems = async () => {
-      if (!userId) return alert("you must login first");
+    
 
       setLoading(true);
       setError(null);
@@ -75,9 +75,9 @@ const SubCart = ({ toggleCart }) => {
     <>
       {!userId ? (
         <div className="cart-empty">
-         <IconButton onClick={() => toggleCart()}>
-              <Close />
-            </IconButton>
+          <IconButton onClick={() => toggleCart()}>
+            <Close />
+          </IconButton>
           <h2>{t("Please login to view your cart")}</h2>
         </div>
       ) : (

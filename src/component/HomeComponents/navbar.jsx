@@ -166,8 +166,8 @@ const NavItem = ({ item }) => {
                   item.tag === "New"
                     ? "green"
                     : item.tag === "Sale"
-                      ? "red"
-                      : "orange",
+                    ? "red"
+                    : "orange",
                 color: "white",
                 fontSize: 12,
                 px: 0.5,
@@ -205,7 +205,7 @@ const NavItem = ({ item }) => {
     </ClickAwayListener>
   );
 };
-// NavBar Component
+
 export default function NavBar() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
@@ -1125,7 +1125,7 @@ export default function NavBar() {
               <React.Fragment
                 sx={{ direction: language === "AR" ? "rtl" : "ltr" }}
                 key={item.label}
-              // right={position === "right" ? true : false}
+                // right={position === "right" ? true : false}
               >
                 <ListItem
                   button
@@ -1276,7 +1276,7 @@ export default function NavBar() {
             right: { xs: 12, sm: 16, md: 24, lg: 16 },
             position: { xs: "fixed", md: "fixed", lg: "static" },
             "&:hover": { bgcolor: "#ffe066" },
-            transition: "all 0.2s",
+            transition: "all 0.3s",
           }}
         >
           <KeyboardArrowUpIcon

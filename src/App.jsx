@@ -18,6 +18,8 @@ import AIContextProvider from "./AI-CHAT-PUT/context/aiTownteam.jsx";
 import MainPage from "./AI-CHAT-PUT/components/MainPage/MianPage";
 import Profile from "./Pages/Profile.jsx";
 
+import { getCartItems } from "./component/cartUtils.jsx";
+
 function AppContent() {
   const [Filteration, setFilteration] = useState();
   const [cartProducts, setcartProducts] = useState([]);
@@ -25,6 +27,9 @@ function AppContent() {
   const [fav, setFav] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [position, setPosition] = useState("");
+  const cartItemsLength = cartItems.length;
+
+  const [userId] = useState(localStorage.getItem("userId") || null);
 
   const contextObject = {
     Filteration,
@@ -36,7 +41,23 @@ function AppContent() {
     cartItems,
     setCartItems,
     position,
+    cartItemsLength,
   };
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const items = await getCartItems(userId);
+        setCartItems(items);
+      } catch (err) {
+        console.log(err);
+
+        console.error(err);
+      }
+    };
+
+    fetchCartItems();
+  }, [userId, setCartItems]);
 
   const location = useLocation();
   const hideNavAndFooter =
