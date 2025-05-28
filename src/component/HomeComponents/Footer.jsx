@@ -8,14 +8,18 @@ import {
   IconButton,
 } from "@mui/material";
 import { Facebook, Instagram, YouTube } from "@mui/icons-material";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
 import { userRegister } from "../../Firebase/auth";
 import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { MyContext } from "../../Context/FilterContaext";
+
 
 function Footer() {
+  const { setUPname, setUPmail, setUPPassword } = useContext(MyContext);
+
   const { t } = useTranslation();
 
   const {
@@ -27,7 +31,11 @@ function Footer() {
 
   const onSubmit = async (data) => {
     try {
-      await userRegister(data.email, data.password);
+      await userRegister(data.email, data.password,data.name);
+      setUPmail(data.email);
+      setUPname(data.name);
+      setUPPassword(data.password);
+    
       toast.success("\u2705 Signed up successfully!");
       reset();
     } catch (error) {
@@ -37,6 +45,7 @@ function Footer() {
       );
     }
   };
+
 
   return (
     <>

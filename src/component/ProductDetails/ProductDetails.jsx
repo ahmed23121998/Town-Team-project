@@ -47,7 +47,7 @@ const ProductDetails = ({ onBackClick }) => {
   const [quantity, setQuantity] = useState(1);
   const [isFav, setIsFav] = useState(false);
   const [setIsWishlistHovered] = useState(false);
-  const userId = localStorage.getItem("userId");
+  const [userId] =useState( localStorage.getItem("userId"));
   const { setCartItems } = useContext(MyContext);
 
   useEffect(() => {
@@ -433,11 +433,12 @@ const ProductDetails = ({ onBackClick }) => {
                 </Paper>
 
                 {/* Add to Cart Button */}
-                <Box sx={{ display: "flex", gap: 2, py: 0.5 }}>
+                <Box sx={{ display: "flex", gap: 2, py: 0.5 }} >
                   <Button
                     variant="contained"
                     color="primary"
                     fullWidth
+                    disabled={userId?false: true}
                     sx={{
                       height: "34px",
                       fontSize: "14px",
@@ -463,6 +464,7 @@ const ProductDetails = ({ onBackClick }) => {
                   >
                     <IconButton
                       onClick={toggleWishlist}
+                      disabled={userId?false: true}
                       onMouseEnter={() => setIsWishlistHovered(true)}
                       onMouseLeave={() => setIsWishlistHovered(false)}
                       sx={{

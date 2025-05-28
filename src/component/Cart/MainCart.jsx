@@ -27,15 +27,16 @@ import { MyContext } from "../../Context/FilterContaext";
 import { getCartItems } from "../cartUtils"; // Adjust the import path as needed
 
 const MainCart = () => {
-  const [cartIttems, setCartIttems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [couponCode, setCouponCode] = useState("");
   const [timeRemaining, setTimeRemaining] = useState(60 * 60);
-  const [userId] = useState(() => localStorage.getItem("userId"));
+  const [userId, setUserId] = useState(() => localStorage.getItem("userId"));
+  const [operationLoading, setOperationLoading] = useState({});
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { setCartItems } = useContext(MyContext);
+  const { setCartItems: setContextCartItems } = useContext(MyContext);
 
   const formatCurrency = (amount) => {
     return `LE ${amount.toLocaleString("en-US", {
@@ -44,36 +45,45 @@ const MainCart = () => {
     })}`;
   };
 
-  // Fix subtotal calculation: item.price is already total for that item
-  const subtotal = cartIttems.reduce((sum, item) => sum + (item.price || 0), 0);
+  // Fix subtotal calculation to account for quantity
+  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity || 0), 0);
   const total = subtotal;
 
+  // Listen for userId changes
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUserId(localStorage.getItem("userId"));
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  // Single source of truth for cart data
   useEffect(() => {
     if (!userId) {
+      setCartItems([]);
       setLoading(false);
       return;
     }
 
+    setLoading(true);
     const cartRef = collection(db, "users", userId, "cart");
 
     try {
       const unsubscribe = onSnapshot(
         cartRef,
         (snapshot) => {
-          if (snapshot.empty) {
-            setCartIttems([]);
-          } else {
-            const items = snapshot.docs.map((doc) => ({
-              id: doc.id,
-              ...doc.data(),
-            }));
-            setCartIttems(items);
-          }
+          const items = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setCartItems(items);
+          setContextCartItems(items); // Update context
           setLoading(false);
         },
         (error) => {
           console.error("Error fetching cart:", error);
-          setError("Failed to load cart items");
+          setError(t("MainCart.ErrorLoadingCart"));
           setLoading(false);
         }
       );
@@ -81,10 +91,10 @@ const MainCart = () => {
       return () => unsubscribe();
     } catch (error) {
       console.error("Error setting up cart listener:", error);
-      setError("Failed to connect to cart");
+      setError(t("MainCart.ErrorConnectingCart"));
       setLoading(false);
     }
-  }, [userId]);
+  }, [userId, setContextCartItems, t]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -104,44 +114,30 @@ const MainCart = () => {
     if (newQuantity < 1) newQuantity = 1;
     if (newQuantity > 99) newQuantity = 99;
 
+    setOperationLoading(prev => ({ ...prev, [itemId]: true }));
     try {
       const itemRef = doc(db, "users", userId, "cart", itemId);
       await updateDoc(itemRef, { quantity: newQuantity });
     } catch (error) {
       console.error("Error updating quantity:", error);
-      setError("Failed to update quantity");
+      setError(t("MainCart.ErrorUpdatingQuantity"));
+    } finally {
+      setOperationLoading(prev => ({ ...prev, [itemId]: false }));
     }
   };
 
   const removeItem = async (itemId) => {
+    setOperationLoading(prev => ({ ...prev, [itemId]: true }));
     try {
       const itemRef = doc(db, "users", userId, "cart", itemId);
       await deleteDoc(itemRef);
-      // Update cartItems in context after deletion
-      const items = await getCartItems(userId);
-      setCartItems(items);
     } catch (error) {
       console.error("Error removing item:", error);
-      setError("Failed to remove item");
+      setError(t("MainCart.ErrorRemovingItem"));
+    } finally {
+      setOperationLoading(prev => ({ ...prev, [itemId]: false }));
     }
   };
-
-  useEffect(() => {
-    const fetchCartItems = async () => {
-      try {
-        const items = await getCartItems(userId);
-        setCartItems(items);
-        // setcartProducts(items);
-      } catch (err) {
-        setError("Failed to load cart items.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCartItems();
-  }, [userId, setCartItems]);
 
   const handleCouponChange = (e) => {
     setCouponCode(e.target.value);
@@ -150,7 +146,7 @@ const MainCart = () => {
   const handleCheckout = () => {
     navigate("/CheckoutForm", {
       state: {
-        cartIttems,
+        cartItems,
         total,
       },
     });
@@ -258,7 +254,7 @@ const MainCart = () => {
           </Box>
         </Box>
 
-        {cartIttems.length > 0 && (
+        {cartItems.length > 0 && (
           <Paper
             elevation={0}
             sx={{
@@ -288,7 +284,7 @@ const MainCart = () => {
           }}
         >
           <Box sx={{ flex: 1, overflow: "auto", p: 2 }}>
-            {cartIttems.length === 0 ? (
+            {cartItems.length === 0 ? (
               <Box
                 sx={{
                   display: "flex",
@@ -311,7 +307,7 @@ const MainCart = () => {
             ) : (
               <>
                 <Divider />
-                {cartIttems.map((item) => (
+                {cartItems.map((item) => (
                   <Box key={item.id} sx={{ py: 2 }}>
                     <Grid container spacing={2} alignItems="center">
                       <Grid
@@ -423,26 +419,12 @@ const MainCart = () => {
                           {formatCurrency(item.price || 0)}
                         </Typography>
                       </Grid>
-                      {/* <Button
-                        variant="text"
-                        color="error"
-                        size="small"
-                        sx={{
-                          p: 0,
-                          mt: 1,
-                          minWidth: "auto",
-                          fontSize: { xs: "0.8rem", sm: "0.875rem" },
-                          marginRight: "0px",
-                        }}
-                        onClick={() => removeItem(item.id)}
-                      >
-                        Remove
-                      </Button> */}
                       <IconButton
                         sx={{ color: "red", marginRight: "Auto" }}
                         onClick={() => removeItem(item.id)}
+                        disabled={operationLoading[item.id]}
                       >
-                        <Close />
+                        {operationLoading[item.id] ? <CircularProgress size={24} /> : <Close />}
                       </IconButton>
                     </Grid>
                     <Divider sx={{ mt: 2 }} />
@@ -452,7 +434,7 @@ const MainCart = () => {
             )}
           </Box>
 
-          {cartIttems.length > 0 && (
+          {cartItems.length > 0 && (
             <Box
               sx={{
                 p: 3,
@@ -570,7 +552,7 @@ const MainCart = () => {
             </Box>
           )}
 
-          {cartIttems.length === 0 && (
+          {cartItems.length === 0 && (
             <Box sx={{ p: 2, width: "100%" }}>
               <Button
                 fullWidth

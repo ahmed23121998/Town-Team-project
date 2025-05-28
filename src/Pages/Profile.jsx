@@ -93,10 +93,11 @@ const governoratesAr = [
 
 const Profile = () => {
   const [user, setUser] = useState(null);
+  const { position, UPname, UPmail, UPPhone } = useContext(MyContext);
   const [profile, setProfile] = useState({
-    firstName: "",
+    firstName: UPname,
     lastName: "",
-    email: "",
+    email: user?.email || "",
     addresses: [],
   });
   const [address, setAddress] = useState({
@@ -117,7 +118,7 @@ const Profile = () => {
   const [profileMenuAnchor, setProfileMenuAnchor] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { position } = useContext(MyContext);
+  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -199,195 +200,205 @@ const Profile = () => {
   if (!user) return <Typography>You must signup</Typography>;
 
   return (
-    <Box sx={{ minHeight: "100vh", bgcolor: "#f7f8fa", py: 6, mt: 0 ,gap:2}}>
-      {/* Home Link */}
-      <Box sx={{ position: "absolute", top: 24, left: 40, zIndex: 10 }}>
+    <Box sx={{ minHeight: "100vh", bgcolor: "#f7f8fa", py: 6, mt: 0, gap: 2 }}>
+      {/* Header Section */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 44,
+          left: 40,
+          right: 40,
+          zIndex: 10,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 20,
+          maxWidth: "30wh",
+          bgcolor: "rgba(255, 255, 255, 0.9)",
+          backdropFilter: "blur(8px)",
+          borderRadius: "12px",
+          p: 1,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+        }}
+      >
         <Button
           onClick={() => navigate("/")}
-          startIcon={<HomeOutlinedIcon />}
+          startIcon={<HomeOutlinedIcon sx={{ fontSize: 20 }} />}
           sx={{
+            fontSize: "15px",
             color: "#444",
+            transition: "all 0.3s ease",
+            borderRadius: "8px",
+            px: 2,
             "&:hover": {
               backgroundColor: "rgba(0, 0, 0, 0.04)",
-              marginBottom: 10,
+              transform: "scale(1.05)",
+              color: "primary.main",
+              "& .MuiSvgIcon-root": {
+                color: "primary.main",
+              }
             },
           }}
         >
           {t("Home.NavBar.Profile.home")}
         </Button>
-      </Box>
-
-      {/* أيقونة البروفايل أعلى يمين الصفحة */}
-      <Box sx={{ position: "absolute", top: 24, right: 40, zIndex: 10 }}>
-        <IconButton aria-label="profile" onClick={handleProfileMenuOpen}>
-          <PermIdentityIcon sx={{ color: "#444", fontSize: 38 }} />
-        </IconButton>
-        <Menu
-          anchorEl={profileMenuAnchor}
-          open={Boolean(profileMenuAnchor)}
-          onClose={handleProfileMenuClose}
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          transformOrigin={{ vertical: "top", horizontal: "right" }}
-          PaperProps={{
-            sx: { minWidth: 260, borderRadius: 3, boxShadow: 6, p: 0 },
+        <IconButton 
+          aria-label="profile" 
+          onClick={handleProfileMenuOpen}
+          sx={{
+            transition: "all 0.3s ease",
+            bgcolor: "rgba(0, 0, 0, 0.02)",
+            borderRadius: "8px",
+            p: 1,
+            "&:hover": {
+              transform: "scale(1.1)",
+              bgcolor: "rgba(0, 0, 0, 0.04)",
+              "& .MuiSvgIcon-root": {
+                color: "primary.main",
+              }
+            }
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              p: 2,
-              pb: 1,
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
-              <PermIdentityIcon sx={{ color: "gray", fontSize: 28 }} />
-              <Typography variant="body2" color="gray">
-                {user?.email || ""}
-              </Typography>
-            </Box>
-          </Box>
-          <Divider sx={{ mb: 1 }} />
-          {/* <MenuItem
-            onClick={() => {
-              handleProfileMenuClose();
-              // navigate("/profile");
-            }}
-          >
-            Profile
-          </MenuItem> */}
-          <MenuItem onClick={handleLogout}>Log out</MenuItem>
-        </Menu>
+          <PermIdentityIcon sx={{ color: "#444", fontSize: 38 }} />
+        </IconButton>
       </Box>
 
-      {/* باقي صفحة البروفايل كما هي */}
+      {/* Main Content */}
       <Box
         sx={{
-          maxWidth: 700,
+          maxWidth: 800,
           mx: "auto",
           display: "flex",
           flexDirection: "column",
           gap: 4,
-          marginTop: 10,
+          marginTop: 12,
+          px: 2,
         }}
       >
         {/* Profile Card */}
-        <Card sx={{ borderRadius: 4, boxShadow: 2 }}>
-          <CardContent>
+        <Card sx={{ borderRadius: 4, boxShadow: 3, overflow: "hidden" }}>
+          <CardContent sx={{ p: 4 }}>
             <Box
               display="flex"
               alignItems="center"
-              justifyContent="space-between"
-              mb={2}
+              justifyContent="center"
+
+              mb={3}
             >
-              <Typography variant="h5" fontWeight={700}>
+              <Typography variant="h5" fontWeight={700} color="primary">
                 {t("Home.NavBar.Profile.profile")}
               </Typography>
-            </Box>
-            <Divider sx={{ mb: 2 }} />
-            <Box display="flex" alignItems="center" gap={1} mb={1}>
-              <Typography variant="subtitle1" fontWeight={600}>
-                {t("Home.NavBar.Profile.name")}
-              </Typography>
               <Tooltip title="Edit name">
-                <IconButton size="small" onClick={() => setEditModal(true)}>
-                  <EditIcon fontSize="small" />
-                </IconButton>
-              </Tooltip>
+                  <IconButton size="small" onClick={() => setEditModal(true)}>
+                    <EditIcon fontSize="small" color="primary" />
+                  </IconButton>
+                </Tooltip> 
             </Box>
-            <Typography color="text.secondary" mb={2}>
-              {profile.firstName || profile.lastName
-                ? `${profile.firstName} ${profile.lastName}`
-                : "-"}
-            </Typography>
-            <Typography variant="subtitle1" fontWeight={600}>
-              {t("Home.NavBar.Profile.profile")}
-            </Typography>
-            <Typography color="text.secondary" mb={2}>
-              {t("Home.NavBar.Profile.email")}
-            </Typography>
-          </CardContent>
-        </Card>
-
-        {/* Addresses Card */}
-        <Card sx={{ borderRadius: 4, boxShadow: 2 }}>
-          <CardContent>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              mb={2}
-            >
-              <Typography variant="h6" fontWeight={700}>
-                {t("Home.NavBar.Profile.addresses")}
-              </Typography>
-              <Tooltip title="Add address">
-                <IconButton
-                  color="primary"
-                  onClick={() => setAddressModal(true)}
-                >
-                  <AddCircleOutlineIcon />
-                </IconButton>
-              </Tooltip>
-            </Box>
-            <Divider sx={{ mb: 2 }} />
-            {profile.addresses && profile.addresses.length > 0 ? (
-              profile.addresses.map((addr, idx) => (
-                <Card
-                  key={idx}
-                  sx={{
-                    mb: 2,
-                    bgcolor: addr.isDefault ? "#e3f2fd" : "#fafafa",
-                    borderRadius: 3,
-                    boxShadow: 1,
-                  }}
-                >
-                  <CardContent>
-                    <Box display="flex" alignItems="center" gap={1} mb={1}>
-                      <HomeOutlinedIcon
-                        color={addr.isDefault ? "primary" : "action"}
-                      />
-                      <Typography fontWeight={600}>
-                        {addr.isDefault
-                          ? "Default address"
-                          : `Address ${idx + 1}`}
-                      </Typography>
-                    </Box>
-                    <Typography color="text.secondary">
-                      {addr.country}, {addr.city}, {addr.governorate}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      {addr.address}
-                      {addr.apartment ? `, ${addr.apartment}` : ""}
-                    </Typography>
-                    <Typography color="text.secondary">
-                      {addr.firstName} {addr.lastName} - {addr.phone}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              ))
-            ) : (
-              <Box
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                py={4}
+            
+            <Divider sx={{ mb: 3 }} />
+            
+            {/* Name Section */}
+            <Box sx={{ mb: 4 }}>
+              <Box display="flex" alignItems="center" gap={1} mb={1}>
+                <Typography variant="subtitle1" fontWeight={600} color="text.primary">
+                  {t("Home.NavBar.Profile.name")}
+                </Typography>
+              
+              </Box>
+              <Typography 
+                color="text.secondary" 
+                sx={{ 
+                  fontSize: "1.1rem",
+                  bgcolor: "#f5f5f5",
+                  p: 1.5,
+                  borderRadius: 1
+                }}
               >
-                <HomeOutlinedIcon
-                  sx={{ fontSize: 40, color: "#bdbdbd", mb: 1 }}
-                />
-                <Typography color="text.secondary">
-                  {t("Home.NavBar.Profile.no_addresses")}
+                {profile.firstName || profile.lastName
+                  ? `${profile.firstName} ${profile.lastName}`
+                  : "-"}
+              </Typography>
+            </Box>
+
+            {/* Email Section */}
+            <Box>
+              <Box display="flex" alignItems="center" gap={1} mb={1}>
+                <Typography variant="subtitle1" fontWeight={600} color="text.primary">
+                  {t("Home.NavBar.Profile.email")}
                 </Typography>
               </Box>
-            )}
+              <Typography 
+                color="text.secondary"
+                sx={{ 
+                  fontSize: "1.1rem",
+                  bgcolor: "#f5f5f5",
+                  p: 1.5,
+                  borderRadius: 1,
+                  wordBreak: "break-word"
+                }}
+              >
+                {user?.email || "-"}
+              </Typography>
+            </Box>
           </CardContent>
         </Card>
       </Box>
 
+      {/* Profile Menu */}
+      <Menu
+        anchorEl={profileMenuAnchor}
+        open={Boolean(profileMenuAnchor)}
+        onClose={handleProfileMenuClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        PaperProps={{
+          sx: { 
+            minWidth: 260, 
+            borderRadius: 3, 
+            boxShadow: 6, 
+            p: 0,
+            mt: 1
+          },
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            p: 2,
+            pb: 1,
+          }}
+        >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
+            <PermIdentityIcon sx={{ color: "primary.main", fontSize: 28 }} />
+            <Typography variant="body2" color="text.secondary">
+              {user?.email || ""}
+            </Typography>
+          </Box>
+        </Box>
+        <Divider sx={{ mb: 1 }} />
+        <MenuItem 
+          onClick={handleLogout}
+          sx={{ 
+            color: "error.main",
+            "&:hover": { bgcolor: "error.lighter" }
+          }}
+        >
+          Log out
+        </MenuItem>
+      </Menu>
+
       {/* Edit Profile Modal */}
-      <Modal open={editModal} onClose={() => setEditModal(false)}>
+      <Modal 
+        open={editModal} 
+        onClose={() => setEditModal(false)}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <Box
           sx={{
             position: "absolute",
@@ -398,7 +409,10 @@ const Profile = () => {
             boxShadow: 24,
             p: 4,
             borderRadius: 4,
-            minWidth: 400,
+            minWidth: { xs: "90%", sm: 400 },
+            maxWidth: 500,
+            maxHeight: "90vh",
+            overflow: "auto"
           }}
         >
           <Box
@@ -439,13 +453,10 @@ const Profile = () => {
                 label={t("Home.NavBar.Profile.email")}
                 value={profile.email}
                 fullWidth
-                disabled
+           
                 helperText={t("Home.NavBar.Profile.email_helper")}
-                sx={
-                  {
-                    // direction: position === "right" ? "ltr" : "ltr",
-                  }
-                }
+              
+                
               />
             </Grid>
           </Grid>
@@ -463,181 +474,6 @@ const Profile = () => {
             <Button
               variant="contained"
               onClick={handleProfileSave}
-              sx={{ borderRadius: 3 }}
-            >
-              {t("Home.NavBar.Profile.save")}
-            </Button>
-          </Box>
-        </Box>
-      </Modal>
-
-      {/* Add Address Modal */}
-      <Modal
-        open={addressModal}
-        onClose={() => setAddressModal(false)}
-        sx={{ overflowY: "auto", display: "flex", flexDirection: "column" }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            borderRadius: 4,
-
-            width: { xs: "90%", sm: 600, md: 700 },
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-            }}
-          >
-            <Typography variant="h6">
-              {t("Home.NavBar.Profile.add_address")}
-            </Typography>
-            <IconButton onClick={() => setAddressModal(false)}>
-              <CloseIcon />
-            </IconButton>
-          </Box>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={address.isDefault}
-                onChange={handleAddressCheckbox}
-              />
-            }
-            label={t("Home.NavBar.Profile.default_address_checkbox")}
-          />
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                label={t("Home.NavBar.Profile.country")}
-                name="country"
-                value={address.country}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                label={t("Home.NavBar.Profile.first_name")}
-                name="firstName"
-                value={address.firstName}
-                onChange={handleAddressChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                label={t("Home.NavBar.Profile.last_name")}
-                name="lastName"
-                value={address.lastName}
-                onChange={handleAddressChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={t("Home.NavBar.Profile.address")}
-                name="address"
-                value={address.address}
-                onChange={handleAddressChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={t("Home.NavBar.Profile.apartment")}
-                name="apartment"
-                value={address.apartment}
-                onChange={handleAddressChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                label={t("Home.NavBar.Profile.city")}
-                name="city"
-                value={address.city}
-                onChange={handleAddressChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                select
-                // label="G"
-                name="governorate"
-                value={address.governorate}
-                onChange={handleAddressChange}
-                fullWidth
-              >
-                {position === "right"
-                  ? governoratesAr.map((gov) => (
-                      <MenuItem key={gov} value={gov}>
-                        {gov}
-                      </MenuItem>
-                    ))
-                  : governorates.map((gov) => (
-                      <MenuItem key={gov} value={gov}>
-                        {gov}
-                      </MenuItem>
-                    ))}
-              </TextField>
-            </Grid>
-            <Grid item xs={4}>
-              <TextField
-                label={t("Home.NavBar.Profile.postal_code")}
-                name="postalCode"
-                value={address.postalCode}
-                onChange={handleAddressChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label={t("Home.NavBar.Profile.phone")}
-                name="phone"
-                value={address.phone}
-                onChange={handleAddressChange}
-                fullWidth
-                sx={{
-                  paddingLeft: "-1",
-
-                  direction: position === "right" ? "ltr" : "ltr",
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <span role="img" aria-label="egypt">
-                      🇪🇬
-                    </span>
-                  ),
-                }}
-              />
-            </Grid>
-          </Grid>
-          <Box
-            sx={{ display: "flex", justifyContent: "flex-end", mt: 3, gap: 2 }}
-          >
-            <Button
-              onClick={() => setAddressModal(false)}
-              color="primary"
-              variant="outlined"
-              sx={{ borderRadius: 3 }}
-            >
-              {t("Home.NavBar.Profile.cancel")}
-            </Button>
-            <Button
-              variant="contained"
-              onClick={handleAddressSave}
               sx={{ borderRadius: 3 }}
             >
               {t("Home.NavBar.Profile.save")}

@@ -27,6 +27,9 @@ function AppContent() {
   const [fav, setFav] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [position, setPosition] = useState("");
+  const [UPname, setUPname] = useState('');
+  const [UPmail, setUPmail] = useState('');
+  const [UPPassword, setUPPassword] = useState('');
   const cartItemsLength = cartItems.length;
 
   const [userId] = useState(localStorage.getItem("userId") || null);
@@ -42,6 +45,12 @@ function AppContent() {
     setCartItems,
     position,
     cartItemsLength,
+    UPname,
+    setUPname,
+    UPmail,
+    setUPmail,
+    UPPassword,
+    setUPPassword,
   };
 
   useEffect(() => {
