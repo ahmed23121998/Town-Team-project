@@ -51,25 +51,39 @@ const SubCart = ({ toggleCart }) => {
       console.error(err);
     }
   };
+
+  const [loadingItems, setLoadingItems] = useState({});
+
   const handleQuantityChange = async (productId, newQty) => {
     if (newQty < 1 || isNaN(newQty)) return;
+    if (newQty > 99) newQty = 99;
 
+    setLoadingItems(prev => ({ ...prev, [productId]: true }));
     try {
       await updateCartQuantity(userId, productId, newQty);
-
       setCartItems(
         cartItems.map((item) =>
           item.id === productId
-            ? { ...item, quantity: newQty, price: item.unitPrice * newQty }
+            ? { 
+                ...item, 
+                quantity: newQty,
+                price: (item.unitPrice || item.price) * newQty 
+              }
             : item
         )
       );
     } catch (err) {
       setError("Failed to update quantity.");
       console.error(err);
+    } finally {
+      setLoadingItems(prev => ({ ...prev, [productId]: false }));
     }
   };
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+
+  const total = cartItems.reduce((sum, item) => {
+    const unitPrice = item.unitPrice || item.price;
+    return sum + (unitPrice * (item.quantity || 1));
+  }, 0).toFixed(2);
 
   return (
     <>

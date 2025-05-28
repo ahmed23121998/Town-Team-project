@@ -484,21 +484,7 @@ const ProductDetails = ({ onBackClick }) => {
                 </Box>
               </Box>
             </Box>
-            <Button
-              variant="contained"
-              fullWidth
-              sx={{
-                backgroundColor: "#000",
-                color: "#fff",
-                padding: "12px",
-                borderRadius: 0,
-                "&:hover": {
-                  backgroundColor: "#333",
-                },
-              }}
-            >
-              {t("Products.Buy it now")}
-            </Button>
+           
           </Grid>
         </Grid>
       </Container>

@@ -39,14 +39,18 @@ const MainCart = () => {
   const { setCartItems: setContextCartItems } = useContext(MyContext);
 
   const formatCurrency = (amount) => {
-    return `LE ${amount.toLocaleString("en-US", {
+    if (isNaN(amount) || amount === undefined) return 'LE 0.00';
+    return `LE ${Number(amount).toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })}`;
   };
 
   // Fix subtotal calculation to account for quantity
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity || 0), 0);
+  const subtotal = cartItems.reduce((sum, item) => {
+    const unitPrice = item.unitPrice || item.price;
+    return sum + (unitPrice * (item.quantity || 1));
+  }, 0);
   const total = subtotal;
 
   // Listen for userId changes

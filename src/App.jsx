@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import AIContextProvider from "./AI-CHAT-PUT/context/aiTownteam.jsx";
 import MainPage from "./AI-CHAT-PUT/components/MainPage/MianPage";
 import Profile from "./Pages/Profile.jsx";
+import NotFound from "./Pages/NotFound.jsx";
 
 import { getCartItems } from "./component/cartUtils.jsx";
 
@@ -69,8 +70,31 @@ function AppContent() {
   }, [userId, setCartItems]);
 
   const location = useLocation();
-  const hideNavAndFooter =
-    location.pathname === "/login" || location.pathname === "/Profile";
+  // Determine if the current location matches any of the explicitly hidden paths
+  const isExplicitlyHidden = [
+    "/login",
+    "/Profile",
+    "/payment-success",
+  ].includes(location.pathname);
+
+  // Check if the location matches any of the defined routes *before* the catch-all route
+  // This assumes the catch-all route is the last one defined.
+  // If no route before the catch-all matches, we are on the 404 page.
+  const definedRoutes = [
+    "/",
+    "/ProductList",
+    "/productDetails",
+    "/Wishlist",
+    "/MainCart",
+    "/CheckoutForm",
+    "/ai-chat",
+    "/search",
+  ];
+
+  const isDefinedRoute = definedRoutes.includes(location.pathname);
+
+  // Hide nav and footer if explicitly hidden or if it's not a defined route (meaning it's the 404 page)
+  const hideNavAndFooter = isExplicitlyHidden || !isDefinedRoute;
 
   const { i18n } = useTranslation();
   useEffect(() => {
@@ -100,6 +124,7 @@ function AppContent() {
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/ai-chat" element={<MainPage />} />
             <Route path="/search" element={<ProductList />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           {!hideNavAndFooter && <Footer />}
           <Toaster />
