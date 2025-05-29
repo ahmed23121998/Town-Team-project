@@ -150,6 +150,21 @@ function Login() {
             Continue
           </Button>
         </form>
+        <Box mt={2} textAlign="center">
+          <Typography variant="body2" sx={{ fontSize: { xs: 13, sm: 14 } }}>
+            Don’t have an account?{" "}
+            <Link
+              component="button"
+              underline="hover"
+              sx={{ cursor: "pointer", color: "#2175bd", fontWeight: 500 }}
+              onClick={() => {
+                navigate("/#signup");
+              }}
+            >
+              Sign up
+            </Link>
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

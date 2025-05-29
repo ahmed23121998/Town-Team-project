@@ -1,32 +1,28 @@
 import React from "react";
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Grid,
-  IconButton,
-} from "@mui/material";
+import { Box, Typography, TextField, Button, Grid, IconButton, } from "@mui/material";
 import { Facebook, Instagram, YouTube } from "@mui/icons-material";
-
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
 import { userRegister } from "../../Firebase/auth";
 import { useTranslation } from "react-i18next";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MyContext } from "../../Context/FilterContaext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Footer() {
   const { setUPname, setUPmail, setUPPassword } = useContext(MyContext);
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const {
-    register: formRegister,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register: formRegister, handleSubmit, reset, formState: { errors }, } = useForm();
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash === "#signup") {
+      const element = document.getElementById("signup");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   const onSubmit = async (data) => {
     try {
@@ -38,7 +34,7 @@ function Footer() {
       toast.success("✅ Signed up successfully!");
       reset();
 
-      navigate("/login"); 
+      navigate("/login");
     } catch (error) {
       console.error("SignUp Error:", error);
       toast.error(
@@ -69,179 +65,181 @@ function Footer() {
               "Home.Footer.be the first to know about our newest arrivals, special offers and store events near you."
             )}
           </Typography>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: 12,
-              flexWrap: "wrap",
-              marginBottom: 16,
-              width: "100%",
-              maxWidth: 900,
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            {/* Name Input */}
-            <TextField
-              variant="outlined"
-              placeholder={t("enter your name")}
-              {...formRegister("name", {
-                required: "Name is required",
-                minLength: {
-                  value: 2,
-                  message: "Name must be at least 2 characters",
-                },
-              })}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-              InputProps={{
-                sx: {
-                  height: "36px",
-                  bgcolor: "white",
-                  borderRadius: "1px",
-                  input: {
-                    textAlign: "center",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    padding: "8px",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                  },
-                },
-              }}
-              InputLabelProps={{
-                shrink: false,
-              }}
-              FormHelperTextProps={{
-                sx: {
-                  mt: "2px",
-                  textAlign: "center",
-                  color: "#f44336",
-                  fontSize: "12px",
-                  background: "transparent",
-                  padding: 0,
-                },
-              }}
-              sx={{
-                width: { xs: "100%", sm: "300px" },
-                borderBottom: "1px solid #ccc",
-              }}
-            />
-
-            {/* Email Input */}
-            <TextField
-              variant="outlined"
-              placeholder={t("Home.Footer.enter your email")}
-              {...formRegister("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Enter a valid email",
-                },
-              })}
-              error={!!errors.email}
-              helperText={errors.email?.message}
-              InputProps={{
-                sx: {
-                  height: "36px",
-                  bgcolor: "white",
-                  borderRadius: "1px",
-                  input: {
-                    textAlign: "center",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    padding: "8px",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                  },
-                },
-              }}
-              InputLabelProps={{
-                shrink: false,
-              }}
-              FormHelperTextProps={{
-                sx: {
-                  mt: "2px",
-                  textAlign: "center",
-                  color: "#f44336",
-                  fontSize: "12px",
-                  background: "transparent",
-                  padding: 0,
-                },
-              }}
-              sx={{
-                width: { xs: "100%", sm: "300px" },
-                borderBottom: "1px solid #ccc",
-              }} // Added grey bottom border
-            />
-
-            {/* Password Input */}
-            <TextField
-              type="password"
-              variant="outlined"
-              placeholder={t("Home.Footer.enter your password")}
-              {...formRegister("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters",
-                },
-              })}
-              error={!!errors.password}
-              helperText={errors.password?.message}
-              InputProps={{
-                sx: {
-                  height: "36px",
-                  bgcolor: "white",
-                  borderRadius: "1px",
-                  input: {
-                    textAlign: "center",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    padding: "8px",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                  },
-                },
-              }}
-              InputLabelProps={{
-                shrink: false,
-              }}
-              FormHelperTextProps={{
-                sx: {
-                  mt: "2px",
-                  textAlign: "center",
-                  color: "#f44336",
-                  fontSize: "12px",
-                  background: "transparent",
-                  padding: 0,
-                },
-              }}
-              sx={{
-                width: { xs: "100%", sm: "300px" },
-                borderBottom: "1px solid #ccc",
-              }} // Added grey bottom border
-            />
-
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{
-                bgcolor: "#f5d042",
-                color: "black",
-                px: 4,
-                height: "36px",
-                "&:hover": { bgcolor: "#e6be00" },
+          <Box id="signup">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: 12,
+                flexWrap: "wrap",
+                marginBottom: 16,
+                width: "100%",
+                maxWidth: 900,
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
-              {t("Home.Footer.SUBMIT")}
-            </Button>
-          </form>
+              {/* Name Input */}
+              <TextField
+                variant="outlined"
+                placeholder={t("enter your name")}
+                {...formRegister("name", {
+                  required: "Name is required",
+                  minLength: {
+                    value: 2,
+                    message: "Name must be at least 2 characters",
+                  },
+                })}
+                error={!!errors.name}
+                helperText={errors.name?.message}
+                InputProps={{
+                  sx: {
+                    height: "36px",
+                    bgcolor: "white",
+                    borderRadius: "1px",
+                    input: {
+                      textAlign: "center",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      padding: "8px",
+                      fontSize: "14px",
+                      fontWeight: 400,
+                    },
+                  },
+                }}
+                InputLabelProps={{
+                  shrink: false,
+                }}
+                FormHelperTextProps={{
+                  sx: {
+                    mt: "2px",
+                    textAlign: "center",
+                    color: "#f44336",
+                    fontSize: "12px",
+                    background: "transparent",
+                    padding: 0,
+                  },
+                }}
+                sx={{
+                  width: { xs: "100%", sm: "300px" },
+                  borderBottom: "1px solid #ccc",
+                }}
+              />
+
+              {/* Email Input */}
+              <TextField
+                variant="outlined"
+                placeholder={t("Home.Footer.enter your email")}
+                {...formRegister("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Enter a valid email",
+                  },
+                })}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+                InputProps={{
+                  sx: {
+                    height: "36px",
+                    bgcolor: "white",
+                    borderRadius: "1px",
+                    input: {
+                      textAlign: "center",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      padding: "8px",
+                      fontSize: "14px",
+                      fontWeight: 400,
+                    },
+                  },
+                }}
+                InputLabelProps={{
+                  shrink: false,
+                }}
+                FormHelperTextProps={{
+                  sx: {
+                    mt: "2px",
+                    textAlign: "center",
+                    color: "#f44336",
+                    fontSize: "12px",
+                    background: "transparent",
+                    padding: 0,
+                  },
+                }}
+                sx={{
+                  width: { xs: "100%", sm: "300px" },
+                  borderBottom: "1px solid #ccc",
+                }} // Added grey bottom border
+              />
+
+              {/* Password Input */}
+              <TextField
+                type="password"
+                variant="outlined"
+                placeholder={t("Home.Footer.enter your password")}
+                {...formRegister("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                })}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                InputProps={{
+                  sx: {
+                    height: "36px",
+                    bgcolor: "white",
+                    borderRadius: "1px",
+                    input: {
+                      textAlign: "center",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      padding: "8px",
+                      fontSize: "14px",
+                      fontWeight: 400,
+                    },
+                  },
+                }}
+                InputLabelProps={{
+                  shrink: false,
+                }}
+                FormHelperTextProps={{
+                  sx: {
+                    mt: "2px",
+                    textAlign: "center",
+                    color: "#f44336",
+                    fontSize: "12px",
+                    background: "transparent",
+                    padding: 0,
+                  },
+                }}
+                sx={{
+                  width: { xs: "100%", sm: "300px" },
+                  borderBottom: "1px solid #ccc",
+                }} // Added grey bottom border
+              />
+
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  bgcolor: "#f5d042",
+                  color: "black",
+                  px: 4,
+                  height: "36px",
+                  "&:hover": { bgcolor: "#e6be00" },
+                }}
+              >
+                {t("Home.Footer.SUBMIT")}
+              </Button>
+            </form>
+          </Box>
         </Box>
 
         <Box
