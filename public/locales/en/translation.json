@@ -158,8 +158,8 @@
     "Clear": "Clear",
     "Availability": {
       "Title": "AVAILABILITY",
-      "InStock": "In Stock (2479)",
-      "OutOfStock": "Out Of Stock (1585)"
+      "InStock": "In Stock",
+      "OutOfStock": "Out Of Stock"
     },
     "Price": {
       "Title": "PRICE",

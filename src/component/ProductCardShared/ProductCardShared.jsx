@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Box,
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  Button,
-  IconButton,
-} from "@mui/material";
+import { Box, Card, CardMedia, CardContent, Typography, Button, IconButton, } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
@@ -276,7 +268,7 @@ const ProductCardShared = ({
               }}
               onClick={navigateToDetails}
             >
-              {product?.title || "No title available"}
+              {product?.product?.title || product?.title}
 
               <Box component="span" sx={{ mx: 1, fontWeight: "normal" }}>
                 -

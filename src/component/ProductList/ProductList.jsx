@@ -1,14 +1,7 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
 import { db } from "../../Firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Typography,
-  IconButton,
-  Drawer,
-} from "@mui/material";
+import { Box, CircularProgress, Container, Typography, IconButton, Drawer, } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ProductCard from "../ProductCard/ProductCard";
 import FiltereTheProducts from "../Filtration/FiltereTheProducts";
@@ -61,7 +54,7 @@ const ProductList = () => {
 
     return data.filter((product) => {
       if (filters.availability) {
-        const inStock = product.in_stock || product.quantity > 0;
+        const inStock = product.in_stock === true && product.quantity > 0;
         if (filters.availability.inStock && !inStock) return false;
         if (filters.availability.outOfStock && inStock) return false;
       }
@@ -165,10 +158,10 @@ const ProductList = () => {
                               colors: Array.isArray(subDocData.colors)
                                 ? subDocData.colors
                                 : subDocData.colors
-                                ? [subDocData.colors]
-                                : subDocData.color
-                                ? [subDocData.color]
-                                : [],
+                                  ? [subDocData.colors]
+                                  : subDocData.color
+                                    ? [subDocData.color]
+                                    : [],
                               sizes: (subDocData.sizes || []).map((s) =>
                                 s.replace(/['"]/g, "")
                               ),
