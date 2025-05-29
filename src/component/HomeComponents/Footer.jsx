@@ -15,13 +15,12 @@ import { userRegister } from "../../Firebase/auth";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { MyContext } from "../../Context/FilterContaext";
-
+import { useNavigate } from "react-router-dom";
 
 function Footer() {
   const { setUPname, setUPmail, setUPPassword } = useContext(MyContext);
-
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
   const {
     register: formRegister,
     handleSubmit,
@@ -31,17 +30,19 @@ function Footer() {
 
   const onSubmit = async (data) => {
     try {
-      await userRegister(data.email, data.password,data.name);
+      await userRegister(data.email, data.password, data.name);
       setUPmail(data.email);
       setUPname(data.name);
       setUPPassword(data.password);
-    
-      toast.success("\u2705 Signed up successfully!");
+
+      toast.success("✅ Signed up successfully!");
       reset();
+
+      navigate("/login"); 
     } catch (error) {
       console.error("SignUp Error:", error);
       toast.error(
-        error.message || "\u274C Please check your email and password"
+        error.message || "❌ Please check your email and password"
       );
     }
   };
