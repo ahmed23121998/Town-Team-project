@@ -111,8 +111,13 @@ const ProductList = () => {
 
   // let category = "kids/closes/Boys Jackets";
   // let cat = "men/accessories/bags";
+   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+  }, []);
+
 
   useEffect(() => {
+
     const fetchData = async () => {
       try {
         setLoading(true);
