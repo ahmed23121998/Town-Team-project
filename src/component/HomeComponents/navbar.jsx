@@ -1,27 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Container,
-  Box,
-  Button,
-  Divider,
-  Menu,
-  MenuItem,
-  MenuList,
-  Paper,
-  Stack,
-  Badge,
-  Typography,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  InputBase,
-  Modal,
-} from "@mui/material";
+import { AppBar, Toolbar, Container, Box, Button, Divider, Menu, MenuItem, MenuList, Paper, Stack, Badge, Typography, IconButton, Drawer, List, ListItem, ListItemText, InputBase, Modal, } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import SearchIcon from "@mui/icons-material/Search";
@@ -366,6 +345,10 @@ export default function NavBar() {
             {
               label: t("Home.NavBar.SubMenu.CANVAS"),
               category: "men/shoes/Canvas",
+            },
+            {
+              label: t("Home.NavBar.SubMenu.CASUAL"),
+              category: "men/shoes/Casual",
             },
             {
               label: t("Home.NavBar.SubMenu.LEATHER"),
