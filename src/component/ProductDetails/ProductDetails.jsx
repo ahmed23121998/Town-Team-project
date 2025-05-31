@@ -1,33 +1,17 @@
 import { useEffect, useState } from "react";
-import {
-  Box,
-  Container,
-  Typography,
-  Button,
-  Grid,
-  IconButton,
-  Paper,
-  ButtonGroup,
-  Breadcrumbs,
-  CardMedia,
-  ToggleButtonGroup,
-  ToggleButton,
-} from "@mui/material";
+import { Box, Container, Typography, Button, Grid, IconButton, Paper, ButtonGroup, Breadcrumbs, CardMedia, ToggleButtonGroup, ToggleButton, } from "@mui/material";
 import { Add, Remove, LocalFireDepartment } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useLocation } from "react-router-dom";
-import {
-  addToFavorites,
-  removeFromFavorites,
-  isFavorite,
-} from "../favorites/favUtils";
+import { addToFavorites, removeFromFavorites, isFavorite, } from "../favorites/favUtils";
 import { addToCart } from "../cartUtils";
 import { useTranslation } from "react-i18next";
 import { useContext } from "react";
 import { MyContext } from "../../Context/FilterContaext";
 import { getCartItems } from "../cartUtils";
+import { toast } from "react-hot-toast";
 
 const theme = createTheme({
   palette: {
@@ -47,7 +31,7 @@ const ProductDetails = ({ onBackClick }) => {
   const [quantity, setQuantity] = useState(1);
   const [isFav, setIsFav] = useState(false);
   const [setIsWishlistHovered] = useState(false);
-  const [userId] =useState( localStorage.getItem("userId"));
+  const [userId] = useState(localStorage.getItem("userId"));
   const { setCartItems } = useContext(MyContext);
 
   useEffect(() => {
@@ -124,22 +108,37 @@ const ProductDetails = ({ onBackClick }) => {
   };
   const addProductToCart = async (product) => {
     const userId = localStorage.getItem("userId");
+
+    // ✅ تحقق من توفر المنتج في المخزون
+    if (!product.stock || product.stock <= 0) {
+      toast.error("This product is out of stock and cannot be added to the cart.", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+      return;
+    }
+
     try {
       await addToCart(userId, product, quantity);
+
       const fetchCartItems = async () => {
         try {
           const items = await getCartItems(userId);
           setCartItems(items);
-          // setcartProducts(items);
+          toast.success("Product added to cart!", {
+            position: "top-center",
+            autoClose: 3000,
+          });
         } catch (err) {
-          console.log(err);
           console.error(err);
+          toast.error("Failed to fetch cart items.");
         }
       };
 
       fetchCartItems();
     } catch (error) {
       console.error("Cart update failed:", error);
+      toast.error("Something went wrong while adding the product to the cart.");
     }
   };
 
@@ -438,7 +437,7 @@ const ProductDetails = ({ onBackClick }) => {
                     variant="contained"
                     color="primary"
                     fullWidth
-                    disabled={userId?false: true}
+                    disabled={userId ? false : true}
                     sx={{
                       height: "34px",
                       fontSize: "14px",
@@ -464,7 +463,7 @@ const ProductDetails = ({ onBackClick }) => {
                   >
                     <IconButton
                       onClick={toggleWishlist}
-                      disabled={userId?false: true}
+                      disabled={userId ? false : true}
                       onMouseEnter={() => setIsWishlistHovered(true)}
                       onMouseLeave={() => setIsWishlistHovered(false)}
                       sx={{
@@ -484,7 +483,7 @@ const ProductDetails = ({ onBackClick }) => {
                 </Box>
               </Box>
             </Box>
-           
+
           </Grid>
         </Grid>
       </Container>

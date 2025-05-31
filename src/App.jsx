@@ -18,7 +18,6 @@ import AIContextProvider from "./AI-CHAT-PUT/context/aiTownteam.jsx";
 import MainPage from "./AI-CHAT-PUT/components/MainPage/MianPage";
 import Profile from "./Pages/Profile.jsx";
 import NotFound from "./Pages/NotFound.jsx";
-
 import { getCartItems } from "./component/cartUtils.jsx";
 
 function AppContent() {
