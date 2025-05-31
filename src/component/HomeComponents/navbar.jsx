@@ -1,6 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppBar, Toolbar, Container, Box, Button, Divider, Menu, MenuItem, MenuList, Paper, Stack, Badge, Typography, IconButton, Drawer, List, ListItem, ListItemText, InputBase, Modal, } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Container,
+  Box,
+  Button,
+  Divider,
+  Menu,
+  MenuItem,
+  MenuList,
+  Paper,
+  Stack,
+  Badge,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  InputBase,
+  Modal,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,6 +30,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import CloseIcon from "@mui/icons-material/Close";
@@ -28,17 +50,19 @@ const SubMenu = styled(Paper)(({ theme }) => ({
   zIndex: theme.zIndex.appBar + 1,
   minWidth: 230,
 }));
-const NestedSubMenu = styled(Paper)(({ theme }) => ({
+const NestedSubMenu = styled(Paper)(({ theme, language }) => ({
   position: "absolute",
   top: 0,
-  left: "100%",
+  left: language === "EN" ? "100%" : "-100%",
+  // left: language === "EN" ?{ xs:"-100%"} : {"100%"},
+
   backgroundColor: theme.palette.background.paper,
   boxShadow: theme.shadows[5],
   zIndex: theme.zIndex.appBar + 2,
   minWidth: 230,
 }));
 // SubMenuItem Component
-const SubMenuItem = ({ item }) => {
+const SubMenuItem = ({ item, position, language }) => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const timeoutRef = React.useRef(null);
@@ -68,16 +92,21 @@ const SubMenuItem = ({ item }) => {
       <MenuItem
         sx={{
           display: "flex",
+          flexDirection: language === "EN" ? "row" : "auto",
           justifyContent: "space-between",
           alignItems: "center",
           "&:hover": { textDecoration: "underline" },
         }}
       >
         {item.label}
-        <KeyboardArrowRightIcon fontSize="small" />
+        {language === "EN" ? (
+          <KeyboardArrowRightIcon fontSize="small" />
+        ) : (
+          <KeyboardArrowLeftIcon fontSize="small" />
+        )}
       </MenuItem>
       {hasSubmenu && open && (
-        <NestedSubMenu>
+        <NestedSubMenu position={position} language={language}>
           <MenuList>
             {item.submenu.map((subitem, i) => (
               <React.Fragment key={i}>
@@ -97,7 +126,7 @@ const SubMenuItem = ({ item }) => {
   );
 };
 // NavItem Component
-const NavItem = ({ item }) => {
+const NavItem = ({ item, position, language }) => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const timeoutRef = React.useRef(null);
@@ -172,7 +201,11 @@ const NavItem = ({ item }) => {
                       {sub.label}
                     </MenuItem>
                   ) : (
-                    <SubMenuItem item={sub} />
+                    <SubMenuItem
+                      item={sub}
+                      position={position}
+                      language={language}
+                    />
                   )}
                   {i < item.submenu.length - 1 && <Divider />}
                 </React.Fragment>
@@ -212,8 +245,8 @@ export default function NavBar() {
     const handleStorageChange = () => {
       setUserId(localStorage.getItem("userId"));
     };
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   const toggleDrawer = (open) => (event) => {
@@ -698,11 +731,6 @@ export default function NavBar() {
             px: { xs: 0.5, sm: 2 },
             minHeight: { xs: 70, md: 90 },
             display: "flex",
-            // flexDirection: "row",
-            // gap: { xs: 10, sm: 2 },
-
-            // justifyContent: "space-between",
-            // alignItems: "center",
           }}
         >
           <Button
@@ -757,7 +785,12 @@ export default function NavBar() {
           </Button>
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
             {navItems.map((item) => (
-              <NavItem key={item.label} item={item} />
+              <NavItem
+                key={item.label}
+                item={item}
+                language={language}
+                position={position}
+              />
             ))}
           </Box>
           <Box
@@ -997,9 +1030,9 @@ export default function NavBar() {
                   },
                 }}
               >
-                <Badge 
-                  badgeContent={userId ? (cartItems?.length || 0) : 0} 
-                  color="primary" 
+                <Badge
+                  badgeContent={userId ? cartItems?.length || 0 : 0}
+                  color="primary"
                   showZero
                 >
                   <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
@@ -1065,9 +1098,9 @@ export default function NavBar() {
           onClick={() => navigate("/MainCart")}
           sx={{ bgcolor: "white" }}
         >
-          <Badge 
-            badgeContent={userId ? (cartItems?.length || 0) : 0} 
-            color="primary" 
+          <Badge
+            badgeContent={userId ? cartItems?.length || 0 : 0}
+            color="primary"
             showZero
           >
             <ShoppingCartIcon sx={{ color: "black", fontSize: 28 }} />
@@ -1305,4 +1338,4 @@ export default function NavBar() {
       `}</style>
     </AppBar>
   );
-}
+};
