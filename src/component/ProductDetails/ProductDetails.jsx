@@ -107,10 +107,7 @@ const ProductDetails = ({ onBackClick }) => {
     }
   };
   const addProductToCart = async (product) => {
-    const userId = localStorage.getItem("userId");
-
-    // ✅ تحقق من توفر المنتج في المخزون
-    if (!product.stock || product.stock <= 0) {
+    if (!product?.in_stock) {
       toast.error("This product is out of stock and cannot be added to the cart.", {
         position: "top-center",
         autoClose: 3000,
@@ -119,28 +116,19 @@ const ProductDetails = ({ onBackClick }) => {
     }
 
     try {
-      await addToCart(userId, product, quantity);
-
-      const fetchCartItems = async () => {
-        try {
-          const items = await getCartItems(userId);
-          setCartItems(items);
-          toast.success("Product added to cart!", {
-            position: "top-center",
-            autoClose: 3000,
-          });
-        } catch (err) {
-          console.error(err);
-          toast.error("Failed to fetch cart items.");
-        }
-      };
-
-      fetchCartItems();
+      await addToCart(userId, product, quantity, selectedColor, selectedSize);
+      const items = await getCartItems(userId);
+      setCartItems(items);
+      toast.success("Product added to cart successfully!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     } catch (error) {
-      console.error("Cart update failed:", error);
-      toast.error("Something went wrong while adding the product to the cart.");
+      console.error("Error adding product to cart:", error.response?.data || error.message);
+      toast.error("Failed to add product to cart. Please try again.");
     }
   };
+
 
   return (
     <ThemeProvider theme={theme}>
