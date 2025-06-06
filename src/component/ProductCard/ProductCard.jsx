@@ -1,32 +1,43 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import { doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
 import { db } from "../../Firebase/firebase.js";
 import ProductCardShared from "../ProductCardShared/ProductCardShared.jsx";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../cartUtils.jsx";
 import { toast } from "react-hot-toast";
+import { MyContext } from "../../Context/FilterContaext.js"; // Ensure this is the correct path
+import { getCartItems } from "../cartUtils.jsx"; // Ensure this is the correct path
+
 const ProductCard = ({ product, toggleCart }) => {
   const [inWishlist, setInWishlist] = useState(false);
   const userId = localStorage.getItem("userId");
+  const { setCartItems } = useContext(MyContext);
+
   const navigate = useNavigate();
 
   const addProductToCart = useCallback(
     async (product) => {
       if (!product.in_stock || product.quantity <= 0) {
-        toast.error("This product is out of stock and cannot be added to the cart.");
+        toast.error(
+          "This product is out of stock and cannot be added to the cart."
+        );
         return;
       }
 
       try {
         await addToCart(userId, product, 1);
+        const updatedItems = await getCartItems(userId); // Fetch after add
+        setCartItems(updatedItems); // Update context/state
         toggleCart();
         toast.success("Product added to cart!");
       } catch (error) {
         console.error("Cart update failed:", error);
-        toast.error("Something went wrong while adding the product to the cart.");
+        toast.error(
+          "Something went wrong while adding the product to the cart."
+        );
       }
     },
-    [toggleCart, userId]
+    [toggleCart, userId, setCartItems]
   );
 
   useEffect(() => {

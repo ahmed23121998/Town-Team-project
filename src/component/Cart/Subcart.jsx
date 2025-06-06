@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getCartItems, removeFromCart, updateCartQuantity } from "../cartUtils";
+import { removeFromCart, updateCartQuantity } from "../cartUtils";
 import "./SubCart.css";
 import { Close } from "@mui/icons-material";
 
@@ -13,33 +13,32 @@ import { MyContext } from "../../Context/FilterContaext";
 
 const SubCart = ({ toggleCart }) => {
   const { cartItems, setCartItems } = useContext(MyContext);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [userId] = useState(() => localStorage.getItem("userId"));
 
-  useEffect(() => {
-    const fetchCartItems = async () => {
-    
+  // useEffect(() => {
+  //   const fetchCartItems = async () => {
 
-      setLoading(true);
-      setError(null);
-      try {
-        const items = await getCartItems(userId);
-        setCartItems(items);
-        // setcartProducts(items);
-      } catch (err) {
-        setError("Failed to load cart items.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  //     setLoading(true);
+  //     setError(null);
+  //     try {
+  //       const items = await getCartItems(userId);
+  //       setCartItems(items);
+  //       // setcartProducts(items);
+  //     } catch (err) {
+  //       setError("Failed to load cart items.");
+  //       console.error(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchCartItems();
-  }, [userId, setCartItems]);
+  //   fetchCartItems();
+  // }, [userId, setCartItems]);
 
   const handleRemove = async (productId) => {
     try {
@@ -52,22 +51,22 @@ const SubCart = ({ toggleCart }) => {
     }
   };
 
-  const [loadingItems, setLoadingItems] = useState({});
+  const [setLoadingItems] = useState({});
 
   const handleQuantityChange = async (productId, newQty) => {
     if (newQty < 1 || isNaN(newQty)) return;
     if (newQty > 99) newQty = 99;
 
-    setLoadingItems(prev => ({ ...prev, [productId]: true }));
+    setLoadingItems((prev) => ({ ...prev, [productId]: true }));
     try {
       await updateCartQuantity(userId, productId, newQty);
       setCartItems(
         cartItems.map((item) =>
           item.id === productId
-            ? { 
-                ...item, 
+            ? {
+                ...item,
                 quantity: newQty,
-                price: (item.unitPrice || item.price) * newQty 
+                price: (item.unitPrice || item.price) * newQty,
               }
             : item
         )
@@ -76,14 +75,16 @@ const SubCart = ({ toggleCart }) => {
       setError("Failed to update quantity.");
       console.error(err);
     } finally {
-      setLoadingItems(prev => ({ ...prev, [productId]: false }));
+      setLoadingItems((prev) => ({ ...prev, [productId]: false }));
     }
   };
 
-  const total = cartItems.reduce((sum, item) => {
-    const unitPrice = item.unitPrice || item.price;
-    return sum + (unitPrice * (item.quantity || 1));
-  }, 0).toFixed(2);
+  const total = cartItems
+    .reduce((sum, item) => {
+      const unitPrice = item.unitPrice || item.price;
+      return sum + unitPrice * (item.quantity || 1);
+    }, 0)
+    .toFixed(2);
 
   return (
     <>
