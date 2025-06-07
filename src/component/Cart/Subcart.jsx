@@ -64,10 +64,10 @@ const SubCart = ({ toggleCart }) => {
         cartItems.map((item) =>
           item.id === productId
             ? {
-                ...item,
-                quantity: newQty,
-                price: (item.unitPrice || item.price) * newQty,
-              }
+              ...item,
+              quantity: newQty,
+              price: (item.unitPrice || item.price) * newQty,
+            }
             : item
         )
       );
