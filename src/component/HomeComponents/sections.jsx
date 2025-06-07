@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import {
-  Box,
-  IconButton,
-  Button,
-  Tooltip,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { useState } from "react";
+import { Box, IconButton, Button, Tooltip, Stack, Typography, } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import img1 from "./../../assets/Images/lastchanceen.webp";
@@ -17,6 +10,10 @@ import img5 from "./../../assets/Images/DeCen_1880x.webp";
 import img6 from "./../../assets/Images/KCen_1880x.webp";
 import img7 from "./../../assets/Images/TSHCen.webp";
 import { useTranslation } from "react-i18next";
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import ReplayIcon from '@mui/icons-material/Replay';
+import CallIcon from '@mui/icons-material/Call';
 
 export default function Sections() {
   const { t } = useTranslation();
@@ -248,31 +245,14 @@ export default function Sections() {
             title={t("Home.List.cash on delivery")}
             slotProps={{
               popper: {
-                modifiers: [
-                  {
-                    name: "offset",
-                    options: {
-                      offset: [0, -14],
-                    },
-                  },
-                ],
+                modifiers: [{ name: "offset", options: { offset: [0, -14] } }],
               },
             }}
           >
             <Button>
-              <Stack direction="row" spacing={1}>
-                <Box
-                  component="img"
-                  src="/images/card.png"
-                  alt={t("Home.List.cash on delivery")}
-                  sx={{
-                    width: { xs: "38px", sm: "50px" },
-                    height: { xs: "19px", sm: "25px" },
-                  }}
-                />
-                <Typography
-                  sx={{ color: "black", fontSize: "15px", fontWeight: "bold" }}
-                >
+              <Stack direction="row" spacing={1} alignItems="center">
+                <CreditCardIcon sx={{ fontSize: 30, color: "black" }} />
+                <Typography sx={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>
                   {t("Home.List.cash on delivery")}
                 </Typography>
               </Stack>
@@ -283,99 +263,50 @@ export default function Sections() {
             title={t("Home.List.Free Shipping over 1399 EGP")}
             slotProps={{
               popper: {
-                modifiers: [
-                  {
-                    name: "offset",
-                    options: {
-                      offset: [0, -14],
-                    },
-                  },
-                ],
+                modifiers: [{ name: "offset", options: { offset: [0, -14] } }],
               },
             }}
           >
             <Button>
-              <Stack direction="row" spacing={1}>
-                <Box
-                  component="img"
-                  src="/images/shipping.png"
-                  alt={t("Home.List.Free Shipping over 1399 EGP")}
-                  sx={{
-                    width: { xs: "38px", sm: "50px" },
-                    height: { xs: "19px", sm: "25px" },
-                  }}
-                />
-                <Typography
-                  sx={{ color: "black", fontSize: "15px", fontWeight: "bold" }}
-                >
+              <Stack direction="row" spacing={1} alignItems="center">
+                <LocalShippingIcon sx={{ fontSize: 30, color: "black" }} />
+                <Typography sx={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>
                   {t("Home.List.Free Shipping over 1399 EGP")}
                 </Typography>
               </Stack>
             </Button>
           </Tooltip>
+
           <Tooltip
             title={t("Home.List.15 Days Return")}
             slotProps={{
               popper: {
-                modifiers: [
-                  {
-                    name: "offset",
-                    options: {
-                      offset: [0, -14],
-                    },
-                  },
-                ],
+                modifiers: [{ name: "offset", options: { offset: [0, -14] } }],
               },
             }}
           >
             <Button>
-              <Stack direction="row" spacing={1}>
-                <Box
-                  component="img"
-                  src="/images/return.png"
-                  alt={t("Home.List.15 Days Return")}
-                  sx={{
-                    width: { xs: "38px", sm: "50px" },
-                    height: { xs: "19px", sm: "25px" },
-                  }}
-                />
-                <Typography
-                  sx={{ color: "black", fontSize: "15px", fontWeight: "bold" }}
-                >
+              <Stack direction="row" spacing={1} alignItems="center">
+                <ReplayIcon sx={{ fontSize: 30, color: "black" }} />
+                <Typography sx={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>
                   {t("Home.List.15 Days Return")}
                 </Typography>
               </Stack>
             </Button>
           </Tooltip>
+
           <Tooltip
             title={t("Home.List.Call Center 16579")}
             slotProps={{
               popper: {
-                modifiers: [
-                  {
-                    name: "offset",
-                    options: {
-                      offset: [0, -14],
-                    },
-                  },
-                ],
+                modifiers: [{ name: "offset", options: { offset: [0, -14] } }],
               },
             }}
           >
             <Button>
-              <Stack direction="row" spacing={1}>
-                <Box
-                  component="img"
-                  src="/images/call-center.png"
-                  alt={t("Home.List.Call Center 16579")}
-                  sx={{
-                    width: { xs: "38px", sm: "50px" },
-                    height: { xs: "19px", sm: "25px" },
-                  }}
-                />
-                <Typography
-                  sx={{ color: "black", fontSize: "15px", fontWeight: "bold" }}
-                >
+              <Stack direction="row" spacing={1} alignItems="center">
+                <CallIcon sx={{ fontSize: 30, color: "black" }} />
+                <Typography sx={{ color: "black", fontSize: "15px", fontWeight: "bold" }}>
                   {t("Home.List.Call Center 16579")}
                 </Typography>
               </Stack>
