@@ -1,27 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Container,
-  Box,
-  Button,
-  Divider,
-  Menu,
-  MenuItem,
-  MenuList,
-  Paper,
-  Stack,
-  Badge,
-  Typography,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  InputBase,
-  Modal,
-} from "@mui/material";
+import { AppBar, Toolbar, Container, Box, Button, Divider, Menu, MenuItem, MenuList, Paper, Stack, Badge, Typography, IconButton, Drawer, List, ListItem, ListItemText, InputBase, Modal, } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import SearchIcon from "@mui/icons-material/Search";
@@ -174,8 +153,8 @@ const NavItem = ({ item, position, language }) => {
                   item.tag === "New"
                     ? "green"
                     : item.tag === "Sale"
-                    ? "red"
-                    : "orange",
+                      ? "red"
+                      : "orange",
                 color: "white",
                 fontSize: 12,
                 px: 0.5,
@@ -894,6 +873,7 @@ export default function NavBar() {
                     display: "flex",
                     alignItems: "flex-start",
                     justifyContent: "center",
+                    overflowY: "auto",
                   }}
                 >
                   <Box
@@ -901,34 +881,34 @@ export default function NavBar() {
                     sx={{
                       bgcolor: "white",
                       width: "100%",
-                      maxWidth: "none",
-                      px: 4,
-                      py: 2,
+                      maxWidth: { xs: "100%", md: "100%" },
+                      px: { xs: 2, sm: 6, md: 10, lg: 20 },
+                      py: { xs: 2, sm: 4 },
+                      boxShadow: 0,
+                      borderRadius: 0,
+                      position: "relative",
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "flex-start",
-                      position: "relative",
                     }}
                   >
                     <IconButton
                       onClick={() => setOpenSearch(false)}
-                      sx={{ alignSelf: "flex-end", mb: 2 }}
+                      sx={{
+                        position: "absolute",
+                        top: 16,
+                        right: 16,
+                      }}
                     >
                       <CloseIcon />
                     </IconButton>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        width: "100%",
-                      }}
-                    >
+
+                    <Box sx={{ mt: 8, width: "100%" }}>
                       <Box
                         sx={{
                           display: "flex",
                           alignItems: "center",
                           width: "100%",
+                          gap: 1,
                         }}
                       >
                         <InputBase
@@ -942,20 +922,29 @@ export default function NavBar() {
                             e.key === "Enter" && handleSearch()
                           }
                           sx={{
-                            fontSize: 20,
+                            fontSize: { xs: 16, sm: 20, md: 24 },
                             borderBottom: "1px solid gray",
                             pb: 1,
+                            flex: 1,
                           }}
                         />
                         <IconButton onClick={handleSearch}>
-                          <SearchIcon />
+                          <SearchIcon sx={{ fontSize: { xs: 24, md: 28 } }} />
                         </IconButton>
                       </Box>
+
                       {showSuggestions && (
-                        <Box sx={{ mt: 2, width: "100%" }}>
-                          <Typography variant="h6">Trending Now</Typography>
-                          <Divider sx={{ my: 1, mt: 2 }} />
-                          <Stack direction="row" spacing={2}>
+                        <Box sx={{ mt: 4, width: "100%" }}>
+                          <Typography variant="h6" fontSize={{ xs: 16, sm: 18 }}>
+                            Trending Now
+                          </Typography>
+                          <Divider sx={{ my: 2 }} />
+                          <Stack
+                            direction="row"
+                            spacing={1}
+                            flexWrap="wrap"
+                            useFlexGap
+                          >
                             {[
                               t("Home.NavBar.Search.men jackets"),
                               t("Home.NavBar.Search.pullover"),
@@ -965,32 +954,32 @@ export default function NavBar() {
                             ].map((term) => (
                               <Button
                                 key={term}
-                                sx={{ backgroundColor: "#f7f7f7" }}
+                                sx={{
+                                  backgroundColor: "#f7f7f7",
+                                  color: "gray",
+                                  textTransform: "none",
+                                  borderRadius: 1,
+                                }}
                                 onClick={() => {
                                   setSearchValue(term);
-                                  navigate(
-                                    `/search?q=${encodeURIComponent(term)}`
-                                  );
+                                  navigate(`/search?q=${encodeURIComponent(term)}`);
                                   setOpenSearch(false);
                                   setSearchValue("");
                                 }}
                               >
-                                <Stack direction="row" spacing={1}>
-                                  <SearchIcon sx={{ color: "gray" }} />
-                                  <Typography sx={{ color: "gray" }}>
-                                    {term}
-                                  </Typography>
-                                </Stack>
+                                <SearchIcon sx={{ mr: 1, color: "gray" }} />
+                                {term}
                               </Button>
                             ))}
                           </Stack>
-                          <Divider sx={{ my: 1, mt: 2 }} />
                         </Box>
                       )}
                     </Box>
                   </Box>
                 </Box>
               </Modal>
+
+
               <IconButton
                 aria-label="user"
                 onClick={() => navigate("/login")}
@@ -1157,7 +1146,7 @@ export default function NavBar() {
               <React.Fragment
                 sx={{ direction: language === "AR" ? "rtl" : "ltr" }}
                 key={item.label}
-                // right={position === "right" ? true : false}
+              // right={position === "right" ? true : false}
               >
                 <ListItem
                   button

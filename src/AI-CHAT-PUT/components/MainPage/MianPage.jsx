@@ -70,9 +70,8 @@ export default function MainPage({ toggleChatDrawer }) {
         scrollbarWidth: "none",
         overflowX: "hidden",
         // textAlign: "left",
-        direction: position === "right" ? "ltr" : " rtl",
-        textAlign: position === "left" ? "right" : "left",
-        // direction: position === "right" ? "rtl" : "ltr",
+        direction: position === "right" ? "rtl" : " ltr",
+        textAlign: position === "left" ? "left" : "right",
       }}
     >
       <div
@@ -196,8 +195,8 @@ export default function MainPage({ toggleChatDrawer }) {
           }
           style={{
             flex: 1,
-            padding: "0.7rem 1rem",
-            borderRadius: 20,
+            padding: "1rem 1rem",
+            borderRadius: 15,
             border: "none",
             outline: "none",
             fontSize: 16,
@@ -243,12 +242,12 @@ export default function MainPage({ toggleChatDrawer }) {
           }
           form[style*='max-width: 820px'] {
             max-width: 100vw !important;
-            padding: 0.5rem !important;
+            padding: 0.7rem !important;
             gap: 6px !important;
           }
           input[type="text"] {
             font-size: 15px !important;
-            padding: 0.5rem 0.8rem !important;
+            // padding: 0.5rem 0.8rem !important;
             min-height: 36px !important;
           }
           button[type="submit"] {
