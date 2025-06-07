@@ -263,7 +263,7 @@ export default function Sections() {
               <Stack direction="row" spacing={1}>
                 <Box
                   component="img"
-                  src="/public/images/card.png"
+                  src="/images/card.png"
                   alt={t("Home.List.cash on delivery")}
                   sx={{
                     width: { xs: "38px", sm: "50px" },
@@ -298,7 +298,7 @@ export default function Sections() {
               <Stack direction="row" spacing={1}>
                 <Box
                   component="img"
-                  src="/public/images/shipping.png"
+                  src="/images/shipping.png"
                   alt={t("Home.List.Free Shipping over 1399 EGP")}
                   sx={{
                     width: { xs: "38px", sm: "50px" },
@@ -332,7 +332,7 @@ export default function Sections() {
               <Stack direction="row" spacing={1}>
                 <Box
                   component="img"
-                  src="/public/images/return.png"
+                  src="/images/return.png"
                   alt={t("Home.List.15 Days Return")}
                   sx={{
                     width: { xs: "38px", sm: "50px" },
@@ -366,7 +366,7 @@ export default function Sections() {
               <Stack direction="row" spacing={1}>
                 <Box
                   component="img"
-                  src="/public/images/call-center.png"
+                  src="/images/call-center.png"
                   alt={t("Home.List.Call Center 16579")}
                   sx={{
                     width: { xs: "38px", sm: "50px" },
