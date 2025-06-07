@@ -35,6 +35,10 @@ const ProductDetails = ({ onBackClick }) => {
   const { setCartItems } = useContext(MyContext);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
     if (userId && product?.id) {
       isFavorite(userId, product.id).then(setIsFav);
     }
@@ -222,8 +226,8 @@ const ProductDetails = ({ onBackClick }) => {
                 {/* Availability */}
                 <Typography variant="body2" sx={{ mb: 2 }}>
                   {t("Products.Availability")}:{" "}
-                  {product.stock > 0
-                    ? `${product.stock} In Stock`
+                  {product.in_stock === true
+                    ? `In Stock`
                     : "Out of Stock"}
                 </Typography>
 
