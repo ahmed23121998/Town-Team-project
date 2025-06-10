@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { MyContext } from "../../Context/FilterContaext";
-import { getCartItems } from "../cartUtils"; // Adjust the import path as needed
+// import { getCartItems } from "../cartUtils";
 
 const MainCart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -39,30 +39,27 @@ const MainCart = () => {
   const { setCartItems: setContextCartItems } = useContext(MyContext);
 
   const formatCurrency = (amount) => {
-    if (isNaN(amount) || amount === undefined) return 'LE 0.00';
+    if (isNaN(amount) || amount === undefined) return "LE 0.00";
     return `LE ${Number(amount).toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })}`;
   };
 
-  // Fix subtotal calculation to account for quantity
   const subtotal = cartItems.reduce((sum, item) => {
     const unitPrice = item.unitPrice || item.price;
-    return sum + (unitPrice * (item.quantity || 1));
+    return sum + unitPrice * (item.quantity || 1);
   }, 0);
   const total = subtotal;
 
-  // Listen for userId changes
   useEffect(() => {
     const handleStorageChange = () => {
       setUserId(localStorage.getItem("userId"));
     };
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  // Single source of truth for cart data
   useEffect(() => {
     if (!userId) {
       setCartItems([]);
@@ -118,7 +115,7 @@ const MainCart = () => {
     if (newQuantity < 1) newQuantity = 1;
     if (newQuantity > 99) newQuantity = 99;
 
-    setOperationLoading(prev => ({ ...prev, [itemId]: true }));
+    setOperationLoading((prev) => ({ ...prev, [itemId]: true }));
     try {
       const itemRef = doc(db, "users", userId, "cart", itemId);
       await updateDoc(itemRef, { quantity: newQuantity });
@@ -126,12 +123,12 @@ const MainCart = () => {
       console.error("Error updating quantity:", error);
       setError(t("MainCart.ErrorUpdatingQuantity"));
     } finally {
-      setOperationLoading(prev => ({ ...prev, [itemId]: false }));
+      setOperationLoading((prev) => ({ ...prev, [itemId]: false }));
     }
   };
 
   const removeItem = async (itemId) => {
-    setOperationLoading(prev => ({ ...prev, [itemId]: true }));
+    setOperationLoading((prev) => ({ ...prev, [itemId]: true }));
     try {
       const itemRef = doc(db, "users", userId, "cart", itemId);
       await deleteDoc(itemRef);
@@ -139,7 +136,7 @@ const MainCart = () => {
       console.error("Error removing item:", error);
       setError(t("MainCart.ErrorRemovingItem"));
     } finally {
-      setOperationLoading(prev => ({ ...prev, [itemId]: false }));
+      setOperationLoading((prev) => ({ ...prev, [itemId]: false }));
     }
   };
 
@@ -428,7 +425,11 @@ const MainCart = () => {
                         onClick={() => removeItem(item.id)}
                         disabled={operationLoading[item.id]}
                       >
-                        {operationLoading[item.id] ? <CircularProgress size={24} /> : <Close />}
+                        {operationLoading[item.id] ? (
+                          <CircularProgress size={24} />
+                        ) : (
+                          <Close />
+                        )}
                       </IconButton>
                     </Grid>
                     <Divider sx={{ mt: 2 }} />

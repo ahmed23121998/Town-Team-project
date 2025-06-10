@@ -1,6 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppBar, Toolbar, Container, Box, Button, Divider, Menu, MenuItem, MenuList, Paper, Stack, Badge, Typography, IconButton, Drawer, List, ListItem, ListItemText, InputBase, Modal, } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Container,
+  Box,
+  Button,
+  Divider,
+  Menu,
+  MenuItem,
+  MenuList,
+  Paper,
+  Stack,
+  Badge,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  InputBase,
+  Modal,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import SearchIcon from "@mui/icons-material/Search";
@@ -153,8 +174,8 @@ const NavItem = ({ item, position, language }) => {
                   item.tag === "New"
                     ? "green"
                     : item.tag === "Sale"
-                      ? "red"
-                      : "orange",
+                    ? "red"
+                    : "orange",
                 color: "white",
                 fontSize: 12,
                 px: 0.5,
@@ -209,7 +230,7 @@ export default function NavBar() {
   const [isFocused, setIsFocused] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const showSuggestions = isFocused || searchValue.length > 0;
-  const { cartItems, position } = useContext(MyContext);
+  const { cartItems, position, cartItemsLength } = useContext(MyContext);
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
 
   React.useEffect(() => {
@@ -935,7 +956,10 @@ export default function NavBar() {
 
                       {showSuggestions && (
                         <Box sx={{ mt: 4, width: "100%" }}>
-                          <Typography variant="h6" fontSize={{ xs: 16, sm: 18 }}>
+                          <Typography
+                            variant="h6"
+                            fontSize={{ xs: 16, sm: 18 }}
+                          >
                             Trending Now
                           </Typography>
                           <Divider sx={{ my: 2 }} />
@@ -962,7 +986,9 @@ export default function NavBar() {
                                 }}
                                 onClick={() => {
                                   setSearchValue(term);
-                                  navigate(`/search?q=${encodeURIComponent(term)}`);
+                                  navigate(
+                                    `/search?q=${encodeURIComponent(term)}`
+                                  );
                                   setOpenSearch(false);
                                   setSearchValue("");
                                 }}
@@ -978,7 +1004,6 @@ export default function NavBar() {
                   </Box>
                 </Box>
               </Modal>
-
 
               <IconButton
                 aria-label="user"
@@ -1020,7 +1045,7 @@ export default function NavBar() {
                 }}
               >
                 <Badge
-                  badgeContent={userId ? cartItems?.length || 0 : 0}
+                  badgeContent={userId ? cartItemsLength : 0}
                   color="primary"
                   showZero
                 >
@@ -1088,7 +1113,7 @@ export default function NavBar() {
           sx={{ bgcolor: "white" }}
         >
           <Badge
-            badgeContent={userId ? cartItems?.length || 0 : 0}
+            badgeContent={userId ? cartItemsLength || 0 : 0}
             color="primary"
             showZero
           >
@@ -1146,7 +1171,7 @@ export default function NavBar() {
               <React.Fragment
                 sx={{ direction: language === "AR" ? "rtl" : "ltr" }}
                 key={item.label}
-              // right={position === "right" ? true : false}
+                // right={position === "right" ? true : false}
               >
                 <ListItem
                   button
@@ -1327,4 +1352,4 @@ export default function NavBar() {
       `}</style>
     </AppBar>
   );
-};
+}

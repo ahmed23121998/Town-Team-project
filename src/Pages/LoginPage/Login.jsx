@@ -5,6 +5,8 @@ import { loginUser } from "../../Firebase/auth";
 import { useContext, useEffect } from "react";
 import { authContext } from "../../Context/auth";
 import { useNavigate } from "react-router-dom";
+import { getCartItems } from "../../component/cartUtils.jsx";
+import { MyContext } from "../../Context/FilterContaext.js"; // Ensure this is the correct path
 
 function Login() {
   const {
@@ -12,7 +14,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const { setCartItems } = useContext(MyContext);
   const { setIsAuth } = useContext(authContext);
   const navigate = useNavigate();
 
@@ -31,6 +33,8 @@ function Login() {
       if (user) {
         const token = await user.getIdToken();
         localStorage.setItem("userId", user.uid);
+        const userId = localStorage.getItem("userId");
+        setCartItems(await getCartItems(userId));
 
         localStorage.setItem("token", token);
 
