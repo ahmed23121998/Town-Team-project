@@ -20,26 +20,6 @@ const SubCart = ({ toggleCart }) => {
 
   const [userId] = useState(() => localStorage.getItem("userId"));
 
-  // useEffect(() => {
-  //   const fetchCartItems = async () => {
-
-  //     setLoading(true);
-  //     setError(null);
-  //     try {
-  //       const items = await getCartItems(userId);
-  //       setCartItems(items);
-  //       // setcartProducts(items);
-  //     } catch (err) {
-  //       setError("Failed to load cart items.");
-  //       console.error(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchCartItems();
-  // }, [userId, setCartItems]);
-
   const handleRemove = async (productId) => {
     try {
       await removeFromCart(userId, productId);
@@ -64,10 +44,10 @@ const SubCart = ({ toggleCart }) => {
         cartItems.map((item) =>
           item.id === productId
             ? {
-              ...item,
-              quantity: newQty,
-              price: (item.unitPrice || item.price) * newQty,
-            }
+                ...item,
+                quantity: newQty,
+                price: (item.unitPrice || item.price) * newQty,
+              }
             : item
         )
       );

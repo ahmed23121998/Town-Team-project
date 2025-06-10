@@ -17,6 +17,11 @@ const ProductCard = ({ product, toggleCart }) => {
 
   const addProductToCart = useCallback(
     async (product) => {
+      if (userId === null) {
+        toast.error("Please log in to add products to the cart.");
+        return;
+      }
+
       if (!product.in_stock || product.quantity <= 0) {
         toast.error(
           "This product is out of stock and cannot be added to the cart."
@@ -26,8 +31,8 @@ const ProductCard = ({ product, toggleCart }) => {
 
       try {
         await addToCart(userId, product, 1);
-        const updatedItems = await getCartItems(userId); // Fetch after add
-        setCartItems(updatedItems); // Update context/state
+        const updatedItems = await getCartItems(userId); 
+        setCartItems(updatedItems); 
         toggleCart();
         toast.success("Product added to cart!");
       } catch (error) {
