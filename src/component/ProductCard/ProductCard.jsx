@@ -20,26 +20,26 @@ const ProductCard = ({ product, toggleCart }) => {
       if (userId === null) {
         toast.error("Please log in to add products to the cart.");
         return;
-      }
+      } else {
+        if (!product.in_stock || product.quantity <= 0) {
+          toast.error(
+            "This product is out of stock and cannot be added to the cart."
+          );
+          return;
+        }
 
-      if (!product.in_stock || product.quantity <= 0) {
-        toast.error(
-          "This product is out of stock and cannot be added to the cart."
-        );
-        return;
-      }
-
-      try {
-        await addToCart(userId, product, 1);
-        const updatedItems = await getCartItems(userId); 
-        setCartItems(updatedItems); 
-        toggleCart();
-        toast.success("Product added to cart!");
-      } catch (error) {
-        console.error("Cart update failed:", error);
-        toast.error(
-          "Something went wrong while adding the product to the cart."
-        );
+        try {
+          await addToCart(userId, product, 1);
+          const updatedItems = await getCartItems(userId);
+          setCartItems(updatedItems);
+          toggleCart();
+          toast.success("Product added to cart!");
+        } catch (error) {
+          console.error("Cart update failed:", error);
+          toast.error(
+            "Something went wrong while adding the product to the cart."
+          );
+        }
       }
     },
     [toggleCart, userId, setCartItems]
