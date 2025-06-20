@@ -59,7 +59,7 @@ const MainCart = () => {
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
-// this the useEffect for the cart items
+// this the useEffect for the cart items gg
   useEffect(() => {
     if (!userId) {
       setCartItems([]);
